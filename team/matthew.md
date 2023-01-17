@@ -1,0 +1,1 @@
+Hi I'm Matthew. I'm a 3rd year CS major. I'd like to work on a project comparing Redditor stock calls against historical stock data. If we do the procedural generation project I'd like to work on the processing of rules. I have some prior experience with parsing end user input from prior projects.

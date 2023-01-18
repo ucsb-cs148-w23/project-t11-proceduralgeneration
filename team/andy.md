@@ -1,0 +1,1 @@
+My name is Anderson/Andy. I am a 2nd year CS major. My idea for a project is to create a user-friendly tool to procedurally generate levels/images/terrain with wave function collapse.

@@ -10,6 +10,7 @@ Team:
 - Christine Tu  [x],
 - Richard Gao   [x],
 - Andy Liu      [x], 
+- Bryan Zhang   [x],
 
 Scribed Discussion:
 - As our first scrum meeting, we don't have any many updates. 

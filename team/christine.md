@@ -1,0 +1,1 @@
+Hi! My name is Christine and I'm a 3rd year CS major. We currently have two ideas for our project -- procedural/level image generation or a reddit stock picker. They both sound really interesting, and I'm looking forward to working on whichever project we choose this quarter!

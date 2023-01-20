@@ -22,6 +22,7 @@ Deployed website link: [https://cs148hello.web.app](https://cs148hello.web.app)
 4. In web app directory (`/matthew-hello-world`) run `firebase init`
   - select "Hosting: Configure files for Firebase Hosting..."
   - select account (if multiple accounts saved to firebase CLI tool)
+  - select project created in step 1 from list
   - type "build" for public directory
   - select yes for single-page app
   - select no for automatic builds and deploys with Github

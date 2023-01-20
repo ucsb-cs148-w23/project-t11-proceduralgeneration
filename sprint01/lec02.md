@@ -1,4 +1,4 @@
-Mentor: Self-Mentored ;)
+Mentor: Vivian/Avishek/Tobias
 
 Meeting Time: lect02
 

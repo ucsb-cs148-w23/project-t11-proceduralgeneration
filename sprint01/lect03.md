@@ -1,4 +1,4 @@
-Mentor: 
+Mentor: Vivian/Avishek/Tobias
 
 Meeting Time: lect03
 

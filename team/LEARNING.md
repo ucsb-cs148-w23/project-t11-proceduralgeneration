@@ -98,3 +98,4 @@ Open mesh and fire base
 Start looking into React and Flask and getting the basics down. Then maybe visiting openmesh with python (and maybe c++ if we have time)
 # Bryan
 React, OpenMesh, 
+

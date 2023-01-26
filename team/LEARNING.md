@@ -4,7 +4,9 @@ Team:
 # Matthew
 Strengths: Python, AWS, JS, React 
 Weaknesses: Databases, 3D Graphics
-# Shuning -Strengths: C++ Weakness: JS, web development
+# Shuning
+Strengths: C++ 
+Weakness: JS, web development
 # Christine
 Strengths: React, Flask, AWS, Js, Python
 Weaknesses: MongoDB, Unity

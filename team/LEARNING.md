@@ -1,103 +1,50 @@
-## Technologies
+# Technologies
 
-Team: 
-# Matthew
-Strengths: Python, AWS, JS, React 
-Weaknesses: Databases, 3D Graphics
-# Shuning
-Strengths: C++ 
-Weakness: JS, web development
-# Christine
-Strengths: React, Flask, AWS, Js, Python
-Weaknesses: MongoDB, Unity
-# Richard
-Strengths: Js, Python, Flask
-Weaknesses: MongoDB, React
-# Andy 
-Strengths: Unity, Three js, .NET, PostgreSQL, 3D Meshes
-Weaknesses: React, Frontend, Web Dev in general, MongoDB, Nodejs
-# Bryan
-Strengths: JS/HTML/CSS, Java/C++/Python
-Weaknesses: MongoDB, React
+## Strengths and Weaknesses
+
+
+| Member    | Strengths                                    | Weaknesses                             |
+|-----------|----------------------------------------------|----------------------------------------|
+| Matthew   | Python, AWS, JS, React                       | Databases, 3D Graphics                 |
+| Shuning   | C++                                          | JS, Web Dev                            |
+| Christine | React, Flask, AWS, JS, Python                | MongoDB, Unity                         |
+| Richard   | JS, Python, Flask                            | MongoDB, React                         |
+| Andy      | Unity, Three.js, .NET, PostgreSQL, 3D Meshes | React, Frontend, Webdev, MongoDB, Node |
+| Bryan     | JS/HTML/CSS, Java, C++, Python               | MongoDB, React                         |
  
 ## Tech Stack Finalized
 
-# Frontend: React (Js/html/css)
+### Frontend: React (Js/html/css)
 https://mantine.dev/
 Bootstrap also works
 
-# API:
-Maybe AWS but lambda costs money
-Also kind of annoying to implement
-Prolly Flask since no one knows Node
-Perhaps C++ with Open Mesh
+### API:
+- eliminated ideas: AWS lambda, Node
 Plan:
-Prototype with python (faster to build)
-After MVP demo if we want to make it faster → convert to C++
+- prototype with python + flask or fastapi for API
+- given tighter performance requirements/extra time: convert to C++/OpenMesh
 
-# DB/Misc: 
-Relational vs non-relational
-Login → login using google account
-Firebase DB (noSQL)
-Algorithm is deterministic → maybe just generate a serial number? No → better to fetch object file from db
-DB:
-Storing object files
-noSQL database
-Firebase, MongoDB
-If we deploy using firebase, might as well use firebase for the DB
+### DB/Misc: 
+Use object store such as S3 or Firebase Cloud Storage for link sharing
+-  firebase can handle (google) login and storage
+-  noSQL (no features from relational DBs needed)
 
 
 ## Knowledge Assessmment
-
-Significant gaps in knowledge:
-
-## React: 
-# Knowing
-Richard
-Christine
-# Don’t know
-Bryan
-Andy
-Shuning Liu
-## Three JS
-# Know
-Andy
-# Don’t Know
-https://threejs.org/
-## OpenMesh
-# Know
-# Don’t Know
-https://www.open-mesh.org/projects/open-mesh/wiki
-Flask
-# Know
-Christine
-Richard
-# Don’t Know
-Andy
-## Firebase
-# Know
-Bryan
-# Don’t Know
-Christine
-Andy
-Richard
-Shuning Liu
-https://firebase.google.com/docs/database/web/start
-
+| Member    | React | ThreeJS | OpenMesh | Flask | Firebase |
+|-----------|-------|---------|----------|-------|----------|
+| Matthew   | x     |         |          |       | x        |
+| Shuning   |       |         |          |       |          |
+| Christine | x     |         |          | x     |          |
+| Richard   | x     |         |          | x     |          |
+| Andy      |       | x       |          |       |          |
+| Bryan     |       |         |          |       | x        |
 
 ## Plan to get good
-
 Team: 
-# Matthew
-# Shuning 
-Try to learn more about Web development and Unity
-# Christine
-Learn more about the ins and outs of Flask, look into using Mantine as a component library, learn more about open mesh & three.js, learn about using Firebase
-If we need help, look to the people who know list for reference of who to ask for help :)
-# Richard
-Open mesh and fire base
-# Andy
-Start looking into React and Flask and getting the basics down. Then maybe visiting openmesh with python (and maybe c++ if we have time)
-# Bryan
-React, OpenMesh, 
-
+- Matthew: Learn how to host python backend somewhere and firebase's cloud storage service.
+- Shuning: Try to learn more about Web development and Unity
+- Christine: Learn more about the ins and outs of Flask, look into using Mantine as a component library, learn more about open mesh & three.js, learn about using Firebase. If we need help, look to the people who know list for reference of who to ask for help :)
+- Richard: Open mesh and fire base
+- Andy: Start looking into React and Flask and getting the basics down. Then maybe visiting openmesh with python (and maybe c++ if we have time)
+- Bryan: React, OpenMesh

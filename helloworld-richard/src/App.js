@@ -1,5 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
+function log_in(){
+  alert("Log in function will be implemented later")
+}
 
 function App() {
   return (
@@ -10,6 +13,11 @@ function App() {
           Hello world web app on Firebase
         </p>
       </header>
+
+
+      <button onClick={log_in}>
+        log_in
+      </button>
     </div>
   );
 }

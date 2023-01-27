@@ -1,7 +1,7 @@
 # project-t11-proceduralgeneration
 Project Name (temp): Procedural City Generator
 
-Create a creative tool to procedurally generate a city model using the wave function collapse algorithm.
+One line description: Create a creative tool to procedurally generate a city model using the wave function collapse algorithm.
 
 
 | Team Member  | Github Username |
@@ -14,14 +14,22 @@ Create a creative tool to procedurally generate a city model using the wave func
 | Christine Tu | christinetu15  |
 
 
-Teck stack we are using: AWS, Python, JavaScript,React, firebase or MongoDB
+## Teck stack 
+- front-end: React.js
+- front-end deployment: firebase
+- back-end: Flask (Python)
+- back-end deployment: AWS EC2
+- database/store: Firebase Cloud Storage or MongoDB
 
+## Approach
+We're planning to make a web app with interface elements to generate a 3D city model, download model files, and get/create a link for sharing.
+As a stretch goal we would like to have options to manually edit tiles.
+For the generation, we're planning to deploy a flask (python) back-end on an EC2 instance.
 
-What we plan for the project: This project is desinged as an Web App, with frontend to support user log in, upload building and street model used to create the city, and share clickable link for generated city model. The algorithm is implemented by python in the backend. If we need more efficiency and we have spare time, we may convert it to c++. 
+## User role
+We have one user role. Our tool is designed for game developers who want to create city environment for video game 
+but lack the time or knowledge to model an entire city environment.
+This user wants to use procedural generation algorithms but without needing to learn game-engine specifics or buying permissions from commercial software.
 
-
-User roles: Designed for game developers who want to create city environment for video game but does not know how to do 3D model.
-Their goals are using existing wave collapsing algorithm without using tools built in Unity, or buying permission from ArcGIS CityEngine
-
-
-Permissions: Our app requires users to log in for using the app.
+## Permissions
+We may later choose to implement login and authorization for sharing with permissions. 

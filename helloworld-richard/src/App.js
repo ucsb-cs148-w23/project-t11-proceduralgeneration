@@ -12,12 +12,13 @@ function App() {
         <p>
           Hello world web app on Firebase
         </p>
+      <button className = "Button"onClick={log_in}>
+        log_in
+        
+      </button>
+
       </header>
 
-
-      <button onClick={log_in}>
-        log_in
-      </button>
     </div>
   );
 }

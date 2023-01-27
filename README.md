@@ -14,7 +14,7 @@ One line description: Create a creative tool to procedurally generate a city mod
 | Christine Tu | christinetu15  |
 
 
-## Teck stack 
+## Tech stack 
 - front-end: React.js
 - front-end deployment: firebase
 - back-end: Flask (Python)

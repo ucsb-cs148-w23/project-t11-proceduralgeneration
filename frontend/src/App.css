@@ -24,6 +24,18 @@
   color: white;
 }
 
+.Button {
+  background-color: #282c34; 
+  border: 2px solid#fcfcfd;
+  color: white;
+  padding: 20px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+}
+
+
 .App-link {
   color: #61dafb;
 }

@@ -28,6 +28,19 @@
   color: #61dafb;
 }
 
+
+.header-container {
+  /* padding: 60px;
+  text-align: center;
+  font-size: 30px;
+  height: 25%; */
+}
+
+.model {
+  
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -1,15 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/header.js'
+import Model from './components/model.js'
+import { Canvas } from '@react-three/fiber'
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Hello world</h1> 
-        <p>
-          Hello world web app on Firebase
-        </p>
-      </header>
+      <Header className="header" />
+      <Canvas className="model">
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+        <Model position={[-1.2, 0, 0]} />
+        <Model position={[1.2, 0, 0]} />
+      </Canvas>
     </div>
   );
 }

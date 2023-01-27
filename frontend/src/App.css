@@ -22,10 +22,22 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  height: 25%;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.header-container {
+  /* padding: 60px;
+  text-align: center;
+  font-size: 30px;
+  height: 25%; */
+}
+
+.model {
+  
 }
 
 @keyframes App-logo-spin {

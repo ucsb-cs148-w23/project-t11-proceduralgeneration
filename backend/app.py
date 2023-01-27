@@ -4,11 +4,9 @@ from flask import Flask, jsonify
 app = Flask(__name__)
 
 @app.route('/generate_map')
-@app.route('/generate_map/<int:num_points>')
-def generate_map(num_points=3):
-    # STUB: return random vertices
+@app.route('/generate_map/<int:scale>')
+def generate_map(scale=8):
+    # STUB: return random triangle
     # TODO: convert Andy's proof of concept
-    vertices = []
-    for _ in range(num_points):
-        vertices += [random.randint(-10, 10) for _ in range(3)]
+    vertices = [random.randint(-scale, scale) for _ in range(9)]
     return jsonify(vertices=vertices)

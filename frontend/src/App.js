@@ -14,6 +14,9 @@ function App() {
         <Model position={[-1.2, 0, 0]} />
         <Model position={[1.2, 0, 0]} />
       </Canvas>
+      <body className="body">
+        <button className="button">Generate</button>
+      </body>
     </div>
   );
 }

@@ -109,6 +109,44 @@
   
 }
 
+.scale-slider {
+  width: 100%;
+  max-width: 500px;
+  height: 8vh;
+  margin: auto;
+}
+.scale-thumb {
+  cursor: pointer;
+  position: absolute;
+  z-index: 100;
+  background: #ffffff;
+  border: 5px solid #3774ff;
+  border-radius: 100%;
+  display: block;
+  box-shadow: 0 0 2px 0 rgb(0 0 0 / 44%);
+}
+.scale.active {
+  background-color: grey;
+}
+.scale-track {
+  position: relative;
+  background: #ddd;
+}
+.scale-track.scale-track-0 {
+  background: #83a9ff;
+}
+.scale-slider .scale-track {
+  top: 20px;
+  height: 4px;
+}
+.scale-slider .scale-thumb {
+  top: 12px;
+  width: 10px;
+  outline: none;
+  height: 10px;
+  line-height: 38px;
+}
+
 
 @keyframes App-logo-spin {
   from {

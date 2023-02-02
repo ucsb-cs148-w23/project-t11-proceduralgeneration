@@ -1,39 +1,38 @@
-import { useRef, useState } from 'react'
-import { useFrame } from '@react-three/fiber';
+import { useRef, useEffect } from 'react'
 import { DoubleSide } from "three";
 // import { Canvas, useFrame } from '@react-three/fiber'
 // import { OrbitControls } from '@react-three/drei'
 
-
 export default function Model(props) {
-  // const refPoints = useRef();
-  // const ref = useRef();
-  // useFrame(() => {
-  //   if (props.requireUpdate) {
-  //     ref.current.setAttribute("array", props.vertices);
-  //     ref.current.setAttribute("count", props.vertices.length / 3);
-  //     props.setRequireUpdate(false);
-  //   }
-  // });
-  // This reference gives us direct access to the THREE.Mesh object
-
-  // Subscribe this component to the render-loop, rotate the mesh every frame
-  // useFrame((state, delta) => (ref.current.rotation.x += delta))
+  console.log("re-render!\nlogging from Model: ", props.vertices);
+  const pointsRef = useRef(props.vertices);
   
-  // Return the view, these are regular Threejs elements expressed in JSX
-  console.log("logging from Model: ", props.vertices);
-  let floatArray = new Float32Array(props.vertices);
-  
+  const meshRef = useRef();
+  useEffect(() => {
+    for (let i = 0; i < props.vertices.length; i++) {
+      // pointsRef.current[i] = props.vertices[i];
+      meshRef.current.geometry.attributes.position.array[i] = props.vertices[i];
+    }
+    // meshRef.current.geometry.setDrawRange(0, props.vertexCount);
+    meshRef.current.geometry.attributes.position.count = props.vertexCount;
+    meshRef.current.geometry.attributes.position.updateRange.count = props.vertexCount * 3
+    meshRef.current.geometry.attributes.position.needsUpdate = true;
+    console.log(meshRef.current.geometry.drawRange);
+    //
+    // apparently pointsRef gets updated too by this effect
+    // console.log("pointsRef: ", pointsRef);
+  }, [props.vertices]);
   
 
   return (
-    <mesh position={props.position} >
+    <mesh ref={meshRef} position={props.position} >
       <bufferGeometry>
-        {/* <bufferAttribute ref={ref} attach="attributes-position" itemSize={3} /> */}
         <bufferAttribute
           attach="attributes-position"
-          count={props.vertices.length / 3}
-          array={floatArray}
+          array={pointsRef.current}
+          count={3}
+          // array={defaultVertices}
+          // count={props.vertexCount}
           itemSize={3}
         /> 
       </bufferGeometry>

@@ -1,28 +1,45 @@
-import { createRoot } from 'react-dom/client'
-import React, { useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { useRef, useState } from 'react'
+import { useFrame } from '@react-three/fiber';
+import { DoubleSide } from "three";
+// import { Canvas, useFrame } from '@react-three/fiber'
+// import { OrbitControls } from '@react-three/drei'
 
-function Model(props) {
+
+export default function Model(props) {
+  // const refPoints = useRef();
+  // const ref = useRef();
+  // useFrame(() => {
+  //   if (props.requireUpdate) {
+  //     ref.current.setAttribute("array", props.vertices);
+  //     ref.current.setAttribute("count", props.vertices.length / 3);
+  //     props.setRequireUpdate(false);
+  //   }
+  // });
   // This reference gives us direct access to the THREE.Mesh object
-  const ref = useRef()
-  // Hold state for hovered and clicked events
-  const [hovered, hover] = useState(false)
-  const [clicked, click] = useState(false)
+
   // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => (ref.current.rotation.x += delta))
+  // useFrame((state, delta) => (ref.current.rotation.x += delta))
+  
   // Return the view, these are regular Threejs elements expressed in JSX
+  console.log("logging from Model: ", props.vertices);
+  let floatArray = new Float32Array(props.vertices);
+  
+  
+
   return (
-    <mesh
-      {...props}
-      ref={ref}
-      scale={clicked ? 1.5 : 1}
-      onClick={(event) => click(!clicked)}
-      onPointerOver={(event) => hover(true)}
-      onPointerOut={(event) => hover(false)}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+    <mesh position={props.position} >
+      <bufferGeometry>
+        {/* <bufferAttribute ref={ref} attach="attributes-position" itemSize={3} /> */}
+        <bufferAttribute
+          attach="attributes-position"
+          count={props.vertices.length / 3}
+          array={floatArray}
+          itemSize={3}
+        /> 
+      </bufferGeometry>
+      <meshBasicMaterial color="orange" side={DoubleSide}/>
     </mesh>
-  )
+  );
 }
 
-export default Model;
+

@@ -7,9 +7,9 @@ Kanban board:
 
 ## Date of Retrospective: 01/27/2023
 
-Led by: Richard
-Present: Christine, Matthew, Bryan, Andy, Shunning
-Absent: NA
+Led by: Richard <br>
+Present: Christine, Matthew, Bryan, Andy, Shunning <br>
+Absent: NA <br>
 
 ## Action Item
 - A goal: Start commenting in code and using good naming conventions.

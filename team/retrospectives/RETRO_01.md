@@ -25,3 +25,9 @@ Retro Notes:
 | Bryan     | Comment codes, use good naming conventions | Making large/base changes without consulting the team              | Keeping things organized, complete tasks on time                          |
 | Andy      | Convert proof of concept to python         | Working on things not related to MVP                               | Look at ways to fix the current algorithm                                 |
 | Shuning   | Try to put some code in python             | Making merge conflict by doing unnecessary changes                 | Learning JS and the algorithm                                             |
+
+
+## Retro Assessment
+* For our retro, we utilized the start, stop, and continue outline where, each team member provided one item for each category. At the end, we went through each category column to cmopare our goals.
+* The retro went smoothly; each team member provided valuable input for how to improve our teamwork and workflow. Everyone agreed on each point, and we plan to utilize these new insights to adjust our team.
+* One advice I'd give is to summarize all the key ideas that were dicussed in the retro to make sure that we're all clear on our goals for after the retro. Make sure everyone leaves with a concrete idea of the steps moving forward.

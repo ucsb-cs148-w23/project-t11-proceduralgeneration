@@ -3,6 +3,7 @@
 ### Slack Help Channel Engagement
 - Matthew: posted firebase authentication tutorial
 - Bryan: posted bootstrap tutorial
+- Christine: posted tutorial on flask development best practices
 
 ## Strengths and Weaknesses
 

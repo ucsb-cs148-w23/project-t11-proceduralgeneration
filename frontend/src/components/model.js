@@ -1,28 +1,44 @@
-import { createRoot } from 'react-dom/client'
-import React, { useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { useRef, useEffect } from 'react'
+import { DoubleSide } from "three";
+// import { Canvas, useFrame } from '@react-three/fiber'
+// import { OrbitControls } from '@react-three/drei'
 
-function Model(props) {
-  // This reference gives us direct access to the THREE.Mesh object
-  const ref = useRef()
-  // Hold state for hovered and clicked events
-  const [hovered, hover] = useState(false)
-  const [clicked, click] = useState(false)
-  // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => (ref.current.rotation.x += delta))
-  // Return the view, these are regular Threejs elements expressed in JSX
+export default function Model(props) {
+  console.log("re-render!\nlogging from Model: ", props.vertices);
+  const pointsRef = useRef(props.vertices);
+  
+  const meshRef = useRef();
+  useEffect(() => {
+    for (let i = 0; i < props.vertices.length; i++) {
+      // pointsRef.current[i] = props.vertices[i];
+      meshRef.current.geometry.attributes.position.array[i] = props.vertices[i];
+    }
+    // meshRef.current.geometry.setDrawRange(0, props.vertexCount);
+    meshRef.current.geometry.attributes.position.count = props.vertexCount;
+    meshRef.current.geometry.attributes.position.updateRange.count = props.vertexCount * 3
+    meshRef.current.geometry.attributes.position.needsUpdate = true;
+    console.log(meshRef.current.geometry.drawRange);
+    //
+    // apparently pointsRef gets updated too by this effect
+    // console.log("pointsRef: ", pointsRef);
+  }, [props.vertices]);
+  
+
   return (
-    <mesh
-      {...props}
-      ref={ref}
-      scale={clicked ? 1.5 : 1}
-      onClick={(event) => click(!clicked)}
-      onPointerOver={(event) => hover(true)}
-      onPointerOut={(event) => hover(false)}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+    <mesh ref={meshRef} position={props.position} >
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          array={pointsRef.current}
+          count={3}
+          // array={defaultVertices}
+          // count={props.vertexCount}
+          itemSize={3}
+        /> 
+      </bufferGeometry>
+      <meshBasicMaterial color="orange" side={DoubleSide}/>
     </mesh>
-  )
+  );
 }
 
-export default Model;
+

@@ -16,11 +16,14 @@ for (let i = 0; i < 9; i++) {
 function App() {
   const [vertices, setVertices] = useState(defaultVertices);
   const [vertexCount, setVertexCount] = useState(9);
-  // const [requireUpdate, setRequireUpdate] = useState(false);
 
-  function onClickGenerate() {
+  function requestGeneration() {
     console.log("clicked generate");
-    fetch("http://127.0.0.1:5000/generate_map/8/2")
+    // local machine + stub endpoint
+    const generateUrl = new URL("http://127.0.0.1:5000/random_triangles");
+    generateUrl.searchParams.append("count", 3);
+    
+    fetch(generateUrl)
       .then(r => r.json())
       .then(data => {
         console.log(data);
@@ -53,7 +56,7 @@ function App() {
       <body className="body">
         <button 
           className="button" 
-          onClick={onClickGenerate}
+          onClick={requestGeneration}
         >
           Generate
         </button>

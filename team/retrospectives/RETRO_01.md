@@ -12,9 +12,9 @@ Present: Christine, Matthew, Bryan, Andy, Shunning
 Absent: NA
 
 ## Action Item
-- A goal: identify something the team wants to get better at
-- A change: identify one thing that the team will change about how it works together
-- A measurement: identify at least one way to measure whether the change helped the team achieve the goal, or move closer to it.
+- A goal: Start commenting in code and using good naming conventions.
+- A change: Refrain from adding minor changes unrelated to the commit.
+- A measurement: Reduced confusion from another commit due to confusing variable names; reduced confusion from which commit a change came from (the change should be related to the commit and have its separate issue and branch).
 
 Retro Notes:
 

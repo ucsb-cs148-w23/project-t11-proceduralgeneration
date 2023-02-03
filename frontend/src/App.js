@@ -6,7 +6,7 @@ import { useState, createContext } from 'react';
 import { OrbitControls } from '@react-three/drei'
 import Paper from '@mui/material/Paper';
 import ControlPanel from './components/ControlPanel.js'
-import { defaultVertices } from './constants.js';
+import { defaultVertices, defaultVertexCount } from './constants.js';
 // import Slider from '@mui/material/Slider';
 
 // const dummy = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);
@@ -18,9 +18,10 @@ const ControlsContext = createContext();
 
 function App() {
   const [vertices, setVertices] = useState(defaultVertices);
-  const [vertexCount, setVertexCount] = useState(9);
+  const [vertexCount, setVertexCount] = useState(defaultVertexCount);
   const [triangleCount, setTriangleCount] = useState(1);
   const [triangleSize, setTriangleSize] = useState(1);
+  const [color, setColor] = useState("#FEFBEA");
 
   return (
     <ControlsContext.Provider 
@@ -28,7 +29,8 @@ function App() {
         vertices, setVertices, 
         vertexCount, setVertexCount, 
         triangleCount, setTriangleCount, 
-        triangleSize, setTriangleSize 
+        triangleSize, setTriangleSize,
+        color, setColor
       }}
     >
       <div className="App">

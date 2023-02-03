@@ -1,5 +1,8 @@
 # Technologies
 
+### Slack Help Channel Engagement
+- Matthew: posted firebase authentication tutorial
+
 ## Strengths and Weaknesses
 
 

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import { TwitterPicker } from 'react-color';
 
 import InputSlider from './InputSlider.js'
 import { ControlsContext } from '../App.js';
@@ -12,7 +13,8 @@ export default function ControlPanel() {
     vertices, setVertices, 
     vertexCount, setVertexCount, 
     triangleCount, setTriangleCount, 
-    triangleSize, setTriangleSize 
+    triangleSize, setTriangleSize,
+    color, setColor
   } = useContext(ControlsContext);
 
   function requestGeneration() {
@@ -33,6 +35,11 @@ export default function ControlPanel() {
           console.log("error: too many points");
         }
       });
+  }
+
+  function handleColorChange(color, event) {
+    console.log("clicked color!");
+    setColor(color.hex);
   }
 
   return (
@@ -61,6 +68,15 @@ export default function ControlPanel() {
           setValue={setTriangleSize} 
           label="Triangle Size" 
           className="control-panel-item"
+        />
+      </Grid>
+      <Grid item>
+        <Typography gutterBottom>
+          Mesh Color
+        </Typography>
+        <TwitterPicker
+          color={color}
+          onChangeComplete={handleColorChange}
         />
       </Grid>
       <Grid item>

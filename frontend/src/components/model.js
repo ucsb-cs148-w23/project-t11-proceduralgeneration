@@ -1,11 +1,14 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useContext } from 'react'
 import { DoubleSide } from "three";
+import { defaultVertexCount } from '../constants.js';
+import { ControlsContext } from '../App.js';
 // import { Canvas, useFrame } from '@react-three/fiber'
 // import { OrbitControls } from '@react-three/drei'
 
 export default function Model(props) {
   console.log("re-render!\nlogging from Model: ", props.vertices);
   const pointsRef = useRef(props.vertices);
+  const { color } = useContext(ControlsContext);
   
   const meshRef = useRef();
   useEffect(() => {
@@ -22,7 +25,6 @@ export default function Model(props) {
     // apparently pointsRef gets updated too by this effect
     // console.log("pointsRef: ", pointsRef);
   }, [props.vertices]);
-  
 
   return (
     <mesh ref={meshRef} position={props.position} >
@@ -30,13 +32,13 @@ export default function Model(props) {
         <bufferAttribute
           attach="attributes-position"
           array={pointsRef.current}
-          count={3}
+          count={defaultVertexCount}
           // array={defaultVertices}
           // count={props.vertexCount}
           itemSize={3}
         /> 
       </bufferGeometry>
-      <meshBasicMaterial color="orange" side={DoubleSide}/>
+      <meshBasicMaterial color={color} side={DoubleSide}/>
     </mesh>
   );
 }

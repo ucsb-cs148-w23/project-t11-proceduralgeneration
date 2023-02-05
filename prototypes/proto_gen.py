@@ -24,9 +24,8 @@ data = json.load(f)
 
 indexed_data = list(data.items())
 
-for i in range(len(indexed_data)):
-    name1, proto1 = indexed_data[i]
-    data[name1]["valid_neighbors"] = {
+for name, proto in data.items():
+    data[name]["valid_neighbors"] = {
         "nx": [],
         "px": [],
         "ny": [],
@@ -35,27 +34,37 @@ for i in range(len(indexed_data)):
         "pz": []
     }
 
+
+for i in range(len(indexed_data)):
+    name1, proto1 = indexed_data[i]
+    
     for j in range(i + 1, len(indexed_data)):
         name2, proto2 = indexed_data[j]
 
         # Append names of valid neighbors
         if (valid_sockets(proto1["sockets"]["py"], proto2["sockets"]["ny"])): 
             data[name1]["valid_neighbors"]["py"].append(name2)
+            data[name2]["valid_neighbors"]["ny"].append(name1)
 
         if (valid_sockets(proto1["sockets"]["px"], proto2["sockets"]["nx"])): 
             data[name1]["valid_neighbors"]["px"].append(name2)
+            data[name2]["valid_neighbors"]["nx"].append(name1)
 
         if (valid_sockets(proto1["sockets"]["ny"], proto2["sockets"]["py"])): 
             data[name1]["valid_neighbors"]["ny"].append(name2)
+            data[name2]["valid_neighbors"]["py"].append(name1)
 
         if (valid_sockets(proto1["sockets"]["nx"], proto2["sockets"]["px"])): 
             data[name1]["valid_neighbors"]["nx"].append(name2)
+            data[name2]["valid_neighbors"]["px"].append(name1)
 
         if (valid_sockets(proto1["sockets"]["pz"], proto2["sockets"]["nz"])): 
             data[name1]["valid_neighbors"]["pz"].append(name2)
+            data[name2]["valid_neighbors"]["nz"].append(name1)
 
         if (valid_sockets(proto1["sockets"]["nz"], proto2["sockets"]["pz"])): 
             data[name1]["valid_neighbors"]["nz"].append(name2)
+            data[name2]["valid_neighbors"]["pz"].append(name1)
 
 
 with open("prototypes.json", "w") as outfile:

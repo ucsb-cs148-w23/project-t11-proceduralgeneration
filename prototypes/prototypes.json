@@ -1,0 +1,1249 @@
+{
+    "proto_0": {
+        "mesh": "default.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_12",
+                "proto_16",
+                "proto_17",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "px": [
+                "proto_10",
+                "proto_14",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_25",
+                "proto_26"
+            ],
+            "ny": [
+                "proto_11",
+                "proto_15",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "py": [
+                "proto_9",
+                "proto_13",
+                "proto_17",
+                "proto_18",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "nz": [
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": [
+                "proto_5",
+                "proto_6",
+                "proto_7",
+                "proto_8",
+                "proto_9",
+                "proto_10",
+                "proto_11",
+                "proto_12",
+                "proto_13",
+                "proto_14",
+                "proto_15",
+                "proto_16",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ]
+        }
+    },
+    "proto_1": {
+        "mesh": "doorblock.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "0s",
+            "px": "0s",
+            "ny": "0s",
+            "py": "1s",
+            "nz": "1_0",
+            "pz": "0_i"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_3",
+                "proto_4"
+            ],
+            "px": [
+                "proto_2",
+                "proto_3"
+            ],
+            "ny": [
+                "proto_2",
+                "proto_3",
+                "proto_4"
+            ],
+            "py": [
+                "proto_3"
+            ],
+            "nz": [],
+            "pz": [
+                "proto_5",
+                "proto_6",
+                "proto_7",
+                "proto_8",
+                "proto_9",
+                "proto_10",
+                "proto_11",
+                "proto_12",
+                "proto_13",
+                "proto_14",
+                "proto_15",
+                "proto_16",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ]
+        }
+    },
+    "proto_2": {
+        "mesh": "doorblock.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "0s",
+            "px": "1s",
+            "ny": "0s",
+            "py": "0s",
+            "nz": "1_1",
+            "pz": "0_i"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_3",
+                "proto_4"
+            ],
+            "px": [
+                "proto_4"
+            ],
+            "ny": [
+                "proto_3",
+                "proto_4"
+            ],
+            "py": [
+                "proto_4"
+            ],
+            "nz": [],
+            "pz": [
+                "proto_5",
+                "proto_6",
+                "proto_7",
+                "proto_8",
+                "proto_9",
+                "proto_10",
+                "proto_11",
+                "proto_12",
+                "proto_13",
+                "proto_14",
+                "proto_15",
+                "proto_16",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ]
+        }
+    },
+    "proto_3": {
+        "mesh": "doorblock.gltf",
+        "rotation": 2,
+        "sockets": {
+            "nx": "0s",
+            "px": "0s",
+            "ny": "1s",
+            "py": "0s",
+            "nz": "1_2",
+            "pz": "0_i"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_4"
+            ],
+            "px": [],
+            "ny": [],
+            "py": [
+                "proto_4"
+            ],
+            "nz": [],
+            "pz": [
+                "proto_5",
+                "proto_6",
+                "proto_7",
+                "proto_8",
+                "proto_9",
+                "proto_10",
+                "proto_11",
+                "proto_12",
+                "proto_13",
+                "proto_14",
+                "proto_15",
+                "proto_16",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ]
+        }
+    },
+    "proto_4": {
+        "mesh": "doorblock.gltf",
+        "rotation": 3,
+        "sockets": {
+            "nx": "1s",
+            "px": "0s",
+            "ny": "0s",
+            "py": "0s",
+            "nz": "1_3",
+            "pz": "0_i"
+        },
+        "valid_neighbors": {
+            "nx": [],
+            "px": [],
+            "ny": [],
+            "py": [],
+            "nz": [],
+            "pz": [
+                "proto_5",
+                "proto_6",
+                "proto_7",
+                "proto_8",
+                "proto_9",
+                "proto_10",
+                "proto_11",
+                "proto_12",
+                "proto_13",
+                "proto_14",
+                "proto_15",
+                "proto_16",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ]
+        }
+    },
+    "proto_5": {
+        "mesh": "roofedge.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "2",
+            "px": "3_s",
+            "ny": "2_f",
+            "py": "3_s",
+            "nz": "0_i",
+            "pz": "4_0"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_7",
+                "proto_11"
+            ],
+            "px": [
+                "proto_7",
+                "proto_8",
+                "proto_12",
+                "proto_16"
+            ],
+            "ny": [
+                "proto_7",
+                "proto_12"
+            ],
+            "py": [
+                "proto_6",
+                "proto_7",
+                "proto_11",
+                "proto_15"
+            ],
+            "nz": [
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": []
+        }
+    },
+    "proto_6": {
+        "mesh": "roofedge.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "2_f",
+            "px": "3_s",
+            "ny": "3_s",
+            "py": "2",
+            "nz": "0_i",
+            "pz": "4_1"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_8",
+                "proto_9"
+            ],
+            "px": [
+                "proto_7",
+                "proto_8",
+                "proto_12",
+                "proto_16"
+            ],
+            "ny": [
+                "proto_8",
+                "proto_9",
+                "proto_13"
+            ],
+            "py": [
+                "proto_8",
+                "proto_12"
+            ],
+            "nz": [
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": []
+        }
+    },
+    "proto_7": {
+        "mesh": "roofedge.gltf",
+        "rotation": 2,
+        "sockets": {
+            "nx": "3_s",
+            "px": "2",
+            "ny": "3_s",
+            "py": "2_f",
+            "nz": "0_i",
+            "pz": "4_2"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_10",
+                "proto_14"
+            ],
+            "px": [
+                "proto_9"
+            ],
+            "ny": [
+                "proto_8",
+                "proto_9",
+                "proto_13"
+            ],
+            "py": [
+                "proto_10"
+            ],
+            "nz": [
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": []
+        }
+    },
+    "proto_8": {
+        "mesh": "roofedge.gltf",
+        "rotation": 3,
+        "sockets": {
+            "nx": "3_s",
+            "px": "2_f",
+            "ny": "2",
+            "py": "3_s",
+            "nz": "0_i",
+            "pz": "4_3"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_10",
+                "proto_14"
+            ],
+            "px": [
+                "proto_11"
+            ],
+            "ny": [
+                "proto_10"
+            ],
+            "py": [
+                "proto_11",
+                "proto_15"
+            ],
+            "nz": [
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": []
+        }
+    },
+    "proto_9": {
+        "mesh": "roofside.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "2",
+            "px": "2_f",
+            "ny": "0_s",
+            "py": "3_s",
+            "nz": "0_i",
+            "pz": "5_0"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_11"
+            ],
+            "px": [
+                "proto_11"
+            ],
+            "ny": [
+                "proto_11",
+                "proto_15",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "py": [
+                "proto_11",
+                "proto_15"
+            ],
+            "nz": [
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": []
+        }
+    },
+    "proto_10": {
+        "mesh": "roofside.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "0_s",
+            "px": "3_s",
+            "ny": "2_f",
+            "py": "2",
+            "nz": "0_i",
+            "pz": "5_2"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_12",
+                "proto_16",
+                "proto_17",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "px": [
+                "proto_12",
+                "proto_16"
+            ],
+            "ny": [
+                "proto_12"
+            ],
+            "py": [
+                "proto_12"
+            ],
+            "nz": [
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": []
+        }
+    },
+    "proto_11": {
+        "mesh": "roofside.gltf",
+        "rotation": 2,
+        "sockets": {
+            "nx": "2_f",
+            "px": "2",
+            "ny": "3_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "5_2"
+        },
+        "valid_neighbors": {
+            "nx": [],
+            "px": [],
+            "ny": [
+                "proto_13"
+            ],
+            "py": [
+                "proto_13",
+                "proto_17",
+                "proto_18",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "nz": [
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": []
+        }
+    },
+    "proto_12": {
+        "mesh": "roofside.gltf",
+        "rotation": 3,
+        "sockets": {
+            "nx": "3_s",
+            "px": "0_s",
+            "ny": "2",
+            "py": "2_f",
+            "nz": "0_i",
+            "pz": "5_3"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_14"
+            ],
+            "px": [
+                "proto_14",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_25",
+                "proto_26"
+            ],
+            "ny": [],
+            "py": [],
+            "nz": [
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": []
+        }
+    },
+    "proto_13": {
+        "mesh": "stair.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "6",
+            "px": "6_f",
+            "ny": "0_s",
+            "py": "3_s",
+            "nz": "0_i",
+            "pz": "5_0"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_15"
+            ],
+            "px": [
+                "proto_15"
+            ],
+            "ny": [
+                "proto_15",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "py": [
+                "proto_15"
+            ],
+            "nz": [
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": []
+        }
+    },
+    "proto_14": {
+        "mesh": "stair.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "0_s",
+            "px": "3_s",
+            "ny": "6_f",
+            "py": "6",
+            "nz": "0_i",
+            "pz": "5_2"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_16",
+                "proto_17",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "px": [
+                "proto_16"
+            ],
+            "ny": [
+                "proto_16"
+            ],
+            "py": [
+                "proto_16"
+            ],
+            "nz": [
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": []
+        }
+    },
+    "proto_15": {
+        "mesh": "stair.gltf",
+        "rotation": 2,
+        "sockets": {
+            "nx": "6_f",
+            "px": "6",
+            "ny": "3_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "5_2"
+        },
+        "valid_neighbors": {
+            "nx": [],
+            "px": [],
+            "ny": [],
+            "py": [
+                "proto_17",
+                "proto_18",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "nz": [
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": []
+        }
+    },
+    "proto_16": {
+        "mesh": "stair.gltf",
+        "rotation": 3,
+        "sockets": {
+            "nx": "3_s",
+            "px": "0_s",
+            "ny": "6",
+            "py": "6_f",
+            "nz": "0_i",
+            "pz": "5_3"
+        },
+        "valid_neighbors": {
+            "nx": [],
+            "px": [
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_25",
+                "proto_26"
+            ],
+            "ny": [],
+            "py": [],
+            "nz": [
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": []
+        }
+    },
+    "proto_17": {
+        "mesh": "twowindow.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "7_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "px": [
+                "proto_18",
+                "proto_19",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_25",
+                "proto_26"
+            ],
+            "ny": [
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "py": [
+                "proto_19"
+            ],
+            "nz": [
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": [
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ]
+        }
+    },
+    "proto_18": {
+        "mesh": "twowindow.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "0_s",
+            "px": "7_s",
+            "ny": "0_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "px": [
+                "proto_20"
+            ],
+            "ny": [
+                "proto_19",
+                "proto_20",
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "py": [
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "nz": [
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": [
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ]
+        }
+    },
+    "proto_19": {
+        "mesh": "twowindow.gltf",
+        "rotation": 2,
+        "sockets": {
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "7_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_20",
+                "proto_21",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "px": [
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_25",
+                "proto_26"
+            ],
+            "ny": [],
+            "py": [
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "nz": [
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": [
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ]
+        }
+    },
+    "proto_20": {
+        "mesh": "twowindow.gltf",
+        "rotation": 3,
+        "sockets": {
+            "nx": "7_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        },
+        "valid_neighbors": {
+            "nx": [],
+            "px": [
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_25",
+                "proto_26"
+            ],
+            "ny": [
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "py": [
+                "proto_21",
+                "proto_22",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "nz": [
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": [
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ]
+        }
+    },
+    "proto_21": {
+        "mesh": "twowindowsimp.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "8_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "px": [
+                "proto_22",
+                "proto_23",
+                "proto_25",
+                "proto_26"
+            ],
+            "ny": [
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "py": [
+                "proto_23"
+            ],
+            "nz": [
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": [
+                "proto_22",
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ]
+        }
+    },
+    "proto_22": {
+        "mesh": "twowindowsimp.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "0_s",
+            "px": "8_s",
+            "ny": "0_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "px": [
+                "proto_24"
+            ],
+            "ny": [
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "py": [
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "nz": [
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": [
+                "proto_23",
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ]
+        }
+    },
+    "proto_23": {
+        "mesh": "twowindowsimp.gltf",
+        "rotation": 2,
+        "sockets": {
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "8_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "px": [
+                "proto_25",
+                "proto_26"
+            ],
+            "ny": [],
+            "py": [
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ],
+            "nz": [
+                "proto_24"
+            ],
+            "pz": [
+                "proto_24",
+                "proto_25",
+                "proto_26"
+            ]
+        }
+    },
+    "proto_24": {
+        "mesh": "twowindowsimp.gltf",
+        "rotation": 3,
+        "sockets": {
+            "nx": "8_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        },
+        "valid_neighbors": {
+            "nx": [],
+            "px": [
+                "proto_25",
+                "proto_26"
+            ],
+            "ny": [
+                "proto_25",
+                "proto_26"
+            ],
+            "py": [
+                "proto_25",
+                "proto_26"
+            ],
+            "nz": [],
+            "pz": [
+                "proto_25",
+                "proto_26"
+            ]
+        }
+    },
+    "proto_25": {
+        "mesh": "onewayroad.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "9_0"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_26"
+            ],
+            "px": [
+                "proto_26"
+            ],
+            "ny": [
+                "proto_26"
+            ],
+            "py": [
+                "proto_26"
+            ],
+            "nz": [],
+            "pz": []
+        }
+    },
+    "proto_26": {
+        "mesh": "onewayroad.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "9_1"
+        },
+        "valid_neighbors": {
+            "nx": [],
+            "px": [],
+            "ny": [],
+            "py": [],
+            "nz": [],
+            "pz": []
+        }
+    }
+}

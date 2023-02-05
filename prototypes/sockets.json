@@ -1,0 +1,327 @@
+{
+    "proto_0": {
+        "mesh": "default.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        }
+    },
+    "proto_1": {
+        "mesh": "doorblock.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "0s",
+            "px": "0s",
+            "ny": "0s",
+            "py": "1s",
+            "nz": "1_0",
+            "pz": "0_i"
+        }
+    }, 
+    "proto_2": {
+        "mesh": "doorblock.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "0s",
+            "px": "1s",
+            "ny": "0s",
+            "py": "0s",
+            "nz": "1_1",
+            "pz": "0_i"
+        }
+    }, 
+    "proto_3": {
+        "mesh": "doorblock.gltf",
+        "rotation": 2,
+        "sockets": {
+            "nx": "0s",
+            "px": "0s",
+            "ny": "1s",
+            "py": "0s",
+            "nz": "1_2",
+            "pz": "0_i"
+        }
+    },
+    "proto_4": {
+        "mesh": "doorblock.gltf",
+        "rotation": 3,
+        "sockets": {
+            "nx": "1s",
+            "px": "0s",
+            "ny": "0s",
+            "py": "0s",
+            "nz": "1_3",
+            "pz": "0_i"
+        }
+    },
+    "proto_5": {
+        "mesh": "roofedge.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "2",
+            "px": "3_s",
+            "ny": "2_f",
+            "py": "3_s",
+            "nz": "0_i",
+            "pz": "4_0"
+        }
+    },
+    "proto_6": {
+        "mesh": "roofedge.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "2_f",
+            "px": "3_s",
+            "ny": "3_s",
+            "py": "2",
+            "nz": "0_i",
+            "pz": "4_1"
+        }
+    },
+    "proto_7": {
+        "mesh": "roofedge.gltf",
+        "rotation": 2,
+        "sockets": {
+            "nx": "3_s",
+            "px": "2",
+            "ny": "3_s",
+            "py": "2_f",
+            "nz": "0_i",
+            "pz": "4_2"
+        }
+    },
+    "proto_8": {
+        "mesh": "roofedge.gltf",
+        "rotation": 3,
+        "sockets": {
+            "nx": "3_s",
+            "px": "2_f",
+            "ny": "2",
+            "py": "3_s",
+            "nz": "0_i",
+            "pz": "4_3"
+        }
+    },
+    "proto_9": {
+        "mesh": "roofside.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "2",
+            "px": "2_f",
+            "ny": "0_s",
+            "py": "3_s",
+            "nz": "0_i",
+            "pz": "5_0"
+        }
+    },
+    "proto_10": {
+        "mesh": "roofside.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "0_s",
+            "px": "3_s",
+            "ny": "2_f",
+            "py": "2",
+            "nz": "0_i",
+            "pz": "5_2"
+        }
+    },
+    "proto_11": {
+        "mesh": "roofside.gltf",
+        "rotation": 2,
+        "sockets": {
+            "nx": "2_f",
+            "px": "2",
+            "ny": "3_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "5_2"
+        }
+    },
+    "proto_12": {
+        "mesh": "roofside.gltf",
+        "rotation": 3,
+        "sockets": {
+            "nx": "3_s",
+            "px": "0_s",
+            "ny": "2",
+            "py": "2_f",
+            "nz": "0_i",
+            "pz": "5_3"
+        }
+    },
+    "proto_13": {
+        "mesh": "stair.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "6",
+            "px": "6_f",
+            "ny": "0_s",
+            "py": "3_s",
+            "nz": "0_i",
+            "pz": "5_0"
+        }
+    },
+    "proto_14": {
+        "mesh": "stair.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "0_s",
+            "px": "3_s",
+            "ny": "6_f",
+            "py": "6",
+            "nz": "0_i",
+            "pz": "5_2"
+        }
+    },
+    "proto_15": {
+        "mesh": "stair.gltf",
+        "rotation": 2,
+        "sockets": {
+            "nx": "6_f",
+            "px": "6",
+            "ny": "3_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "5_2"
+        }
+    },
+    "proto_16": {
+        "mesh": "stair.gltf",
+        "rotation": 3,
+        "sockets": {
+            "nx": "3_s",
+            "px": "0_s",
+            "ny": "6",
+            "py": "6_f",
+            "nz": "0_i",
+            "pz": "5_3"
+        }
+    },
+    "proto_17": {
+        "mesh": "twowindow.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "7_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        }
+    },
+    "proto_18": {
+        "mesh": "twowindow.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "0_s",
+            "px": "7_s",
+            "ny": "0_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        }
+    },
+    "proto_19": {
+        "mesh": "twowindow.gltf",
+        "rotation": 2,
+        "sockets": {
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "7_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        }
+    },
+    "proto_20": {
+        "mesh": "twowindow.gltf",
+        "rotation": 3,
+        "sockets": {
+            "nx": "7_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        }
+    },
+    "proto_21": {
+        "mesh": "twowindowsimp.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "8_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        }
+    },
+    "proto_22": {
+        "mesh": "twowindowsimp.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "0_s",
+            "px": "8_s",
+            "ny": "0_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        }
+    },
+    "proto_23": {
+        "mesh": "twowindowsimp.gltf",
+        "rotation": 2,
+        "sockets": {
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "8_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        }
+    },
+    "proto_24": {
+        "mesh": "twowindowsimp.gltf",
+        "rotation": 3,
+        "sockets": {
+            "nx": "8_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "0_i"
+        }
+    },
+    "proto_25": {
+        "mesh": "onewayroad.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "9_0"
+        }
+    },
+    "proto_26": {
+        "mesh": "onewayroad.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "0_s",
+            "nz": "0_i",
+            "pz": "9_1"
+        }
+    }
+}
+

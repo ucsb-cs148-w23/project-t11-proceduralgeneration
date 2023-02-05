@@ -1,5 +1,10 @@
 # Technologies
 
+### Slack Help Channel Engagement
+- Matthew: posted firebase authentication tutorial
+- Bryan: posted bootstrap tutorial
+- Christine: posted tutorial on flask development best practices
+
 ## Strengths and Weaknesses
 
 
@@ -48,3 +53,7 @@ Team:
 - Richard: Open mesh and fire base
 - Andy: Start looking into React and Flask and getting the basics down. Then maybe visiting openmesh with python (and maybe c++ if we have time)
 - Bryan: React, OpenMesh
+
+
+# Posts in help channel (Lab03)
+

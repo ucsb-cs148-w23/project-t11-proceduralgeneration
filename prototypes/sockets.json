@@ -305,8 +305,8 @@
         "sockets": {
             "nx": "0_s",
             "px": "0_s",
-            "ny": "0_s",
-            "py": "0_s",
+            "ny": "10_s",
+            "py": "10_s",
             "nz": "0_i",
             "pz": "9_0"
         }
@@ -315,12 +315,24 @@
         "mesh": "onewayroad.gltf",
         "rotation": 1,
         "sockets": {
-            "nx": "0_s",
-            "px": "0_s",
+            "nx": "10_s",
+            "px": "10_s",
             "ny": "0_s",
             "py": "0_s",
             "nz": "0_i",
             "pz": "9_1"
+        }
+    },
+    "proto_27": {
+        "mesh": "twowayroad.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "10_s",
+            "px": "10_s",
+            "ny": "10_s",
+            "py": "10_s",
+            "nz": "0_i",
+            "pz": "11_i"
         }
     }
 }

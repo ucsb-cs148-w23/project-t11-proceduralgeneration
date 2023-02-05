@@ -20,8 +20,7 @@
                 "proto_21",
                 "proto_23",
                 "proto_24",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
             "px": [
                 "proto_10",
@@ -32,8 +31,7 @@
                 "proto_21",
                 "proto_22",
                 "proto_23",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
             "ny": [
                 "proto_11",
@@ -44,7 +42,6 @@
                 "proto_22",
                 "proto_23",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "py": [
@@ -56,7 +53,6 @@
                 "proto_21",
                 "proto_22",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "nz": [
@@ -95,7 +91,8 @@
                 "proto_23",
                 "proto_24",
                 "proto_25",
-                "proto_26"
+                "proto_26",
+                "proto_27"
             ]
         }
     },
@@ -129,6 +126,7 @@
             ],
             "nz": [],
             "pz": [
+                "proto_0",
                 "proto_5",
                 "proto_6",
                 "proto_7",
@@ -150,7 +148,8 @@
                 "proto_23",
                 "proto_24",
                 "proto_25",
-                "proto_26"
+                "proto_26",
+                "proto_27"
             ]
         }
     },
@@ -167,6 +166,7 @@
         },
         "valid_neighbors": {
             "nx": [
+                "proto_1",
                 "proto_3",
                 "proto_4"
             ],
@@ -178,10 +178,12 @@
                 "proto_4"
             ],
             "py": [
+                "proto_1",
                 "proto_4"
             ],
             "nz": [],
             "pz": [
+                "proto_0",
                 "proto_5",
                 "proto_6",
                 "proto_7",
@@ -203,7 +205,8 @@
                 "proto_23",
                 "proto_24",
                 "proto_25",
-                "proto_26"
+                "proto_26",
+                "proto_27"
             ]
         }
     },
@@ -220,15 +223,24 @@
         },
         "valid_neighbors": {
             "nx": [
+                "proto_1",
                 "proto_4"
             ],
-            "px": [],
-            "ny": [],
+            "px": [
+                "proto_1",
+                "proto_2"
+            ],
+            "ny": [
+                "proto_1"
+            ],
             "py": [
+                "proto_1",
+                "proto_2",
                 "proto_4"
             ],
             "nz": [],
             "pz": [
+                "proto_0",
                 "proto_5",
                 "proto_6",
                 "proto_7",
@@ -250,7 +262,8 @@
                 "proto_23",
                 "proto_24",
                 "proto_25",
-                "proto_26"
+                "proto_26",
+                "proto_27"
             ]
         }
     },
@@ -266,12 +279,25 @@
             "pz": "0_i"
         },
         "valid_neighbors": {
-            "nx": [],
-            "px": [],
-            "ny": [],
-            "py": [],
+            "nx": [
+                "proto_2"
+            ],
+            "px": [
+                "proto_1",
+                "proto_2",
+                "proto_3"
+            ],
+            "ny": [
+                "proto_2",
+                "proto_3"
+            ],
+            "py": [
+                "proto_1",
+                "proto_2"
+            ],
             "nz": [],
             "pz": [
+                "proto_0",
                 "proto_5",
                 "proto_6",
                 "proto_7",
@@ -293,7 +319,8 @@
                 "proto_23",
                 "proto_24",
                 "proto_25",
-                "proto_26"
+                "proto_26",
+                "proto_27"
             ]
         }
     },
@@ -330,6 +357,11 @@
                 "proto_15"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
                 "proto_17",
                 "proto_18",
                 "proto_19",
@@ -365,6 +397,7 @@
                 "proto_16"
             ],
             "ny": [
+                "proto_5",
                 "proto_8",
                 "proto_9",
                 "proto_13"
@@ -374,6 +407,11 @@
                 "proto_12"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
                 "proto_17",
                 "proto_18",
                 "proto_19",
@@ -399,21 +437,31 @@
         },
         "valid_neighbors": {
             "nx": [
+                "proto_5",
+                "proto_6",
                 "proto_10",
                 "proto_14"
             ],
             "px": [
+                "proto_5",
                 "proto_9"
             ],
             "ny": [
+                "proto_5",
                 "proto_8",
                 "proto_9",
                 "proto_13"
             ],
             "py": [
+                "proto_5",
                 "proto_10"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
                 "proto_17",
                 "proto_18",
                 "proto_19",
@@ -439,20 +487,31 @@
         },
         "valid_neighbors": {
             "nx": [
+                "proto_5",
+                "proto_6",
                 "proto_10",
                 "proto_14"
             ],
             "px": [
+                "proto_6",
                 "proto_11"
             ],
             "ny": [
+                "proto_6",
                 "proto_10"
             ],
             "py": [
+                "proto_6",
+                "proto_7",
                 "proto_11",
                 "proto_15"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
                 "proto_17",
                 "proto_18",
                 "proto_19",
@@ -478,12 +537,15 @@
         },
         "valid_neighbors": {
             "nx": [
+                "proto_7",
                 "proto_11"
             ],
             "px": [
+                "proto_6",
                 "proto_11"
             ],
             "ny": [
+                "proto_0",
                 "proto_11",
                 "proto_15",
                 "proto_18",
@@ -492,14 +554,20 @@
                 "proto_22",
                 "proto_23",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "py": [
+                "proto_6",
+                "proto_7",
                 "proto_11",
                 "proto_15"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
                 "proto_17",
                 "proto_18",
                 "proto_19",
@@ -525,6 +593,7 @@
         },
         "valid_neighbors": {
             "nx": [
+                "proto_0",
                 "proto_12",
                 "proto_16",
                 "proto_17",
@@ -533,20 +602,28 @@
                 "proto_21",
                 "proto_23",
                 "proto_24",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
             "px": [
+                "proto_7",
+                "proto_8",
                 "proto_12",
                 "proto_16"
             ],
             "ny": [
+                "proto_7",
                 "proto_12"
             ],
             "py": [
+                "proto_8",
                 "proto_12"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
                 "proto_17",
                 "proto_18",
                 "proto_19",
@@ -571,12 +648,23 @@
             "pz": "5_2"
         },
         "valid_neighbors": {
-            "nx": [],
-            "px": [],
+            "nx": [
+                "proto_8",
+                "proto_9"
+            ],
+            "px": [
+                "proto_5",
+                "proto_9"
+            ],
             "ny": [
+                "proto_5",
+                "proto_8",
+                "proto_9",
                 "proto_13"
             ],
             "py": [
+                "proto_0",
+                "proto_9",
                 "proto_13",
                 "proto_17",
                 "proto_18",
@@ -584,10 +672,14 @@
                 "proto_21",
                 "proto_22",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
                 "proto_17",
                 "proto_18",
                 "proto_19",
@@ -613,9 +705,14 @@
         },
         "valid_neighbors": {
             "nx": [
+                "proto_5",
+                "proto_6",
+                "proto_10",
                 "proto_14"
             ],
             "px": [
+                "proto_0",
+                "proto_10",
                 "proto_14",
                 "proto_17",
                 "proto_18",
@@ -623,12 +720,22 @@
                 "proto_21",
                 "proto_22",
                 "proto_23",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
-            "ny": [],
-            "py": [],
+            "ny": [
+                "proto_6",
+                "proto_10"
+            ],
+            "py": [
+                "proto_5",
+                "proto_10"
+            ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
                 "proto_17",
                 "proto_18",
                 "proto_19",
@@ -660,6 +767,8 @@
                 "proto_15"
             ],
             "ny": [
+                "proto_0",
+                "proto_11",
                 "proto_15",
                 "proto_18",
                 "proto_19",
@@ -667,13 +776,20 @@
                 "proto_22",
                 "proto_23",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "py": [
+                "proto_6",
+                "proto_7",
+                "proto_11",
                 "proto_15"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
                 "proto_17",
                 "proto_18",
                 "proto_19",
@@ -699,6 +815,8 @@
         },
         "valid_neighbors": {
             "nx": [
+                "proto_0",
+                "proto_12",
                 "proto_16",
                 "proto_17",
                 "proto_19",
@@ -706,10 +824,12 @@
                 "proto_21",
                 "proto_23",
                 "proto_24",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
             "px": [
+                "proto_7",
+                "proto_8",
+                "proto_12",
                 "proto_16"
             ],
             "ny": [
@@ -719,6 +839,11 @@
                 "proto_16"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
                 "proto_17",
                 "proto_18",
                 "proto_19",
@@ -743,20 +868,36 @@
             "pz": "5_2"
         },
         "valid_neighbors": {
-            "nx": [],
-            "px": [],
-            "ny": [],
+            "nx": [
+                "proto_13"
+            ],
+            "px": [
+                "proto_13"
+            ],
+            "ny": [
+                "proto_5",
+                "proto_8",
+                "proto_9",
+                "proto_13"
+            ],
             "py": [
+                "proto_0",
+                "proto_9",
+                "proto_13",
                 "proto_17",
                 "proto_18",
                 "proto_20",
                 "proto_21",
                 "proto_22",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
                 "proto_17",
                 "proto_18",
                 "proto_19",
@@ -781,20 +922,36 @@
             "pz": "5_3"
         },
         "valid_neighbors": {
-            "nx": [],
+            "nx": [
+                "proto_5",
+                "proto_6",
+                "proto_10",
+                "proto_14"
+            ],
             "px": [
+                "proto_0",
+                "proto_10",
+                "proto_14",
                 "proto_17",
                 "proto_18",
                 "proto_19",
                 "proto_21",
                 "proto_22",
                 "proto_23",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
-            "ny": [],
-            "py": [],
+            "ny": [
+                "proto_14"
+            ],
+            "py": [
+                "proto_14"
+            ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
                 "proto_17",
                 "proto_18",
                 "proto_19",
@@ -820,37 +977,48 @@
         },
         "valid_neighbors": {
             "nx": [
+                "proto_0",
+                "proto_12",
+                "proto_16",
                 "proto_19",
                 "proto_20",
                 "proto_21",
                 "proto_23",
                 "proto_24",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
             "px": [
+                "proto_0",
+                "proto_10",
+                "proto_14",
                 "proto_18",
                 "proto_19",
                 "proto_21",
                 "proto_22",
                 "proto_23",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
             "ny": [
+                "proto_0",
+                "proto_11",
+                "proto_15",
                 "proto_18",
                 "proto_19",
                 "proto_20",
                 "proto_22",
                 "proto_23",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "py": [
                 "proto_19"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
                 "proto_18",
                 "proto_19",
                 "proto_20",
@@ -860,6 +1028,19 @@
                 "proto_24"
             ],
             "pz": [
+                "proto_0",
+                "proto_5",
+                "proto_6",
+                "proto_7",
+                "proto_8",
+                "proto_9",
+                "proto_10",
+                "proto_11",
+                "proto_12",
+                "proto_13",
+                "proto_14",
+                "proto_15",
+                "proto_16",
                 "proto_18",
                 "proto_19",
                 "proto_20",
@@ -868,7 +1049,8 @@
                 "proto_23",
                 "proto_24",
                 "proto_25",
-                "proto_26"
+                "proto_26",
+                "proto_27"
             ]
         }
     },
@@ -885,35 +1067,49 @@
         },
         "valid_neighbors": {
             "nx": [
+                "proto_0",
+                "proto_12",
+                "proto_16",
+                "proto_17",
                 "proto_19",
                 "proto_20",
                 "proto_21",
                 "proto_23",
                 "proto_24",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
             "px": [
                 "proto_20"
             ],
             "ny": [
+                "proto_0",
+                "proto_11",
+                "proto_15",
                 "proto_19",
                 "proto_20",
                 "proto_22",
                 "proto_23",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "py": [
+                "proto_0",
+                "proto_9",
+                "proto_13",
+                "proto_17",
                 "proto_20",
                 "proto_21",
                 "proto_22",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
+                "proto_17",
                 "proto_19",
                 "proto_20",
                 "proto_21",
@@ -922,6 +1118,20 @@
                 "proto_24"
             ],
             "pz": [
+                "proto_0",
+                "proto_5",
+                "proto_6",
+                "proto_7",
+                "proto_8",
+                "proto_9",
+                "proto_10",
+                "proto_11",
+                "proto_12",
+                "proto_13",
+                "proto_14",
+                "proto_15",
+                "proto_16",
+                "proto_17",
                 "proto_19",
                 "proto_20",
                 "proto_21",
@@ -929,7 +1139,8 @@
                 "proto_23",
                 "proto_24",
                 "proto_25",
-                "proto_26"
+                "proto_26",
+                "proto_27"
             ]
         }
     },
@@ -946,30 +1157,50 @@
         },
         "valid_neighbors": {
             "nx": [
+                "proto_0",
+                "proto_12",
+                "proto_16",
+                "proto_17",
                 "proto_20",
                 "proto_21",
                 "proto_23",
                 "proto_24",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
             "px": [
+                "proto_0",
+                "proto_10",
+                "proto_14",
+                "proto_17",
+                "proto_18",
                 "proto_21",
                 "proto_22",
                 "proto_23",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
-            "ny": [],
+            "ny": [
+                "proto_17"
+            ],
             "py": [
+                "proto_0",
+                "proto_9",
+                "proto_13",
+                "proto_17",
+                "proto_18",
                 "proto_20",
                 "proto_21",
                 "proto_22",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
+                "proto_17",
+                "proto_18",
                 "proto_20",
                 "proto_21",
                 "proto_22",
@@ -977,13 +1208,29 @@
                 "proto_24"
             ],
             "pz": [
+                "proto_0",
+                "proto_5",
+                "proto_6",
+                "proto_7",
+                "proto_8",
+                "proto_9",
+                "proto_10",
+                "proto_11",
+                "proto_12",
+                "proto_13",
+                "proto_14",
+                "proto_15",
+                "proto_16",
+                "proto_17",
+                "proto_18",
                 "proto_20",
                 "proto_21",
                 "proto_22",
                 "proto_23",
                 "proto_24",
                 "proto_25",
-                "proto_26"
+                "proto_26",
+                "proto_27"
             ]
         }
     },
@@ -999,41 +1246,81 @@
             "pz": "0_i"
         },
         "valid_neighbors": {
-            "nx": [],
+            "nx": [
+                "proto_18"
+            ],
             "px": [
+                "proto_0",
+                "proto_10",
+                "proto_14",
+                "proto_17",
+                "proto_18",
+                "proto_19",
                 "proto_21",
                 "proto_22",
                 "proto_23",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
             "ny": [
+                "proto_0",
+                "proto_11",
+                "proto_15",
+                "proto_18",
+                "proto_19",
                 "proto_22",
                 "proto_23",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "py": [
+                "proto_0",
+                "proto_9",
+                "proto_13",
+                "proto_17",
+                "proto_18",
                 "proto_21",
                 "proto_22",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
+                "proto_17",
+                "proto_18",
+                "proto_19",
                 "proto_21",
                 "proto_22",
                 "proto_23",
                 "proto_24"
             ],
             "pz": [
+                "proto_0",
+                "proto_5",
+                "proto_6",
+                "proto_7",
+                "proto_8",
+                "proto_9",
+                "proto_10",
+                "proto_11",
+                "proto_12",
+                "proto_13",
+                "proto_14",
+                "proto_15",
+                "proto_16",
+                "proto_17",
+                "proto_18",
+                "proto_19",
                 "proto_21",
                 "proto_22",
                 "proto_23",
                 "proto_24",
                 "proto_25",
-                "proto_26"
+                "proto_26",
+                "proto_27"
             ]
         }
     },
@@ -1050,38 +1337,80 @@
         },
         "valid_neighbors": {
             "nx": [
+                "proto_0",
+                "proto_12",
+                "proto_16",
+                "proto_17",
+                "proto_19",
+                "proto_20",
                 "proto_23",
                 "proto_24",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
             "px": [
+                "proto_0",
+                "proto_10",
+                "proto_14",
+                "proto_17",
+                "proto_18",
+                "proto_19",
                 "proto_22",
                 "proto_23",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
             "ny": [
+                "proto_0",
+                "proto_11",
+                "proto_15",
+                "proto_18",
+                "proto_19",
+                "proto_20",
                 "proto_22",
                 "proto_23",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "py": [
                 "proto_23"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
                 "proto_22",
                 "proto_23",
                 "proto_24"
             ],
             "pz": [
+                "proto_0",
+                "proto_5",
+                "proto_6",
+                "proto_7",
+                "proto_8",
+                "proto_9",
+                "proto_10",
+                "proto_11",
+                "proto_12",
+                "proto_13",
+                "proto_14",
+                "proto_15",
+                "proto_16",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
                 "proto_22",
                 "proto_23",
                 "proto_24",
                 "proto_25",
-                "proto_26"
+                "proto_26",
+                "proto_27"
             ]
         }
     },
@@ -1098,34 +1427,80 @@
         },
         "valid_neighbors": {
             "nx": [
+                "proto_0",
+                "proto_12",
+                "proto_16",
+                "proto_17",
+                "proto_19",
+                "proto_20",
+                "proto_21",
                 "proto_23",
                 "proto_24",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
             "px": [
                 "proto_24"
             ],
             "ny": [
+                "proto_0",
+                "proto_11",
+                "proto_15",
+                "proto_18",
+                "proto_19",
+                "proto_20",
                 "proto_23",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "py": [
+                "proto_0",
+                "proto_9",
+                "proto_13",
+                "proto_17",
+                "proto_18",
+                "proto_20",
+                "proto_21",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
                 "proto_23",
                 "proto_24"
             ],
             "pz": [
+                "proto_0",
+                "proto_5",
+                "proto_6",
+                "proto_7",
+                "proto_8",
+                "proto_9",
+                "proto_10",
+                "proto_11",
+                "proto_12",
+                "proto_13",
+                "proto_14",
+                "proto_15",
+                "proto_16",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
                 "proto_23",
                 "proto_24",
                 "proto_25",
-                "proto_26"
+                "proto_26",
+                "proto_27"
             ]
         }
     },
@@ -1142,27 +1517,80 @@
         },
         "valid_neighbors": {
             "nx": [
+                "proto_0",
+                "proto_12",
+                "proto_16",
+                "proto_17",
+                "proto_19",
+                "proto_20",
+                "proto_21",
                 "proto_24",
-                "proto_25",
-                "proto_26"
+                "proto_25"
             ],
             "px": [
-                "proto_25",
-                "proto_26"
+                "proto_0",
+                "proto_10",
+                "proto_14",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_21",
+                "proto_22",
+                "proto_25"
             ],
-            "ny": [],
+            "ny": [
+                "proto_21"
+            ],
             "py": [
+                "proto_0",
+                "proto_9",
+                "proto_13",
+                "proto_17",
+                "proto_18",
+                "proto_20",
+                "proto_21",
+                "proto_22",
                 "proto_24",
-                "proto_25",
                 "proto_26"
             ],
             "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
                 "proto_24"
             ],
             "pz": [
+                "proto_0",
+                "proto_5",
+                "proto_6",
+                "proto_7",
+                "proto_8",
+                "proto_9",
+                "proto_10",
+                "proto_11",
+                "proto_12",
+                "proto_13",
+                "proto_14",
+                "proto_15",
+                "proto_16",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
                 "proto_24",
                 "proto_25",
-                "proto_26"
+                "proto_26",
+                "proto_27"
             ]
         }
     },
@@ -1178,23 +1606,81 @@
             "pz": "0_i"
         },
         "valid_neighbors": {
-            "nx": [],
+            "nx": [
+                "proto_22"
+            ],
             "px": [
-                "proto_25",
-                "proto_26"
+                "proto_0",
+                "proto_10",
+                "proto_14",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_25"
             ],
             "ny": [
-                "proto_25",
+                "proto_0",
+                "proto_11",
+                "proto_15",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_22",
+                "proto_23",
                 "proto_26"
             ],
             "py": [
-                "proto_25",
+                "proto_0",
+                "proto_9",
+                "proto_13",
+                "proto_17",
+                "proto_18",
+                "proto_20",
+                "proto_21",
+                "proto_22",
                 "proto_26"
             ],
-            "nz": [],
+            "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23"
+            ],
             "pz": [
+                "proto_0",
+                "proto_5",
+                "proto_6",
+                "proto_7",
+                "proto_8",
+                "proto_9",
+                "proto_10",
+                "proto_11",
+                "proto_12",
+                "proto_13",
+                "proto_14",
+                "proto_15",
+                "proto_16",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
                 "proto_25",
-                "proto_26"
+                "proto_26",
+                "proto_27"
             ]
         }
     },
@@ -1204,10 +1690,126 @@
         "sockets": {
             "nx": "0_s",
             "px": "0_s",
+            "ny": "10_s",
+            "py": "10_s",
+            "nz": "0_i",
+            "pz": "9_0"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_0",
+                "proto_12",
+                "proto_16",
+                "proto_17",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_23",
+                "proto_24"
+            ],
+            "px": [
+                "proto_0",
+                "proto_10",
+                "proto_14",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_21",
+                "proto_22",
+                "proto_23"
+            ],
+            "ny": [
+                "proto_27"
+            ],
+            "py": [
+                "proto_27"
+            ],
+            "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": []
+        }
+    },
+    "proto_26": {
+        "mesh": "onewayroad.gltf",
+        "rotation": 1,
+        "sockets": {
+            "nx": "10_s",
+            "px": "10_s",
             "ny": "0_s",
             "py": "0_s",
             "nz": "0_i",
-            "pz": "9_0"
+            "pz": "9_1"
+        },
+        "valid_neighbors": {
+            "nx": [
+                "proto_27"
+            ],
+            "px": [
+                "proto_27"
+            ],
+            "ny": [
+                "proto_0",
+                "proto_11",
+                "proto_15",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "py": [
+                "proto_0",
+                "proto_9",
+                "proto_13",
+                "proto_17",
+                "proto_18",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_24"
+            ],
+            "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
+            "pz": []
+        }
+    },
+    "proto_27": {
+        "mesh": "twowayroad.gltf",
+        "rotation": 0,
+        "sockets": {
+            "nx": "10_s",
+            "px": "10_s",
+            "ny": "10_s",
+            "py": "10_s",
+            "nz": "0_i",
+            "pz": "11_i"
         },
         "valid_neighbors": {
             "nx": [
@@ -1217,32 +1819,26 @@
                 "proto_26"
             ],
             "ny": [
-                "proto_26"
+                "proto_25"
             ],
             "py": [
-                "proto_26"
+                "proto_25"
             ],
-            "nz": [],
-            "pz": []
-        }
-    },
-    "proto_26": {
-        "mesh": "onewayroad.gltf",
-        "rotation": 1,
-        "sockets": {
-            "nx": "0_s",
-            "px": "0_s",
-            "ny": "0_s",
-            "py": "0_s",
-            "nz": "0_i",
-            "pz": "9_1"
-        },
-        "valid_neighbors": {
-            "nx": [],
-            "px": [],
-            "ny": [],
-            "py": [],
-            "nz": [],
+            "nz": [
+                "proto_0",
+                "proto_1",
+                "proto_2",
+                "proto_3",
+                "proto_4",
+                "proto_17",
+                "proto_18",
+                "proto_19",
+                "proto_20",
+                "proto_21",
+                "proto_22",
+                "proto_23",
+                "proto_24"
+            ],
             "pz": []
         }
     }

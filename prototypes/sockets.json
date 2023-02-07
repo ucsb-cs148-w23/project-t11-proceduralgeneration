@@ -15,10 +15,10 @@
         "mesh": "doorblock.gltf",
         "rotation": 0,
         "sockets": {
-            "nx": "0s",
-            "px": "0s",
-            "ny": "0s",
-            "py": "1s",
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "1_s",
             "nz": "1_0",
             "pz": "0_i"
         }
@@ -27,10 +27,10 @@
         "mesh": "doorblock.gltf",
         "rotation": 1,
         "sockets": {
-            "nx": "0s",
-            "px": "1s",
-            "ny": "0s",
-            "py": "0s",
+            "nx": "0_s",
+            "px": "1_s",
+            "ny": "0_s",
+            "py": "0_s",
             "nz": "1_1",
             "pz": "0_i"
         }
@@ -39,10 +39,10 @@
         "mesh": "doorblock.gltf",
         "rotation": 2,
         "sockets": {
-            "nx": "0s",
-            "px": "0s",
-            "ny": "1s",
-            "py": "0s",
+            "nx": "0_s",
+            "px": "0_s",
+            "ny": "1_s",
+            "py": "0_s",
             "nz": "1_2",
             "pz": "0_i"
         }
@@ -51,10 +51,10 @@
         "mesh": "doorblock.gltf",
         "rotation": 3,
         "sockets": {
-            "nx": "1s",
-            "px": "0s",
-            "ny": "0s",
-            "py": "0s",
+            "nx": "1_s",
+            "px": "0_s",
+            "ny": "0_s",
+            "py": "0_s",
             "nz": "1_3",
             "pz": "0_i"
         }

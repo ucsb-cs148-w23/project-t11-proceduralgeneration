@@ -1,7 +1,7 @@
 import json
 import pprint
 
-def valid_sockets(s1, s2, vert=True) -> bool:
+def valid_sockets(s1, s2, vert=False) -> bool:
     s1 = s1.split('_')
     s2 = s2.split('_')
 
@@ -58,11 +58,11 @@ for i in range(len(indexed_data)):
             data[name1]["valid_neighbors"]["nx"].append(name2)
             data[name2]["valid_neighbors"]["px"].append(name1)
 
-        if (valid_sockets(proto1["sockets"]["pz"], proto2["sockets"]["nz"])): 
+        if (valid_sockets(proto1["sockets"]["pz"], proto2["sockets"]["nz"], vert=True)): 
             data[name1]["valid_neighbors"]["pz"].append(name2)
             data[name2]["valid_neighbors"]["nz"].append(name1)
 
-        if (valid_sockets(proto1["sockets"]["nz"], proto2["sockets"]["pz"])): 
+        if (valid_sockets(proto1["sockets"]["nz"], proto2["sockets"]["pz"], vert=True)): 
             data[name1]["valid_neighbors"]["nz"].append(name2)
             data[name2]["valid_neighbors"]["pz"].append(name1)
 

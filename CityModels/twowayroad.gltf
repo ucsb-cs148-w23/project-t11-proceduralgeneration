@@ -15,12 +15,12 @@
   "nodes": [
     {
       "mesh": 0,
-      "name": "Cube.001"
+      "name": "Cube.002"
     }
   ],
   "meshes": [
     {
-      "name": "Cube.006",
+      "name": "Cube.004",
       "primitives": [
         {
           "attributes": {
@@ -45,7 +45,7 @@
     {
       "bufferView": 0,
       "componentType": 5126,
-      "count": 48,
+      "count": 54,
       "max": [
         1,
         1,
@@ -61,110 +61,110 @@
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 48,
+      "count": 54,
       "type": "VEC2"
     },
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 48,
+      "count": 54,
       "type": "VEC3"
     },
     {
       "bufferView": 3,
       "componentType": 5123,
-      "count": 96,
+      "count": 114,
       "type": "SCALAR"
     },
     {
       "bufferView": 4,
       "componentType": 5126,
-      "count": 24,
+      "count": 48,
       "max": [
         1,
         1,
-        0.5199999809265137
+        1
       ],
       "min": [
         -1,
-        0.9750000238418579,
-        -0.6000000238418579
+        0.9500000476837158,
+        -1
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 5,
       "componentType": 5126,
-      "count": 24,
+      "count": 48,
       "type": "VEC2"
     },
     {
       "bufferView": 6,
       "componentType": 5126,
-      "count": 24,
+      "count": 48,
       "type": "VEC3"
     },
     {
       "bufferView": 7,
       "componentType": 5123,
-      "count": 36,
+      "count": 78,
       "type": "SCALAR"
     }
   ],
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 576,
+      "byteLength": 648,
       "byteOffset": 0,
       "target": 34962
     },
     {
       "buffer": 0,
+      "byteLength": 432,
+      "byteOffset": 648,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 648,
+      "byteOffset": 1080,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 228,
+      "byteOffset": 1728,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 576,
+      "byteOffset": 1956,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
       "byteLength": 384,
-      "byteOffset": 576,
+      "byteOffset": 2532,
       "target": 34962
     },
     {
       "buffer": 0,
       "byteLength": 576,
-      "byteOffset": 960,
+      "byteOffset": 2916,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 192,
-      "byteOffset": 1536,
-      "target": 34963
-    },
-    {
-      "buffer": 0,
-      "byteLength": 288,
-      "byteOffset": 1728,
-      "target": 34962
-    },
-    {
-      "buffer": 0,
-      "byteLength": 192,
-      "byteOffset": 2016,
-      "target": 34962
-    },
-    {
-      "buffer": 0,
-      "byteLength": 288,
-      "byteOffset": 2208,
-      "target": 34962
-    },
-    {
-      "buffer": 0,
-      "byteLength": 72,
-      "byteOffset": 2496,
+      "byteLength": 156,
+      "byteOffset": 3492,
       "target": 34963
     }
   ],
   "buffers": [
     {
-      "uri": "onwayroad_data.bin",
-      "byteLength": 2568
+      "uri": "twowayroad_data.bin",
+      "byteLength": 3648
     }
   ]
 }

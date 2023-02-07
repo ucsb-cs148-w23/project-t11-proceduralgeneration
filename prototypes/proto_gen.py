@@ -11,10 +11,12 @@ def valid_sockets(s1, s2, vert=False) -> bool:
     
     # Flipped cases
     if len(s1) == 1:
-        return s1.append('f') == s2
+        s1.append('f')
+        return s1 == s2
     
     if len(s2) == 1:
-        return s2.append('f') == s1
+        s2.append('f')
+        return s2 == s1
 
     # Symmetrical case
     return s1[1] == 's' and s1 == s2

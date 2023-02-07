@@ -28,12 +28,12 @@ indexed_data = list(data.items())
 
 for name, proto in data.items():
     data[name]["valid_neighbors"] = {
-        "nx": [],
-        "px": [],
-        "ny": [],
-        "py": [],
+        "nx": ["proto_28"],
+        "px": ["proto_28"],
+        "ny": ["proto_28"],
+        "py": ["proto_28"],
         "nz": [],
-        "pz": []
+        "pz": ["proto_28"]
     }
 
 
@@ -67,6 +67,16 @@ for i in range(len(indexed_data)):
         if (valid_sockets(proto1["sockets"]["nz"], proto2["sockets"]["pz"], vert=True)): 
             data[name1]["valid_neighbors"]["nz"].append(name2)
             data[name2]["valid_neighbors"]["pz"].append(name1)
+
+
+data["proto_28"]["valid_neighbors"]["nz"].append("proto_28")
+for name, proto in data.items():
+    if name == "proto_28": continue
+    data["proto_28"]["valid_neighbors"]["nx"].append(name)
+    data["proto_28"]["valid_neighbors"]["px"].append(name)
+    data["proto_28"]["valid_neighbors"]["ny"].append(name)
+    data["proto_28"]["valid_neighbors"]["py"].append(name)
+    data["proto_28"]["valid_neighbors"]["nz"].append(name)
 
 
 with open("prototypes.json", "w") as outfile:

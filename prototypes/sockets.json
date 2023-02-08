@@ -123,8 +123,8 @@
         "mesh": "roofside.gltf",
         "rotation": 1,
         "sockets": {
-            "nx": "0_s",
-            "px": "3_s",
+            "nx": "3_s",
+            "px": "0_s",
             "ny": "2_f",
             "py": "2",
             "nz": "0_i",
@@ -147,8 +147,8 @@
         "mesh": "roofside.gltf",
         "rotation": 3,
         "sockets": {
-            "nx": "3_s",
-            "px": "0_s",
+            "nx": "0_s",
+            "px": "3_s",
             "ny": "2",
             "py": "2_f",
             "nz": "0_i",

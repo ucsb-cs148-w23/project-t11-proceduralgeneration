@@ -3,6 +3,13 @@ import open3d as o3d
 import numpy as np
 import random, copy
 
+# WFC Algorithm
+# To use this file:
+# LoadPrototypes() -> None. Initializes prototypes from JSON file (should only have to do once)
+# Setup() -> None. Calls LoadPrototypes() and initializes map 
+# CreateModel(scale : int) -> np.array (1 dimension). This is the primary function. Call this from the endpoint to get mesh vertices.
+
+
 class Block:
     def __init__(self, mesh, rotation, neighbors) -> None:
         if len(mesh) > 0:
@@ -134,7 +141,9 @@ def Combine(visualize):
     return np.ndarray.flatten(np.asarray(mesh.vertices))
     #print(np.asarray(mesh.triangles))
 
-def CreateModel():
+def CreateModel(scale):
+    global dim
+    dim = scale
     if grid[0] == None or not prototypes:
         Setup()
     Generate()

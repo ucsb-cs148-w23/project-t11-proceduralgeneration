@@ -22,12 +22,12 @@ class Cell:
 
 prototypes = {}
 blocks = {}
-dim = 5
+dim = 8
 grid = [None]*(dim**3)
 # stairs = "proto_13","proto_14","proto_15","proto_16"
 alloptions = ["proto_0","proto_1","proto_2","proto_3","proto_4","proto_5","proto_6","proto_7","proto_8","proto_9","proto_10","proto_11","proto_12","proto_17","proto_18","proto_19","proto_20","proto_21","proto_22","proto_23","proto_24","proto_25","proto_26","proto_27","proto_28"]
 directions = [(1,0,0), (-1,0,0), (0,0,1), (0,0,-1), (0,1,0), (0,-1,0)]
-roads = ["proto_0", "proto_25", "proto_26", "proto_27"]
+roads = ["proto_0","proto_25", "proto_26", "proto_27"]
 buildings = ["proto_0","proto_1","proto_2","proto_3","proto_4","proto_17","proto_18","proto_19","proto_20","proto_21","proto_22","proto_23","proto_24","proto_28"]
 def LoadPrototypes():
     
@@ -44,7 +44,7 @@ def Setup():
         for j in range(dim):
             for k in range(dim):
                 if j == 0: grid[i * dim * dim + j * dim + k] = Cell(roads)
-                #elif j == 1: grid[i * dim * dim + j * dim + k] = Cell(buildings)
+                elif j == 1: grid[i * dim * dim + j * dim + k] = Cell(buildings)
                 else: grid[i * dim * dim + j * dim + k] = Cell(alloptions)
 
 def Generate():
@@ -125,6 +125,7 @@ def Combine():
                     mesh += copy.deepcopy(m).translate((i*2, j*2, k*2))
     mesh.compute_vertex_normals()
     o3d.visualization.draw_geometries([mesh])
+    print(mesh)
 if __name__ == "__main__":
     LoadPrototypes()
     Setup()

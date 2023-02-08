@@ -96,7 +96,7 @@ export default function ControlPanel() {
           </Button>
         </Grid>
         <Grid item>
-          <Button variant="outlined" onClick={requestDownload}>
+          <Button variant="outlined" color="secondary" onClick={requestDownload}>
             Download
           </Button>
         </Grid>

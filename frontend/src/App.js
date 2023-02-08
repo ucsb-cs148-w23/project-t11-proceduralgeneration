@@ -1,6 +1,6 @@
 import './App.css';
-import Header from './components/header.js'
-import Model from './components/model.js'
+import Header from './components/Header.js'
+import Model from './components/Model.js'
 import { Canvas } from '@react-three/fiber'
 import { useState, createContext } from 'react';
 import { OrbitControls } from '@react-three/drei'

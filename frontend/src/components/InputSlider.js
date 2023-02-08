@@ -9,6 +9,9 @@ const Input = styled(MuiInput)`
   width: 42px;
 `;
 
+const DEFAULT_MIN = 0;
+const DEFAULT_MAX = 32;
+
 
 export default function InputSlider(props) {
   const handleSliderChange = (event, newValue) => {
@@ -36,8 +39,8 @@ export default function InputSlider(props) {
         <Grid item xs>
           <Slider
             value={typeof props.value === 'number' ? props.value : 0}
-            min={props.min || 0}
-            max={props.max || 100}
+            min={props.min || DEFAULT_MIN}
+            max={props.max || DEFAULT_MAX}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
           />
@@ -50,9 +53,9 @@ export default function InputSlider(props) {
             handleBlur={handleBlur}
             inputProps={{
               step: 1,
-              min: props.min || 0,
-              max: props.max || 100,
-              type: 'number',
+              min: props.min || DEFAULT_MIN,
+              max: props.max || DEFAULT_MAX,
+              type: 'text',
               'aria-labelledby': 'input-slider',
             }}
           />

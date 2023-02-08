@@ -62,7 +62,7 @@ class WFCSolver:
             if self.debug:
                 print(
                     f"Collapsing {collapse_target_idx} "
-                    f"{self._to_triple(collapse_target_idx)}"
+                    f"{self._to_triple(collapse_target_idx)} "
                     f"to {self._mesh_name(selected_option)}"
                 )
             

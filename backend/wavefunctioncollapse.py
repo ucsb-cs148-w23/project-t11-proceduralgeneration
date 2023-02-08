@@ -20,7 +20,7 @@ class Cell:
 
 prototypes = {}
 blocks = {}
-dim = 2
+dim = 5
 grid = [None]*(dim**3)
 # stairs = "proto_13","proto_14","proto_15","proto_16"
 alloptions = ["proto_0","proto_1","proto_2","proto_3","proto_4","proto_5","proto_6","proto_7","proto_8","proto_9","proto_10","proto_11","proto_12","proto_17","proto_18","proto_19","proto_20","proto_21","proto_22","proto_23","proto_24","proto_25","proto_26","proto_27"]

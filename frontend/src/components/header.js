@@ -20,9 +20,9 @@ export default function Header() {
         >
           3D Environment Procedural Generator
       </Typography>
-      <Button variant="outlined" size="small">
+      {/* <Button variant="outlined" size="small">
         Login
-      </Button>
+      </Button> */}
     </Toolbar>
   );
 }

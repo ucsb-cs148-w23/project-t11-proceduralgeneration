@@ -22,11 +22,11 @@ class Cell:
 
 prototypes = {}
 blocks = {}
-dim = 8
+dim = 20
 grid = [None]*(dim**3)
 # stairs = "proto_13","proto_14","proto_15","proto_16"
 alloptions = ["proto_0","proto_1","proto_2","proto_3","proto_4","proto_5","proto_6","proto_7","proto_8","proto_9","proto_10","proto_11","proto_12","proto_17","proto_18","proto_19","proto_20","proto_21","proto_22","proto_23","proto_24","proto_25","proto_26","proto_27","proto_28"]
-directions = [(1,0,0), (-1,0,0), (0,0,1), (0,0,-1), (0,1,0), (0,-1,0)]
+directions = [(1,0,0), (-1,0,0),(0,0,1), (0,0,-1),(0,1,0), (0,-1,0)]
 roads = ["proto_0","proto_25", "proto_26", "proto_27"]
 buildings = ["proto_0","proto_1","proto_2","proto_3","proto_4","proto_17","proto_18","proto_19","proto_20","proto_21","proto_22","proto_23","proto_24","proto_28"]
 def LoadPrototypes():
@@ -66,32 +66,47 @@ def Generate():
         cellToCollapse.options = set([chosenOption])
 
         RunDFS(cellToCollapse)
-        #break
     
 def RunDFS(cellToCollapse):
     for i in range(dim):
             for j in range(dim):
                 for k in range(dim):
                     if grid[i * dim * dim + j * dim + k] == cellToCollapse:
-                        visited = set()
-                        DFS(i,j,k,visited)
+                        DFS(i,j,k)
                         return
                         
-def DFS(x,y,z,visited):
+def DFS(x,y,z):
     global grid, dim
-    if x < 0 or y < 0 or z < 0 or x == dim or y == dim or z == dim:
-        return
-    index = x * dim * dim + y * dim + z
-    if index in visited:
-        return
-    visited.add(index)
-    CheckValid(x,y,z)
-    for dx,dy,dz in directions:
-        DFS(x+dx, y+dy, z+dz, visited)
-    CheckValid(x,y,z)
-    
-    if len(grid[index].options) == 1:
-        grid[index].collapsed = True
+    s = [(x,y,z,False)]
+    visited = set()
+    while s:
+        top = s.pop()
+        index = top[0] * dim * dim + top[1] * dim + top[2]
+        if top[3]:
+            CheckValid(top[0], top[1], top[2])
+            if len(grid[index].options) == 1:
+                grid[index].collapsed = True
+
+        if index in visited: continue
+
+        visited.add(index)
+        CheckValid(top[0],top[1],top[2])
+        s.append((x,y,z,True))
+        for dx,dy,dz in directions:
+            if (x+dx) < 0 or (y+dy) < 0 or (z+dz) < 0 or (x+dx) == dim or (y+dy) == dim or (z+dz) == dim: continue
+            s.append((x+dx,y+dy,z+dz,False))
+
+    # if x < 0 or y < 0 or z < 0 or x == dim or y == dim or z == dim:
+    #     return
+    # index = x * dim * dim + y * dim + z
+    # if index in visited:
+    #     return
+    # visited.add(index)
+    # CheckValid(x,y,z)
+    # for dx,dy,dz in directions:
+    #     DFS(x+dx, y+dy, z+dz, visited)
+    # CheckValid(x,y,z)
+
 
 def CheckValid(x,y,z):
     labels = ["px", "nx", "ny", "py", "nz", "pz"]
@@ -109,6 +124,8 @@ def CheckValid(x,y,z):
             validneighbors = validneighbors.union(set(blocks[opt].neighbors[label]))
         current.options = current.options.intersection(validneighbors)
     
+    
+    
 
 def Combine():
     mesh = None
@@ -125,7 +142,8 @@ def Combine():
                     mesh += copy.deepcopy(m).translate((i*2, j*2, k*2))
     mesh.compute_vertex_normals()
     o3d.visualization.draw_geometries([mesh])
-    print(mesh)
+    print(np.ndarray.flatten(np.asarray(mesh.vertices))) 
+    print(np.asarray(mesh.triangles))
 if __name__ == "__main__":
     LoadPrototypes()
     Setup()

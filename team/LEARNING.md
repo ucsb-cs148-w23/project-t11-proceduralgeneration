@@ -56,4 +56,7 @@ Team:
 
 
 # Posts in help channel (Lab03)
++1. (Christine) posted in Python channel about Flask & Http errors
++2. (Matthew) posted in js-node-react-express about Firebase Authentication
++3. (Andy) posted in unity channel about Compute Shader
 

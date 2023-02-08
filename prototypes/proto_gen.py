@@ -28,19 +28,19 @@ indexed_data = list(data.items())
 
 for name, proto in data.items():
     data[name]["valid_neighbors"] = {
-        "nx": [],
-        "px": [],
-        "ny": [],
-        "py": [],
+        "nx": ["proto_28"],
+        "px": ["proto_28"],
+        "ny": ["proto_28"],
+        "py": ["proto_28"],
         "nz": [],
-        "pz": []
+        "pz": ["proto_28"]
     }
 
 
 for i in range(len(indexed_data)):
     name1, proto1 = indexed_data[i]
     
-    for j in range(i + 1, len(indexed_data)):
+    for j in range(i, len(indexed_data)):
         name2, proto2 = indexed_data[j]
 
         # Append names of valid neighbors
@@ -67,6 +67,30 @@ for i in range(len(indexed_data)):
         if (valid_sockets(proto1["sockets"]["nz"], proto2["sockets"]["pz"], vert=True)): 
             data[name1]["valid_neighbors"]["nz"].append(name2)
             data[name2]["valid_neighbors"]["pz"].append(name1)
+
+
+data["proto_28"]["valid_neighbors"]["nz"].append("proto_28")
+for name, proto in data.items():
+    if name == "proto_28": continue
+    data["proto_28"]["valid_neighbors"]["nx"].append(name)
+    data["proto_28"]["valid_neighbors"]["px"].append(name)
+    data["proto_28"]["valid_neighbors"]["ny"].append(name)
+    data["proto_28"]["valid_neighbors"]["py"].append(name)
+    data["proto_28"]["valid_neighbors"]["nz"].append(name)
+
+
+# Manual constraints
+
+# Door block to default
+data["proto_1"]["valid_neighbors"]["nz"].append("proto_0")
+data["proto_2"]["valid_neighbors"]["nz"].append("proto_0")
+data["proto_3"]["valid_neighbors"]["nz"].append("proto_0")
+data["proto_4"]["valid_neighbors"]["nz"].append("proto_0")
+data["proto_0"]["valid_neighbors"]["pz"].append("proto_1")
+data["proto_0"]["valid_neighbors"]["pz"].append("proto_2")
+data["proto_0"]["valid_neighbors"]["pz"].append("proto_3")
+data["proto_0"]["valid_neighbors"]["pz"].append("proto_4")
+
 
 
 with open("prototypes.json", "w") as outfile:

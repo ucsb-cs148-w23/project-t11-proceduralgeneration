@@ -22,6 +22,7 @@ function App() {
   const [triangleCount, setTriangleCount] = useState(1);
   const [triangleSize, setTriangleSize] = useState(1);
   const [color, setColor] = useState("#FEFBEA");
+  const [numDownload, setNumDownload] = useState(0);
 
   return (
     <ControlsContext.Provider 
@@ -30,7 +31,8 @@ function App() {
         vertexCount, setVertexCount, 
         triangleCount, setTriangleCount, 
         triangleSize, setTriangleSize,
-        color, setColor
+        color, setColor,
+        numDownload, setNumDownload
       }}
     >
       <div className="App">

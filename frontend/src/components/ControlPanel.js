@@ -14,7 +14,8 @@ export default function ControlPanel() {
     vertexCount, setVertexCount, 
     triangleCount, setTriangleCount, 
     triangleSize, setTriangleSize,
-    color, setColor
+    color, setColor,
+    numDownload, setNumDownload
   } = useContext(ControlsContext);
 
   function requestGeneration() {
@@ -35,6 +36,11 @@ export default function ControlPanel() {
           console.log("error: too many points");
         }
       });
+  }
+
+  function requestDownload(){
+    console.log("download requested");
+    setNumDownload(numDownload+1);
   }
 
   function handleColorChange(color, event) {
@@ -90,7 +96,7 @@ export default function ControlPanel() {
           </Button>
         </Grid>
         <Grid item>
-          <Button variant="outlined" id="export">
+          <Button variant="outlined" onClick={requestDownload}>
             Download
           </Button>
         </Grid>

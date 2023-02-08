@@ -1,4 +1,4 @@
-import { useRef, useEffect, useContext } from 'react'
+import { useRef, useEffect, useContext, useLayoutEffect } from 'react'
 import { DoubleSide } from "three";
 import { defaultVertexCount } from '../constants.js';
 import { ControlsContext } from '../App.js';
@@ -9,32 +9,9 @@ import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 export default function Model(props) {
   console.log("re-render!\nlogging from Model: ", props.vertices);
   const pointsRef = useRef(props.vertices);
-  const { color } = useContext(ControlsContext);
+  const { color, numDownload } = useContext(ControlsContext);
   
   const meshRef = useRef();
-
-  const button = document.getElementById('export');
-  button.addEventListener('click', exportModel);
-
-  const link = document.createElement('a');
-  link.style.display = 'none';
-  document.body.appendChild(link);
-
-  function exportModel() {
-    const exporter = new GLTFExporter();
-    exporter.parse(meshRef.current, function(gltf) {
-      const output = JSON.stringify( gltf, null, 2 );
-      console.log('File gltf stringified', output);
-      link.href = URL.createObjectURL(new Blob([output], {
-        type: 'text/plain'
-      }));
-      link.download = 'scene.gltf';
-      link.click();
-    }, 
-    function(error) {
-      console.log('Error when parsing', error);
-    }, {});
-  }
 
   useEffect(() => {
     for (let i = 0; i < props.vertices.length; i++) {
@@ -50,6 +27,27 @@ export default function Model(props) {
     // apparently pointsRef gets updated too by this effect
     // console.log("pointsRef: ", pointsRef);
   }, [props.vertices]);
+
+  useLayoutEffect(() => {
+    if(numDownload>0){
+      const link = document.createElement('a');
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      
+      const exporter = new GLTFExporter();
+      exporter.parse(meshRef.current, function(gltf) {
+        const output = JSON.stringify( gltf, null, 2 );
+        console.log('File gltf stringified', output);
+        link.href = URL.createObjectURL(new Blob([output], {
+          type: 'text/plain'
+        }));
+        link.download = 'scene.gltf';
+        link.click();
+      }, 
+      function(error) {
+        console.log('Error when parsing', error);
+      }, {});
+  }}, [numDownload]);
 
   return (
     <mesh ref={meshRef} position={props.position} >

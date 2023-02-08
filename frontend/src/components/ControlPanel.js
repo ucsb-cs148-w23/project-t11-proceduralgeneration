@@ -10,20 +10,27 @@ import { MAX_POINTS } from '../constants.js';
 
 export default function ControlPanel() {
   const { 
-    vertices, setVertices, 
-    vertexCount, setVertexCount, 
-    triangleCount, setTriangleCount, 
-    triangleSize, setTriangleSize,
+    numDownload, setNumDownload,
+    scaleX, setScaleX,
+    scaleY, setScaleY,
+    scaleZ, setScaleZ,
     color, setColor,
-    numDownload, setNumDownload
+    setVertices, 
+    setVertexCount
   } = useContext(ControlsContext);
 
   function requestGeneration() {
     console.log("clicked generate");
     // local machine + stub endpoint
+    /* let url = (
+      prodEndpoint ? 
+      // it turns out this changes every time I stop the server
+      : "http://127.0.0.1:8080/generate_map"
+    ); */
     const generateUrl = new URL("http://127.0.0.1:8080/generate_map");
-    // generateUrl.searchParams.append("count", triangleCount);
-    // generateUrl.searchParams.append("scale", triangleSize);
+    generateUrl.searchParams.append("x", scaleX);
+    generateUrl.searchParams.append("y", scaleY);
+    generateUrl.searchParams.append("z", scaleZ);
     
     fetch(generateUrl)
       .then(r => r.json())
@@ -57,22 +64,30 @@ export default function ControlPanel() {
     >
       <Grid item>
         <Typography>
-          The current placeholder endpoint generates random triangles
+          Choose the dimensions of the generated environment.
         </Typography>
       </Grid>
       <Grid item>
           <InputSlider 
-            value={triangleCount} 
-            setValue={setTriangleCount} 
-            label="Triangle Count" 
+            value={scaleX} 
+            setValue={setScaleX} 
+            label="X Scale" 
             className="control-panel-item"
           />
       </Grid>
       <Grid item>
         <InputSlider 
-          value={triangleSize} 
-          setValue={setTriangleSize} 
-          label="Triangle Size" 
+          value={scaleY} 
+          setValue={setScaleY}
+          label="Y Scale" 
+          className="control-panel-item"
+        />
+      </Grid>
+      <Grid item>
+        <InputSlider 
+          value={scaleZ} 
+          setValue={setScaleZ}
+          label="Z Scale"
           className="control-panel-item"
         />
       </Grid>

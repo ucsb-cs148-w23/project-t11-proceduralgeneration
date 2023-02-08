@@ -40,7 +40,7 @@ for name, proto in data.items():
 for i in range(len(indexed_data)):
     name1, proto1 = indexed_data[i]
     
-    for j in range(i + 1, len(indexed_data)):
+    for j in range(i, len(indexed_data)):
         name2, proto2 = indexed_data[j]
 
         # Append names of valid neighbors
@@ -77,6 +77,20 @@ for name, proto in data.items():
     data["proto_28"]["valid_neighbors"]["ny"].append(name)
     data["proto_28"]["valid_neighbors"]["py"].append(name)
     data["proto_28"]["valid_neighbors"]["nz"].append(name)
+
+
+# Manual constraints
+
+# Door block to default
+data["proto_1"]["valid_neighbors"]["nz"].append("proto_0")
+data["proto_2"]["valid_neighbors"]["nz"].append("proto_0")
+data["proto_3"]["valid_neighbors"]["nz"].append("proto_0")
+data["proto_4"]["valid_neighbors"]["nz"].append("proto_0")
+data["proto_0"]["valid_neighbors"]["pz"].append("proto_1")
+data["proto_0"]["valid_neighbors"]["pz"].append("proto_2")
+data["proto_0"]["valid_neighbors"]["pz"].append("proto_3")
+data["proto_0"]["valid_neighbors"]["pz"].append("proto_4")
+
 
 
 with open("prototypes.json", "w") as outfile:

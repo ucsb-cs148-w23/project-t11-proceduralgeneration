@@ -34,7 +34,7 @@ class EnvironmentGenerator:
         self.empty_tile = empty_tile
 
         # handle height option mapping
-        self.height_option_map = height_option_map or DEFAULT_HEIGHT_OPTION_MAP
+        self.height_option_map = height_option_map or copy.deepcopy(DEFAULT_HEIGHT_OPTION_MAP)
         self.DEFAULT_HEIGHT_OPTIONS = set(self.height_option_map.pop("default"))
         self.height_option_map = {int(k): set(v) for k, v in self.height_option_map.items()}
 

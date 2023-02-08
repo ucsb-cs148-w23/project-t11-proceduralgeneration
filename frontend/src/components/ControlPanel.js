@@ -79,10 +79,21 @@ export default function ControlPanel() {
           onChangeComplete={handleColorChange}
         />
       </Grid>
-      <Grid item>
-        <Button variant="outlined" onClick={requestGeneration}>
-          Generate
-        </Button>
+      <Grid item></Grid>
+      <Grid
+        container
+        direction="row"
+        columnSpacing={3}>
+        <Grid item>
+          <Button variant="outlined" onClick={requestGeneration}>
+            Generate
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button variant="outlined" id="export">
+            Download
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );

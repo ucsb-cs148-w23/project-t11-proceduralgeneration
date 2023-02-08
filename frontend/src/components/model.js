@@ -2,6 +2,7 @@ import { useRef, useEffect, useContext } from 'react'
 import { DoubleSide } from "three";
 import { defaultVertexCount } from '../constants.js';
 import { ControlsContext } from '../App.js';
+import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 // import { Canvas, useFrame } from '@react-three/fiber'
 // import { OrbitControls } from '@react-three/drei'
 
@@ -11,6 +12,30 @@ export default function Model(props) {
   const { color } = useContext(ControlsContext);
   
   const meshRef = useRef();
+
+  const button = document.getElementById('export');
+  button.addEventListener('click', exportModel);
+
+  const link = document.createElement('a');
+  link.style.display = 'none';
+  document.body.appendChild(link);
+
+  function exportModel() {
+    const exporter = new GLTFExporter();
+    exporter.parse(meshRef.current, function(gltf) {
+      const output = JSON.stringify( gltf, null, 2 );
+      console.log('File gltf stringified', output);
+      link.href = URL.createObjectURL(new Blob([output], {
+        type: 'text/plain'
+      }));
+      link.download = 'scene.gltf';
+      link.click();
+    }, 
+    function(error) {
+      console.log('Error when parsing', error);
+    }, {});
+  }
+
   useEffect(() => {
     for (let i = 0; i < props.vertices.length; i++) {
       // pointsRef.current[i] = props.vertices[i];

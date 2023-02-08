@@ -2,9 +2,13 @@ import json
 import open3d as o3d
 import numpy as np
 import random, copy
-import sys
 
-sys.setrecursionlimit(1500)
+# WFC Algorithm
+# To use this file:
+# LoadPrototypes() -> None. Initializes prototypes from JSON file (should only have to do once)
+# Setup() -> None. Calls LoadPrototypes() and initializes map 
+# CreateModel(scale : int) -> np.array (1 dimension). This is the primary function. Call this from the endpoint to get mesh vertices.
+
 
 class Block:
     def __init__(self, mesh, rotation, neighbors) -> None:
@@ -22,11 +26,11 @@ class Cell:
 
 prototypes = {}
 blocks = {}
-dim = 20
+dim = 10
 grid = [None]*(dim**3)
 # stairs = "proto_13","proto_14","proto_15","proto_16"
 alloptions = ["proto_0","proto_1","proto_2","proto_3","proto_4","proto_5","proto_6","proto_7","proto_8","proto_9","proto_10","proto_11","proto_12","proto_17","proto_18","proto_19","proto_20","proto_21","proto_22","proto_23","proto_24","proto_25","proto_26","proto_27","proto_28"]
-directions = [(1,0,0), (-1,0,0),(0,0,1), (0,0,-1),(0,1,0), (0,-1,0)]
+directions = [(1,0,0),(-1,0,0),(0,0,1), (0,0,-1),(0,1,0), (0,-1,0)]
 roads = ["proto_0","proto_25", "proto_26", "proto_27"]
 buildings = ["proto_0","proto_1","proto_2","proto_3","proto_4","proto_17","proto_18","proto_19","proto_20","proto_21","proto_22","proto_23","proto_24","proto_28"]
 def LoadPrototypes():
@@ -40,6 +44,7 @@ def LoadPrototypes():
 
 def Setup():
     global grid
+    LoadPrototypes()
     for i in range(dim):
         for j in range(dim):
             for k in range(dim):
@@ -96,20 +101,9 @@ def DFS(x,y,z):
             if (x+dx) < 0 or (y+dy) < 0 or (z+dz) < 0 or (x+dx) == dim or (y+dy) == dim or (z+dz) == dim: continue
             s.append((x+dx,y+dy,z+dz,False))
 
-    # if x < 0 or y < 0 or z < 0 or x == dim or y == dim or z == dim:
-    #     return
-    # index = x * dim * dim + y * dim + z
-    # if index in visited:
-    #     return
-    # visited.add(index)
-    # CheckValid(x,y,z)
-    # for dx,dy,dz in directions:
-    #     DFS(x+dx, y+dy, z+dz, visited)
-    # CheckValid(x,y,z)
-
 
 def CheckValid(x,y,z):
-    labels = ["px", "nx", "ny", "py", "nz", "pz"]
+    labels = ["nx", "px", "ny", "py", "nz", "pz"]
     current = grid[x * dim * dim + y * dim + z]
     if current.collapsed: return
     for i in range(6):
@@ -127,7 +121,7 @@ def CheckValid(x,y,z):
     
     
 
-def Combine():
+def Combine(visualize):
     mesh = None
     for i in range(dim):
         for j in range(dim):
@@ -141,11 +135,21 @@ def Combine():
                 else:
                     mesh += copy.deepcopy(m).translate((i*2, j*2, k*2))
     mesh.compute_vertex_normals()
-    o3d.visualization.draw_geometries([mesh])
-    print(np.ndarray.flatten(np.asarray(mesh.vertices))) 
-    print(np.asarray(mesh.triangles))
+    if visualize:
+        coord = o3d.geometry.TriangleMesh.create_coordinate_frame(size=20, origin = [0,0,0])
+        o3d.visualization.draw_geometries([mesh, coord])
+    return np.ndarray.flatten(np.asarray(mesh.vertices))
+    #print(np.asarray(mesh.triangles))
+
+def CreateModel(scale):
+    global dim
+    dim = scale
+    if grid[0] == None or not prototypes:
+        Setup()
+    Generate()
+    return Combine(False)
+
 if __name__ == "__main__":
-    LoadPrototypes()
     Setup()
     Generate()
-    Combine()
+    Combine(True)

@@ -19,17 +19,20 @@ const ControlsContext = createContext();
 function App() {
   const [vertices, setVertices] = useState(defaultVertices);
   const [vertexCount, setVertexCount] = useState(defaultVertexCount);
-  const [triangleCount, setTriangleCount] = useState(1);
-  const [triangleSize, setTriangleSize] = useState(1);
+  const [scaleX, setScaleX] = useState(8);
+  const [scaleY, setScaleY] = useState(8);
+  const [scaleZ, setScaleZ] = useState(8);
   const [color, setColor] = useState("#FEFBEA");
+  const [prodEndpoint, setProdEndpoint] = useState(false);
 
   return (
     <ControlsContext.Provider 
       value={{ 
         vertices, setVertices, 
         vertexCount, setVertexCount, 
-        triangleCount, setTriangleCount, 
-        triangleSize, setTriangleSize,
+        scaleX, setScaleX,
+        scaleY, setScaleY,
+        scaleZ, setScaleZ,
         color, setColor
       }}
     >
@@ -38,6 +41,8 @@ function App() {
         <div className="content"> 
           <Paper className="canvas-container">
               <Canvas>
+                <ambientLight intensity={1} />
+                <pointLight position={[20, 20, 20]} />
                 <OrbitControls />
                 <Model 
                   position={[0, 0, 0]}

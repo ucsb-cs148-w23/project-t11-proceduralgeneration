@@ -1,4 +1,4 @@
-import { useRef, useEffect, useContext } from 'react'
+import { useRef, useEffect, useContext } from 'react';
 import { DoubleSide } from "three";
 import { defaultVertexCount } from '../constants.js';
 import { ControlsContext } from '../App.js';
@@ -21,7 +21,6 @@ export default function Model(props) {
     meshRef.current.geometry.attributes.position.updateRange.count = props.vertexCount * 3
     meshRef.current.geometry.attributes.position.needsUpdate = true;
     console.log(meshRef.current.geometry.drawRange);
-    //
     // apparently pointsRef gets updated too by this effect
     // console.log("pointsRef: ", pointsRef);
   }, [props.vertices]);
@@ -38,7 +37,9 @@ export default function Model(props) {
           itemSize={3}
         /> 
       </bufferGeometry>
-      <meshBasicMaterial color={color} side={DoubleSide}/>
+      <meshStandardMaterial color={color} flatShading={true} side={DoubleSide}/>
+      {/* <meshBasicMaterial color={color} side={DoubleSide}/> */}
+      {/* <meshStandardMaterial side={DoubleSide}/> */}
     </mesh>
   );
 }

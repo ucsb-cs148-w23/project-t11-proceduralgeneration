@@ -20,9 +20,9 @@ export default function ControlPanel() {
   function requestGeneration() {
     console.log("clicked generate");
     // local machine + stub endpoint
-    const generateUrl = new URL("http://127.0.0.1:5000/random_triangles");
-    generateUrl.searchParams.append("count", triangleCount);
-    generateUrl.searchParams.append("scale", triangleSize);
+    const generateUrl = new URL("http://127.0.0.1:8080/generate_map");
+    // generateUrl.searchParams.append("count", triangleCount);
+    // generateUrl.searchParams.append("scale", triangleSize);
     
     fetch(generateUrl)
       .then(r => r.json())

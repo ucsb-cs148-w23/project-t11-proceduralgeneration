@@ -42,6 +42,24 @@ export default function ControlPanel() {
     setColor(color.hex);
   }
 
+  function requestShareLink(){
+    const title  = window.document.title;
+    const url = window.document.location.href;
+    if(navigator.share){
+      navigator.share({
+          title: "City Generating webApp",
+          url:`${url}`
+      }).then(()=>{
+        console.log('Thanks for sharing');
+      })
+      .catch(console.error)
+    }
+    else{
+      alert("Shareing not supported on this device");
+
+    }
+  }
+
   return (
     <Grid 
       container
@@ -84,6 +102,14 @@ export default function ControlPanel() {
           Generate
         </Button>
       </Grid>
+
+      <Grid item>
+        <Button variant="outlined" onClick={requestShareLink}>
+          Share
+        </Button>
+      </Grid>
+
+
     </Grid>
   );
 }

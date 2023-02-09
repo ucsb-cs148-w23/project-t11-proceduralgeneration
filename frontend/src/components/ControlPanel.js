@@ -21,13 +21,11 @@ export default function ControlPanel() {
 
   function requestGeneration() {
     console.log("clicked generate");
-    // local machine + stub endpoint
-    /* let url = (
-      prodEndpoint ? 
-      // it turns out this changes every time I stop the server
-      : "http://127.0.0.1:8080/generate_map"
-    ); */
-    const generateUrl = new URL("http://127.0.0.1:8080/generate_map");
+    //
+    // local dev server
+    // const generateUrl = new URL("http://127.0.0.1:8080/generate_map");
+    // prod server
+    const generateUrl = new URL("http://3.144.13.148:8080/generate_map");
     generateUrl.searchParams.append("x", scaleX);
     generateUrl.searchParams.append("y", scaleY);
     generateUrl.searchParams.append("z", scaleZ);
@@ -92,7 +90,7 @@ export default function ControlPanel() {
         />
       </Grid>
       <Grid item>
-        <Typography gutterBottom>
+        <Typography sx={{marginBottom: 2}} gutterBottom>
           Mesh Color
         </Typography>
         <TwitterPicker

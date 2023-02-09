@@ -1,18 +1,15 @@
 import './App.css';
-import Header from './components/Header.js'
-import Model from './components/Model.js'
-import { Canvas } from '@react-three/fiber'
-import { useState, createContext } from 'react';
-import { OrbitControls } from '@react-three/drei'
-import Paper from '@mui/material/Paper';
 import ControlPanel from './components/ControlPanel.js'
+import CssBaseline from '@mui/material/CssBaseline';
+import Header from './components/Header.js'
+import Lato from "./fonts/Lato-Regular.ttf";
+import Model from './components/Model.js'
+import Paper from '@mui/material/Paper';
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { defaultVertices, defaultVertexCount } from './constants.js';
-// import Slider from '@mui/material/Slider';
-
-// const dummy = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);
-// for (let i = 0; i < 9; i++) {
-//   defaultVertices[i] = dummy[i];
-// }
+import { useState, useMemo, createContext } from 'react';
 
 const ControlsContext = createContext();
 
@@ -24,7 +21,38 @@ function App() {
   const [scaleZ, setScaleZ] = useState(8);
   const [color, setColor] = useState("#FEFBEA");
   const [numDownload, setNumDownload] = useState(0);
-  const [prodEndpoint, setProdEndpoint] = useState(false);
+  const [mode, setMode] = useState("light");;
+
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+      },
+    }),
+    [],
+  );
+
+  const theme = useMemo(
+    () => createTheme({
+      palette: { mode },
+      typography: {
+        fontFamily: 'Lato, Arial'
+      },
+      components: {
+        MuiCssBaseline: {
+          styleOverrides: `
+            @font-face {
+              font-family: 'Lato';
+              font-style: 'normal';
+              font-display: swap;
+              src: url(${Lato}) format('truetype');
+            }
+          `,
+        }
+      }
+    }),
+    [mode],
+  );
 
   return (
     <ControlsContext.Provider 
@@ -35,27 +63,31 @@ function App() {
         scaleX, setScaleX,
         scaleY, setScaleY,
         scaleZ, setScaleZ,
-        color, setColor
+        color, setColor,
+        colorMode
       }}
     >
-      <div className="App">
-        <Header className="header" />
-        <div className="content"> 
-          <Paper className="canvas-container">
-              <Canvas>
-                <ambientLight intensity={1} />
-                <pointLight position={[20, 20, 20]} />
-                <OrbitControls />
-                <Model 
-                  position={[0, 0, 0]}
-                  vertices={vertices} 
-                  vertexCount={vertexCount}
-                />
-              </Canvas>
-          </Paper>
-          <ControlPanel />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="App">
+          <Header className="header" />
+          <div className="content"> 
+            <Paper className="canvas-container">
+                <Canvas>
+                  <ambientLight intensity={1} />
+                  <pointLight position={[20, 20, 20]} />
+                  <OrbitControls />
+                  <Model 
+                    position={[0, 0, 0]}
+                    vertices={vertices} 
+                    vertexCount={vertexCount}
+                  />
+                </Canvas>
+            </Paper>
+            <ControlPanel />
+          </div>
         </div>
-      </div>
+      </ThemeProvider>
     </ControlsContext.Provider>
   );
 }

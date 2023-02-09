@@ -10,13 +10,13 @@ import { MAX_POINTS } from '../constants.js';
 
 export default function ControlPanel() {
   const { 
-    vertices, setVertices, 
-    vertexCount, setVertexCount, 
+    numDownload, setNumDownload,
     scaleX, setScaleX,
     scaleY, setScaleY,
     scaleZ, setScaleZ,
     color, setColor,
-    prodEndpoint
+    setVertices, 
+    setVertexCount
   } = useContext(ControlsContext);
 
   function requestGeneration() {
@@ -43,6 +43,11 @@ export default function ControlPanel() {
           console.log("error: too many points");
         }
       });
+  }
+
+  function requestDownload(){
+    console.log("download requested");
+    setNumDownload(numDownload+1);
   }
 
   function handleColorChange(color, event) {
@@ -95,10 +100,21 @@ export default function ControlPanel() {
           onChangeComplete={handleColorChange}
         />
       </Grid>
-      <Grid item>
-        <Button variant="outlined" onClick={requestGeneration}>
-          Generate
-        </Button>
+      <Grid item></Grid>
+      <Grid
+        container
+        direction="row"
+        columnSpacing={3}>
+        <Grid item>
+          <Button variant="outlined" onClick={requestGeneration}>
+            Generate
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button variant="outlined" color="secondary" onClick={requestDownload}>
+            Download
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );

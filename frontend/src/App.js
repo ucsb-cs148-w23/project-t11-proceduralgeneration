@@ -23,6 +23,7 @@ function App() {
   const [scaleY, setScaleY] = useState(8);
   const [scaleZ, setScaleZ] = useState(8);
   const [color, setColor] = useState("#FEFBEA");
+  const [numDownload, setNumDownload] = useState(0);
   const [prodEndpoint, setProdEndpoint] = useState(false);
 
   return (
@@ -30,6 +31,7 @@ function App() {
       value={{ 
         vertices, setVertices, 
         vertexCount, setVertexCount, 
+        numDownload, setNumDownload,
         scaleX, setScaleX,
         scaleY, setScaleY,
         scaleZ, setScaleZ,

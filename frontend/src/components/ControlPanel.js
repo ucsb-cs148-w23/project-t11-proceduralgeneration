@@ -21,11 +21,12 @@ export default function ControlPanel() {
 
   function requestGeneration() {
     console.log("clicked generate");
-    //
-    // local dev server
-    // const generateUrl = new URL("http://127.0.0.1:8080/generate_map");
-    // prod server
-    const generateUrl = new URL("http://3.144.13.148:8080/generate_map");
+    
+    // public ip (for testing):
+    // const domain = "3.132.124.203"
+    const domain = "https://deez.mturk.monster"
+    
+    const generateUrl = new URL(`${domain}:8080/generate_map`);
     generateUrl.searchParams.append("x", scaleX);
     generateUrl.searchParams.append("y", scaleY);
     generateUrl.searchParams.append("z", scaleZ);

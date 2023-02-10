@@ -74,7 +74,7 @@ function App() {
           <div className="content"> 
             <Paper className="canvas-container">
                 <Canvas>
-                  <ambientLight intensity={1} />
+                  <ambientLight intensity={0.5} />
                   <pointLight position={[20, 20, 20]} />
                   <OrbitControls />
                   <Model 

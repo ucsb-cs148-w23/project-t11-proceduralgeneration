@@ -1,6 +1,6 @@
 Mentor: Vivian/Avishek/Tobias
 
-Meeting Time: lect09
+Meeting Time: lect08
 
 Type of meeting: daily scrum, project discussion
 

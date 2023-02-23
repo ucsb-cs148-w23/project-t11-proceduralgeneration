@@ -22,8 +22,11 @@ export default function ControlPanel() {
   function requestGeneration() {
     console.log("clicked generate");
     
-    // public ip (for testing):
+    // -> local testing
+    // const domain = "http://127.0.0.1"
+    // -> server testing
     // const domain = "3.132.124.203"
+    // -> prod
     const domain = "https://deez.mturk.monster"
     
     const generateUrl = new URL(`${domain}:8080/generate_map`);

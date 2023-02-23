@@ -15,7 +15,7 @@ DIRECTIONS = [
     (0, 1, 0, "pz"),  (0, -1, 0, "nz")
 ]
 MESH_FILE_DIRECTORY = "../CityModels/"
-DEFAULT_TILE_PATH = "../prototypes/p2.json"
+DEFAULT_TILE_PATH = "../prototypes/p3.json"
 with open("default_height_option_map.json") as f:
     DEFAULT_HEIGHT_OPTION_MAP = json.load(f)
 
@@ -64,7 +64,13 @@ class EnvironmentGenerator:
             # - only select if it's the only remaining option
             if len(collapse_target) > 1:
                 collapse_target.discard(self.empty_tile)
-            selected_option = random.choice(list(collapse_target))
+            # selected_option = random.choice(list(collapse_target))
+            choices = list(collapse_target)
+            selected_option = random.choices(
+                choices,
+                weights=[self.tile_data[opt]["weight"] for opt in choices],
+                k=1
+            )[0]
             self._set_cell(collapse_target_idxs, {selected_option})
 
             if self.debug:

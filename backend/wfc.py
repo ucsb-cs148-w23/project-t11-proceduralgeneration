@@ -15,7 +15,7 @@ DIRECTIONS = [
     (0, 1, 0, "pz"),  (0, -1, 0, "nz")
 ]
 MESH_FILE_DIRECTORY = "../CityModels/"
-DEFAULT_TILE_PATH = "../prototypes/p3.json"
+DEFAULT_TILE_PATH = "../prototypes/p2.json"
 with open("default_height_option_map.json") as f:
     DEFAULT_HEIGHT_OPTION_MAP = json.load(f)
 
@@ -31,10 +31,12 @@ class EnvironmentGenerator:
         shape, 
         tile_data,
         height_option_map=None, 
-        empty_tile="proto_28"
+        empty_tile="proto_28",
+        prep_meshes=False
     ):
         self.tile_data = tile_data
-        self._prep_meshes()
+        if prep_meshes:
+            self._prep_meshes()
         self.empty_tile = empty_tile
 
         # handle height option mapping
@@ -59,18 +61,21 @@ class EnvironmentGenerator:
             collapse_target_idxs = min(self.uncollapsed, key=lambda idxs: len(self._get_cell(idxs)))
             self.uncollapsed.discard(collapse_target_idxs)
             collapse_target = self._get_cell(collapse_target_idxs)
+            if len(collapse_target) == 0:
+                continue
             
             # special handling of the empty tile: 
             # - only select if it's the only remaining option
             if len(collapse_target) > 1:
                 collapse_target.discard(self.empty_tile)
-            # selected_option = random.choice(list(collapse_target))
-            choices = list(collapse_target)
-            selected_option = random.choices(
-                choices,
-                weights=[self.tile_data[opt]["weight"] for opt in choices],
-                k=1
-            )[0]
+            selected_option = random.choice(list(collapse_target))
+            # choices = list(collapse_target)
+            # selected_option = random.choices(
+            #     choices,
+            #     weights=[self.tile_data[opt]["weight"] for opt in choices],
+            #     k=1
+            # )[0]
+            # print(f"--> len choices: {len(choices)}")
             self._set_cell(collapse_target_idxs, {selected_option})
 
             if self.debug:
@@ -103,11 +108,14 @@ class EnvironmentGenerator:
             for j in range(self.shape[1]):
                 for k in range(self.shape[2]):
                     tile = self.grid[i][j][k]
+                    if len(tile) == 0:
+                        continue
                     opt = list(tile)[0]
-                    if opt != self.empty_tile:
+                    file = self.tile_data[opt]["mesh"]
+                    if file != "":
                         tiles.append({
-                            "file": self.tile_data[opt]["mesh"],    
-                            "position": (i * TILE_SIZE, j * TILE_SIZE, k * TILE_SIZE),
+                            "file": file,
+                            "position": [i * TILE_SIZE, j * TILE_SIZE, k * TILE_SIZE],
                             "rotation": self.tile_data[opt]["rotation"]
                         })
                     
@@ -223,11 +231,13 @@ class EnvironmentGenerator:
 
 
 
-# if __name__ == "__main__":
-    # solver = EnvironmentGenerator(shape=(5, 5, 5))
-    # solver.debug = True 
-    # solver.generate()
+if __name__ == "__main__":
+    with open("beans.json") as f:
+        beans = json.load(f)
+    solver = EnvironmentGenerator(shape=(5, 5, 5), tile_data=beans, prep_meshes=True)
+    solver.debug = True 
+    solver.generate()
 
-    # mesh = solver.assemble_mesh()
-    # mesh.compute_vertex_normals()
-    # o3d.visualization.draw_geometries([mesh])
+    mesh = solver.assemble_mesh()
+    mesh.compute_vertex_normals()
+    o3d.visualization.draw_geometries([mesh])

@@ -4,12 +4,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Header from './components/Header.js'
 import Lato from "./fonts/Lato-Regular.ttf";
 import Model from './components/Model.js'
+import ModelTile from './components/ModelTile.js'
 import Paper from '@mui/material/Paper';
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { defaultVertices, defaultVertexCount } from './constants.js';
 import { useState, useMemo, createContext } from 'react';
+import { fileTileMap } from './defaultTiles.js';
 
 const ControlsContext = createContext();
 
@@ -22,6 +24,7 @@ function App() {
   const [color, setColor] = useState("#FEFBEA");
   const [numDownload, setNumDownload] = useState(0);
   const [mode, setMode] = useState("light");;
+  const [modelTiles, setModelTiles] = useState([]);
 
   const colorMode = useMemo(
     () => ({
@@ -64,7 +67,8 @@ function App() {
         scaleY, setScaleY,
         scaleZ, setScaleZ,
         color, setColor,
-        colorMode
+        colorMode,
+        modelTiles, setModelTiles
       }}
     >
       <ThemeProvider theme={theme}>
@@ -77,11 +81,32 @@ function App() {
                   <ambientLight intensity={0.5} />
                   <pointLight position={[20, 20, 20]} />
                   <OrbitControls />
-                  <Model 
+
+                  {/* <Model 
                     position={[0, 0, 0]}
                     vertices={vertices} 
                     vertexCount={vertexCount}
+                  /> */}
+                { 
+                  modelTiles.map((tile, i) => {
+                    return (
+                      <ModelTile 
+                        modelPath={fileTileMap[tile["file"]]} 
+                        position={tile["position"]}
+                        rotation={[0, tile["rotation"] * Math.PI / 2, 0]}
+                      />
+                    );
+                  })
+                }
+                {/*
+                  modelTiles.length && 
+                  <ModelTile
+                    modelPath={fileTileMap[modelTiles[0]["file"]]}
+                    position={modelTiles[0]["position"]}
+                    rotation={[0, modelTiles[0]["rotation"] * Math.PI / 2, 0]}
                   />
+                */}
+
                 </Canvas>
             </Paper>
             <ControlPanel />

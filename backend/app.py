@@ -7,11 +7,12 @@ from flask_cors import CORS
 
 from wfc import EnvironmentGenerator
 from expand_rotation import expand_rotations
+from height_option_map import build_height_options
 
 app = Flask(__name__)
 CORS(app)
 
-DEFAULT_TILE_PATH = "../prototypes/prototypes.json"
+DEFAULT_TILE_PATH = "../prototypes/p2.json"
 with open(DEFAULT_TILE_PATH) as f:
     default_tile_data = json.load(f)
 
@@ -21,7 +22,7 @@ def generate_map():
     y = request.args.get('y', default=8, type=int)
     z = request.args.get('z', default=8, type=int)
 
-    env_gen = EnvironmentGenerator((x, y, z), deepcopy(default_tile_data))
+    env_gen = EnvironmentGenerator((x, y, z), deepcopy(default_tile_data), prep_meshes=True)
     env_gen.generate()
     mesh = env_gen.assemble_mesh()
     vertex_array = env_gen.vertices_from_mesh(mesh)
@@ -32,11 +33,16 @@ def generate_map():
 def generate():
     request_data = request.json
     x = request_data["scale"].get("x", 8)
-    y = request_data["scale"].get("x", 8)
-    z = request_data["scale"].get("x", 8)
-    raw_tile_data = request_data.get("tile_data", deepcopy(default_tile_data))
-    tile_data = expand_rotations(raw_tile_data)
+    y = request_data["scale"].get("y", 8)
+    z = request_data["scale"].get("z", 8)
+    tile_data = request_data.get("tile_data", deepcopy(default_tile_data))
+    # rotation expand doesn't work rn
+    # tile_data = expand_rotations(tile_data)
+    
+    # gotta add more detailed height mapping, just use default
+    # height_option_map = build_height_options(tile_data)
 
+    # env_gen = EnvironmentGenerator(shape=(x, y, z), tile_data=tile_data, height_option_map=height_option_map)
     env_gen = EnvironmentGenerator(shape=(x, y, z), tile_data=tile_data)
     env_gen.generate()
     tiles = env_gen.format_tile_array()

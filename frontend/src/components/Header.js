@@ -30,6 +30,7 @@ export default function Header() {
         >
           3D Environment Procedural Generator
       </Typography>
+      <div id="signInDiv"></div>
 
       <Box
         sx={{

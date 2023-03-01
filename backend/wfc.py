@@ -16,7 +16,9 @@ DIRECTIONS = [
 ]
 MESH_FILE_DIRECTORY = "../CityModels/"
 DEFAULT_TILE_PATH = "../prototypes/p2.json"
-with open("default_height_option_map.json") as f:
+# DEFAULT_HOM = "default_height_option_map.json"
+DEFAULT_HOM = "default_height_option_map2.json"
+with open(DEFAULT_HOM) as f:
     DEFAULT_HEIGHT_OPTION_MAP = json.load(f)
 
 TILE_SIZE = 2
@@ -31,7 +33,8 @@ class EnvironmentGenerator:
         shape, 
         tile_data,
         height_option_map=None, 
-        empty_tile="proto_28",
+        # empty_tile="proto_28",
+        empty_tile="m9_r0",
         prep_meshes=False
     ):
         self.tile_data = tile_data
@@ -62,31 +65,32 @@ class EnvironmentGenerator:
             self.uncollapsed.discard(collapse_target_idxs)
             collapse_target = self._get_cell(collapse_target_idxs)
             if len(collapse_target) == 0:
-                continue
-            
-            # special handling of the empty tile: 
-            # - only select if it's the only remaining option
-            if len(collapse_target) > 1:
-                collapse_target.discard(self.empty_tile)
-            selected_option = random.choice(list(collapse_target))
-            # choices = list(collapse_target)
-            # selected_option = random.choices(
-            #     choices,
-            #     weights=[self.tile_data[opt]["weight"] for opt in choices],
-            #     k=1
-            # )[0]
-            # print(f"--> len choices: {len(choices)}")
+                selected_option = "proto_28_r0"
+            else:
+                # special handling of the empty tile: 
+                # - only select if it's the only remaining option
+                if len(collapse_target) > 1:
+                    collapse_target.discard(self.empty_tile)
+                selected_option = random.choice(list(collapse_target))
+                # choices = list(collapse_target)
+                # selected_option = random.choices(
+                #     choices,
+                #     weights=[self.tile_data[opt]["weight"] for opt in choices],
+                #     k=1
+                # )[0]
+                # print(f"--> len choices: {len(choices)}")
             self._set_cell(collapse_target_idxs, {selected_option})
 
             if self.debug:
                 print(
                     f"Collapsing {collapse_target_idxs} "
-                    f"to {self.tile_data[selected_option]['name']}"
+                    f"to {selected_option, self.tile_data[selected_option]['mesh']}"
                 )
             
             # update neighbors
             self._update_neighbors(collapse_target_idxs)
 
+        # print(self.grid)
         return self.grid
 
     def assemble_mesh(self):
@@ -153,9 +157,9 @@ class EnvironmentGenerator:
         while len(stack):
             i, j, k, neighbor_options, direction = stack.pop()
 
-            if self.debug:
-                n_opts = [self.tile_data[opt]["name"] for opt in neighbor_options]
-                print(f"updating tile {i} {j} {k} from {direction} with new options: {n_opts}")
+            # if self.debug:
+                # n_opts = [self.tile_data[opt]["mesh"] for opt in neighbor_options]
+                # print(f"updating tile {i} {j} {k} from {direction} with new options: {neighbor_options}")
 
             target = self.grid[i][j][k]
             allowed_options = set()

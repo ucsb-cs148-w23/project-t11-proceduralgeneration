@@ -69,8 +69,9 @@ export default function ControlPanel() {
         "y": scaleY,
         "z": scaleZ
       },
-      // "tile_data": defaultCollapsed
-      "tile_data": defaultExpanded
+      "expand_rotation": true,
+      "tile_data": defaultCollapsed,
+      // "tile_data": defaultExpanded
     };
     console.log(postData);
     

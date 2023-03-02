@@ -15,9 +15,6 @@ export default function ControlPanel() {
     scaleX, setScaleX,
     scaleY, setScaleY,
     scaleZ, setScaleZ,
-    color, setColor,
-    setVertices, 
-    setVertexCount,
     modelTiles, setModelTiles
   } = useContext(ControlsContext);
 
@@ -31,38 +28,7 @@ export default function ControlPanel() {
     // -> prod
     const domain = "https://deez.mturk.monster"
     
-    const generateUrl = new URL(`${domain}:8080/generate_map`);
-    generateUrl.searchParams.append("x", scaleX);
-    generateUrl.searchParams.append("y", scaleY);
-    generateUrl.searchParams.append("z", scaleZ);
-    
-    fetch(generateUrl)
-      .then(r => r.json())
-      .then(data => {
-        console.log(data);
-        if (data.vertices.length <= MAX_POINTS * 3) {
-          setVertices(new Float32Array(data.vertices));
-          setVertexCount(data.vertices.length / 3);
-        } else {
-          console.log("error: too many points");
-        }
-      });
-  }
-
-  function requestGeneration2() {
-    console.log("clicked generate");
-    
-    // -> local testing
-    const domain = "http://127.0.0.1"
-    // -> server testing
-    // const domain = "3.132.124.203"
-    // -> prod
-    // const domain = "https://deez.mturk.monster"
-    
     const generateUrl = new URL(`${domain}:8080/generate`);
-    // generateUrl.searchParams.append("x", scaleX);
-    // generateUrl.searchParams.append("y", scaleY);
-    // generateUrl.searchParams.append("z", scaleZ);
     const postData = {
       "scale": {
         "x": scaleX,
@@ -70,10 +36,8 @@ export default function ControlPanel() {
         "z": scaleZ
       },
       "expand_rotation": true,
-      "tile_data": defaultCollapsed,
-      // "tile_data": defaultExpanded
+      "tile_data": defaultCollapsed
     };
-    console.log(postData);
     
     fetch(generateUrl, {
         method: 'POST',
@@ -88,24 +52,21 @@ export default function ControlPanel() {
         console.log(data);
         setModelTiles(data["tiles"]);
         console.log("model tiles:", modelTiles)
-      });
+      }
+    );
   }
 
   function requestDownload(){
-    console.log("download requested");
-    setNumDownload(numDownload+1);
+    // console.log("download requested");
+    setNumDownload(numDownload + 1);
   }
 
+  /**
   function handleColorChange(color, event) {
     console.log("clicked color!");
     setColor(color.hex);
   }
-
-  
-  function debugLogs() {
-    console.log("debug log!");
-    console.log(modelTiles);
-  }
+  */
 
   return (
     <Grid 
@@ -158,7 +119,7 @@ export default function ControlPanel() {
         direction="row"
         columnSpacing={3}>
         <Grid item>
-          <Button variant="outlined" onClick={requestGeneration2}>
+          <Button variant="outlined" onClick={requestGeneration}>
             Generate
           </Button>
         </Grid>
@@ -167,11 +128,6 @@ export default function ControlPanel() {
             Download
           </Button>
         </Grid>
-      </Grid>
-      <Grid item>
-        <Button variant="outlined" color="secondary" onClick={debugLogs}>
-          console log lol
-        </Button>
       </Grid>
     </Grid>
   );

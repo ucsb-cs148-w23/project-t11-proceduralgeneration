@@ -12,10 +12,34 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { defaultVertices, defaultVertexCount } from './constants.js';
 import { useState, useMemo, createContext } from 'react';
 import { fileTileMap } from './defaultTiles.js';
+import { getOptionGroupUnstyledUtilityClass } from '@mui/base';
+import{ useEffect} from 'react';
+import jwt_decode from 'jwt-decode';
 
 const ControlsContext = createContext();
 
 function App() {
+  const [user, setUser] = useState({});
+  function handleCallbackResponse(response){
+    console.log("encoded JWT ID token: "+ response.credential);
+    let userObject = jwt_decode(response.credential);
+    console.log(userObject);
+    setUser(userObject);
+  }
+  useEffect(()=>{
+    /* global google */
+    google.accounts.id.initialize({
+      client_id:"971264102154-4lp0bdl42fgvpatk5933gvsg6kk36quf.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+
+
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      {theme:"outline",size:"large"}
+    );
+
+  },[])
   const [vertices, setVertices] = useState(defaultVertices);
   const [vertexCount, setVertexCount] = useState(defaultVertexCount);
   const [scaleX, setScaleX] = useState(8);

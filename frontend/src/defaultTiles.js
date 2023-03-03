@@ -2589,6 +2589,7 @@ const defaultExpanded = {
 const defaultCollapsed = {
     "m0": {
         "mesh": "default.gltf",
+        "label": "default.gltf",
         "rotation": 0,
         "sockets": {
             "nx": "0_s",
@@ -3009,6 +3010,7 @@ const defaultCollapsed = {
     },
     "m1": {
         "mesh": "doorblock.gltf",
+        "label": "doorblock.gltf",
         "rotation": 0,
         "sockets": {
             "nx": "0_s",
@@ -3317,6 +3319,7 @@ const defaultCollapsed = {
     },
     "m2": {
         "mesh": "roofedge.gltf",
+        "label": "roofedge.gltf",
         "rotation": 0,
         "sockets": {
             "nx": "2",
@@ -3465,6 +3468,7 @@ const defaultCollapsed = {
     },
     "m3": {
         "mesh": "roofside.gltf",
+        "label": "roofside.gltf",
         "rotation": 0,
         "sockets": {
             "nx": "2",
@@ -3649,6 +3653,7 @@ const defaultCollapsed = {
     },
     "m4": {
         "mesh": "stair.gltf",
+        "label": "stair.gltf",
         "rotation": 0,
         "sockets": {
             "nx": "6",
@@ -3825,6 +3830,7 @@ const defaultCollapsed = {
     },
     "m5": {
         "mesh": "twowindow.gltf",
+        "label": "twowindow.gltf",
         "rotation": 0,
         "sockets": {
             "nx": "0_s",
@@ -4181,6 +4187,7 @@ const defaultCollapsed = {
     },
     "m6": {
         "mesh": "twowindowsimp.gltf",
+        "label": "twowindowsimp.gltf",
         "rotation": 0,
         "sockets": {
             "nx": "0_s",
@@ -4537,6 +4544,7 @@ const defaultCollapsed = {
     },
     "m7": {
         "mesh": "onewayroad.gltf",
+        "label": "onewayroad.gltf",
         "rotation": 0,
         "sockets": {
             "nx": "0_s",
@@ -4757,6 +4765,7 @@ const defaultCollapsed = {
     },
     "m8": {
         "mesh": "twowayroad.gltf",
+        "label": "twowayroad.gltf",
         "rotation": 0,
         "sockets": {
             "nx": "10_s",
@@ -4889,6 +4898,7 @@ const defaultCollapsed = {
     },
     "m9": {
         "mesh": "",
+        "label": "none",
         "rotation": 0,
         "sockets": {
             "nx": "-1",

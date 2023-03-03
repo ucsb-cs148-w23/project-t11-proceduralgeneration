@@ -1,5 +1,6 @@
 import './App.css';
-import ControlPanel from './components/ControlPanel.js'
+import ControlPanel from './components/ControlPanel.js';
+import TilePanel from './components/TilePanel.js';
 import CssBaseline from '@mui/material/CssBaseline';
 import Header from './components/Header.js'
 import Lato from "./fonts/Lato-Regular.ttf";
@@ -9,7 +10,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useMemo, useRef, useState, createContext } from 'react';
-import { fileTileMap } from './defaultTiles.js';
+import { fileTileMap, defaultCollapsed } from './defaultTiles.js';
 
 const ControlsContext = createContext();
 
@@ -21,6 +22,10 @@ function App() {
   const [numDownload, setNumDownload] = useState(0);
   const [mode, setMode] = useState("light");;
   const [modelTiles, setModelTiles] = useState([]);
+  const [tilePanel, setTilePanel] = useState(false); // [true, false
+  const [tile, setTile] = useState(null);
+  const [neighbor, setNeighbor] = useState(null);
+  const [tiles, setTiles] = useState(defaultCollapsed);
   const meshRef = useRef();
 
   // light/dark mode toggle
@@ -64,6 +69,10 @@ function App() {
         scaleZ, setScaleZ,
         modelTiles, setModelTiles,
         numDownload, setNumDownload,
+        tilePanel, setTilePanel,
+        tile, setTile,
+        tiles, setTiles,
+        neighbor, setNeighbor,
         colorMode,
         meshRef
       }}
@@ -80,7 +89,16 @@ function App() {
                   <OrbitControls />
                   <group ref={meshRef}>
                   { 
-                    modelTiles.map((tile, i) => {
+                    tilePanel?
+                    (
+                      tile && 
+                      <ModelTile 
+                        modelPath={fileTileMap[tile]} 
+                        position={[0, 0, 0]} 
+                        rotation={[0, 0, 0]} 
+                      />
+                    )
+                    : modelTiles.map((tile, i) => {
                       return (
                         <ModelTile 
                           modelPath={fileTileMap[tile["file"]]} 
@@ -93,7 +111,9 @@ function App() {
                   </group>
                 </Canvas>
             </Paper>
-            <ControlPanel />
+            {
+              tilePanel? <TilePanel /> : <ControlPanel />
+            }
           </div>
         </div>
       </ThemeProvider>

@@ -2,12 +2,16 @@ import { useContext } from 'react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { TwitterPicker } from 'react-color';
+// import { TwitterPicker } from 'react-color';
 
 import InputSlider from './InputSlider.js'
 import { ControlsContext } from '../App.js';
 import { MAX_POINTS } from '../constants.js';
 import { defaultExpanded, defaultCollapsed } from '../defaultTiles.js';
+
+import EditIcon from '@mui/icons-material/Edit';
+import DownloadIcon from '@mui/icons-material/Download';
+import LoopIcon from '@mui/icons-material/Loop';
 
 export default function ControlPanel() {
   const { 
@@ -15,18 +19,19 @@ export default function ControlPanel() {
     scaleX, setScaleX,
     scaleY, setScaleY,
     scaleZ, setScaleZ,
-    modelTiles, setModelTiles
+    modelTiles, setModelTiles,
+    setTilePanel
   } = useContext(ControlsContext);
 
   function requestGeneration() {
     console.log("clicked generate");
     
     // -> local testing
-    // const domain = "http://127.0.0.1"
+    const domain = "http://127.0.0.1"
     // -> server testing
     // const domain = "3.132.124.203"
     // -> prod
-    const domain = "https://deez.mturk.monster"
+    // const domain = "https://deez.mturk.monster"
     
     const generateUrl = new URL(`${domain}:8080/generate`);
     const postData = {
@@ -49,9 +54,9 @@ export default function ControlPanel() {
       })
       .then(r => r.json())
       .then(data => {
-        console.log(data);
         setModelTiles(data["tiles"]);
-        console.log("model tiles:", modelTiles)
+        // console.log(data);
+        // console.log("model tiles:", modelTiles)
       }
     );
   }
@@ -104,6 +109,7 @@ export default function ControlPanel() {
           className="control-panel-item"
         />
       </Grid>
+      {/* 
       <Grid item>
         <Typography sx={{marginBottom: 2}} gutterBottom>
           Mesh Color
@@ -112,22 +118,35 @@ export default function ControlPanel() {
           color={color}
           onChangeComplete={handleColorChange}
         />
-      </Grid>
+      </Grid> 
+      */}
       <Grid item></Grid>
-      <Grid
-        container
-        direction="row"
-        columnSpacing={3}>
-        <Grid item>
-          <Button variant="outlined" onClick={requestGeneration}>
-            Generate
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button variant="outlined" color="secondary" onClick={requestDownload}>
-            Download
-          </Button>
-        </Grid>
+      <Grid item >
+        <Button 
+          variant="outlined" 
+          endIcon={<EditIcon />}
+          onClick={() => {setTilePanel(true)}}
+        >
+          Customize
+        </Button>
+      </Grid>
+      <Grid item >
+        <Button 
+          variant="outlined" 
+          endIcon={<LoopIcon />}
+          onClick={requestGeneration}
+        >
+          Generate
+        </Button>
+      </Grid>
+      <Grid item >
+        <Button 
+          variant="outlined" 
+          endIcon={<DownloadIcon />}
+          onClick={requestDownload}
+        >
+          Download
+        </Button>
       </Grid>
     </Grid>
   );

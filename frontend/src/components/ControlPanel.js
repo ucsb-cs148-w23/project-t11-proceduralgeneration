@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { TwitterPicker } from 'react-color';
 
+
 import InputSlider from './InputSlider.js'
 import { ControlsContext } from '../App.js';
 import { MAX_POINTS } from '../constants.js';

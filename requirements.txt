@@ -35,3 +35,4 @@ tenacity==8.2.0
 traitlets==5.9.0
 Werkzeug==2.2.2
 zipp==3.11.0
+parameterized==0.8.1

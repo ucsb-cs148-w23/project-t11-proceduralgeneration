@@ -10,7 +10,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useMemo, useRef, useState, createContext } from 'react';
-import { fileTileMap, defaultCollapsed } from './defaultTiles.js';
+import { fileTileMap, defaultCollapsed, defaultFile2id } from './defaultTiles.js';
 
 const ControlsContext = createContext();
 
@@ -26,6 +26,7 @@ function App() {
   const [tile, setTile] = useState(null);
   const [neighbor, setNeighbor] = useState(null);
   const [tiles, setTiles] = useState(defaultCollapsed);
+  const [file2id, setFile2id] = useState(defaultFile2id);
   const meshRef = useRef();
 
   // light/dark mode toggle
@@ -37,6 +38,15 @@ function App() {
     }),
     [],
   );
+
+  const dir2pos = {
+    "px": [1, 0, 0],
+    "nx": [-1, 0, 0],
+    "pz": [0, 1, 0],
+    "nz": [0, -1, 0],
+    "py": [0, 0, 1],
+    "ny": [0, 0, -1]
+  }
 
   // custom MUI theme
   const theme = useMemo(
@@ -72,6 +82,7 @@ function App() {
         tilePanel, setTilePanel,
         tile, setTile,
         tiles, setTiles,
+        file2id, setFile2id,
         neighbor, setNeighbor,
         colorMode,
         meshRef
@@ -87,28 +98,38 @@ function App() {
                   <ambientLight intensity={0.5} />
                   <pointLight position={[20, 20, 20]} />
                   <OrbitControls />
-                  <group ref={meshRef}>
                   { 
                     tilePanel?
                     (
                       tile && 
-                      <ModelTile 
-                        modelPath={fileTileMap[tile]} 
-                        position={[0, 0, 0]} 
-                        rotation={[0, 0, 0]} 
-                      />
+                      <group>
+                        <ModelTile 
+                          modelPath={fileTileMap[tile]} 
+                          position={[0, 0, 0]} 
+                          rotation={[0, 0, 0]} 
+                        />
+                        {
+                          neighbor &&
+                          <ModelTile
+                            modelPath={fileTileMap[tiles[neighbor["id"]]["mesh"]]}
+                            position={dir2pos[neighbor["direction"]].map(x => x * 2)}
+                            rotation={[0, neighbor["rotation"] * Math.PI / 2, 0]}
+                          />
+                        }
+                      </group>
                     )
                     : modelTiles.map((tile, i) => {
                       return (
-                        <ModelTile 
-                          modelPath={fileTileMap[tile["file"]]} 
-                          position={tile["position"]}
-                          rotation={[0, tile["rotation"] * Math.PI / 2, 0]}
-                        />
+                        <group ref={meshRef}>
+                          <ModelTile 
+                            modelPath={fileTileMap[tile["file"]]} 
+                            position={tile["position"]}
+                            rotation={[0, tile["rotation"] * Math.PI / 2, 0]}
+                          />
+                        </group>
                       );
                     })
                   }
-                  </group>
                 </Canvas>
             </Paper>
             {

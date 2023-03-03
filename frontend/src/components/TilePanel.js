@@ -11,6 +11,7 @@ import Switch from '@mui/material/Switch';
 import { ControlsContext } from '../App.js';
 import TextField from '@mui/material/TextField';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AddIcon from '@mui/icons-material/Add';
 import InputSlider from './InputSlider.js'
 
 
@@ -19,11 +20,31 @@ export default function TilePanel() {
     tilePanel, setTilePanel,
     tile, setTile,
     tiles, setTiles,
-    neighbor, setNeighbor
+    neighbor, setNeighbor,
+    file2id, setFile2id
   } = useContext(ControlsContext);
 
   const [w, setW] = useState(1);
+
+  function getNeighbors() {
+    const tid = file2id[tile];
+    const fmtd = [];
+    const neighbors = tiles[tid]["valid_neighbors"];
+    for (const direction in neighbors) {
+      for (const neighbor of neighbors[direction]) {
+        const nname = tiles[neighbor[0]]["mesh"]
+        fmtd.push({
+          "label": `${direction}, r${neighbor[1]}: ${nname}`,
+          "id": neighbor[0],
+          "rotation": neighbor[1],
+          "direction": direction
+        });
+      }
+    }
+    return fmtd;
+  }
   
+
   return (
     <Grid 
       container
@@ -37,7 +58,11 @@ export default function TilePanel() {
             variant="outlined"
             color="error"
             startIcon={<ArrowBackIcon />}
-            onClick={() => {setTilePanel(false)}}
+            onClick={() => {
+              setTilePanel(false);
+              setTile(null);
+              setNeighbor(null);
+            }}
           >
             Back
           </Button>
@@ -49,18 +74,20 @@ export default function TilePanel() {
         </ButtonGroup>
       </Grid>
       <Grid item>
-        <Typography>
+        <Typography 
+          variant="h6" 
+          sx={{marginBottom: 1}}
+        >
           Choose a tile to examine or customize.
         </Typography>
-      </Grid>
-      <Grid item>
         <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={Object.values(tiles)}
           onChange={(event, newValue) => {
-            console.log(newValue["mesh"]);
+            // console.log(newValue["mesh"]);
             setTile(newValue["mesh"]);
+            setNeighbor(null);
           }}
           renderInput={(params) => <TextField {...params} label="Tile" />}
         />
@@ -72,14 +99,51 @@ export default function TilePanel() {
         </Grid>
       }
       {
-      tile &&
-      <Grid item>
-        <InputSlider 
-          value={w} 
-          setValue={setW} 
-          label="Random Selection Weight" 
-        />
-      </Grid>
+        tile &&
+        <Grid item>
+          <InputSlider 
+            value={w} 
+            setValue={setW} 
+            label="Random Selection Weight" 
+          />
+        </Grid>
+      }
+      {
+        tile &&
+        <Grid item>
+          <Typography 
+            variant="h6" 
+            sx={{marginbottom: 3}}
+          >
+            View or Delete Allowed Neighbors
+          </Typography>
+          <Autocomplete
+            disablePortal
+            options={getNeighbors(tile)}
+            onChange={(event, newValue) => {
+              console.log(newValue);
+              setNeighbor(newValue);
+            }}
+            renderInput={(params) => <TextField {...params} label="Neighbor" />}
+          />
+          <Button startIcon={<AddIcon />}>
+            Add Allowed Neighbor
+          </Button>
+
+        </Grid>
+      }
+      {
+        neighbor &&
+        <Grid item>
+          <ButtonGroup variant="outlined" aria-label="outlined primary button group">
+            <Button color="error">Delete Neighbor</Button>
+            <Button
+              onClick={() => {setNeighbor(null)}}
+            >
+              Cancel
+            </Button>
+          </ButtonGroup>
+        </Grid>
       }
     </Grid>
   );

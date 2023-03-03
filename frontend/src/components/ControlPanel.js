@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import InputSlider from './InputSlider.js'
 import { ControlsContext } from '../App.js';
 import { MAX_POINTS } from '../constants.js';
-import { defaultExpanded, defaultCollapsed } from '../defaultTiles.js';
+import { defaultCollapsed } from '../defaultTiles.js';
 
 import EditIcon from '@mui/icons-material/Edit';
 import DownloadIcon from '@mui/icons-material/Download';

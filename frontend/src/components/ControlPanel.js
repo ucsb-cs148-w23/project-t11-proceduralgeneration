@@ -1,17 +1,14 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-// import { TwitterPicker } from 'react-color';
-
 import InputSlider from './InputSlider.js'
 import { ControlsContext } from '../App.js';
-import { MAX_POINTS } from '../constants.js';
-import { defaultCollapsed } from '../defaultTiles.js';
-
 import EditIcon from '@mui/icons-material/Edit';
 import DownloadIcon from '@mui/icons-material/Download';
 import LoopIcon from '@mui/icons-material/Loop';
+import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+import { defaultCollapsed } from '../defaultTiles.js';
 
 export default function ControlPanel() {
   const { 
@@ -19,9 +16,53 @@ export default function ControlPanel() {
     scaleX, setScaleX,
     scaleY, setScaleY,
     scaleZ, setScaleZ,
-    modelTiles, setModelTiles,
-    setTilePanel
+    setModelTiles,
+    setShowTileSettings,
+    meshRef
   } = useContext(ControlsContext);
+  //
+  // create persistent variable, initialize once
+  const link = useRef();
+  useEffect(() => {
+    link.current = document.createElement('a');
+    link.current.style.display = 'none';
+    document.body.appendChild(link.current);
+  })
+
+  // ---------------------
+  // save file functions
+  function saveFile(blob, filename) {
+    link.current.href = URL.createObjectURL(blob);
+    link.current.download = filename;
+    link.current.click();
+  }
+
+  function saveString(text, filename) {
+    saveFile( new Blob( [ text ], { type: 'text/plain' } ), filename );
+  }
+
+  function saveArrayBuffer( buffer, filename ) {
+    saveFile( new Blob( [ buffer ], { type: 'application/octet-stream' } ), filename );
+  }
+  
+  // numDownload change ~= set download flag
+  useEffect(() => {
+    if (numDownload > 0) {
+      const exporter = new GLTFExporter();
+      exporter.parse(
+        meshRef.current, 
+        (gltf) => {
+          const output = JSON.stringify(gltf, null, 2);
+          console.log('File gltf stringified', output);
+          saveString(output, 'model.gltf');
+        }, 
+        (error) => {
+          console.log('Error when parsing', error);
+        },
+        {} // options
+      );
+    }
+  }, [numDownload]);
 
   function requestGeneration() {
     console.log("clicked generate");
@@ -124,8 +165,8 @@ export default function ControlPanel() {
       <Grid item >
         <Button 
           variant="outlined" 
-          endIcon={<EditIcon />}
-          onClick={() => {setTilePanel(true)}}
+          startIcon={<EditIcon />}
+          onClick={() => {setShowTileSettings(true)}}
         >
           Customize
         </Button>
@@ -133,7 +174,7 @@ export default function ControlPanel() {
       <Grid item >
         <Button 
           variant="outlined" 
-          endIcon={<LoopIcon />}
+          startIcon={<LoopIcon />}
           onClick={requestGeneration}
         >
           Generate
@@ -142,7 +183,7 @@ export default function ControlPanel() {
       <Grid item >
         <Button 
           variant="outlined" 
-          endIcon={<DownloadIcon />}
+          startIcon={<DownloadIcon />}
           onClick={requestDownload}
         >
           Download

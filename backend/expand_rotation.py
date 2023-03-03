@@ -47,11 +47,6 @@ def _rotate_neighbors(base_neighbors, rotation, tile_data):
             rotated_neighbors[d].append(
                 _rotate_tile(neighbor, r + rotation, tile_data)
             )
-        # for neighbor, neighbor_rotations in base_neighbors[d].items():
-        #     for neighbor_rotation in neighbor_rotations:
-        #         rotated_neighbors[d].append(
-        #             _rotate_tile(neighbor, neighbor_rotation + rotation, tile_data)
-        #         )
 
     # rotate neighbors
     # ds = ["px", "py", "nx", "ny"]
@@ -65,11 +60,6 @@ def _rotate_neighbors(base_neighbors, rotation, tile_data):
             rotated_neighbors[nd].append(
                 _rotate_tile(neighbor, r + rotation, tile_data)
             )
-        # for neighbor, neighbor_rotations in base_neighbors[pd].items():
-        #     for neighbor_rotation in neighbor_rotations:
-        #         rotated_neighbors[nd].append(
-        #             _rotate_tile(neighbor, neighbor_rotation + rotation, tile_data)
-        #         )
 
     return rotated_neighbors
     

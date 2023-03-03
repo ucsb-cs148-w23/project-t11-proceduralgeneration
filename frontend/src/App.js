@@ -1,6 +1,6 @@
 import './App.css';
 import ControlPanel from './components/ControlPanel.js';
-import TilePanel from './components/TilePanel.js';
+import TileSettings from './components/TileSettings.js';
 import CssBaseline from '@mui/material/CssBaseline';
 import Header from './components/Header.js'
 import Lato from "./fonts/Lato-Regular.ttf";
@@ -22,11 +22,12 @@ function App() {
   const [numDownload, setNumDownload] = useState(0);
   const [mode, setMode] = useState("light");;
   const [modelTiles, setModelTiles] = useState([]);
-  const [tilePanel, setTilePanel] = useState(false); // [true, false
+  const [showTileSettings, setShowTileSettings] = useState(false); // [true, false
   const [tile, setTile] = useState(null);
   const [neighbor, setNeighbor] = useState(null);
   const [tiles, setTiles] = useState(defaultCollapsed);
   const [file2id, setFile2id] = useState(defaultFile2id);
+  const [name2file, setName2file] = useState(fileTileMap);
   const meshRef = useRef();
 
   // light/dark mode toggle
@@ -79,10 +80,11 @@ function App() {
         scaleZ, setScaleZ,
         modelTiles, setModelTiles,
         numDownload, setNumDownload,
-        tilePanel, setTilePanel,
+        showTileSettings, setShowTileSettings,
         tile, setTile,
         tiles, setTiles,
         file2id, setFile2id,
+        name2file, setName2file,
         neighbor, setNeighbor,
         colorMode,
         meshRef
@@ -99,41 +101,44 @@ function App() {
                   <pointLight position={[20, 20, 20]} />
                   <OrbitControls />
                   { 
-                    tilePanel?
+                    showTileSettings?
                     (
                       tile && 
                       <group>
                         <ModelTile 
-                          modelPath={fileTileMap[tile]} 
+                          modelPath={name2file[tile]} 
                           position={[0, 0, 0]} 
                           rotation={[0, 0, 0]} 
                         />
                         {
-                          neighbor &&
+                          (neighbor && (neighbor["label"] != "none")) &&
                           <ModelTile
-                            modelPath={fileTileMap[tiles[neighbor["id"]]["mesh"]]}
+                            modelPath={name2file[tiles[neighbor["id"]]["mesh"]]}
                             position={dir2pos[neighbor["direction"]].map(x => x * 2)}
                             rotation={[0, neighbor["rotation"] * Math.PI / 2, 0]}
                           />
                         }
                       </group>
                     )
-                    : modelTiles.map((tile, i) => {
-                      return (
-                        <group ref={meshRef}>
-                          <ModelTile 
-                            modelPath={fileTileMap[tile["file"]]} 
-                            position={tile["position"]}
-                            rotation={[0, tile["rotation"] * Math.PI / 2, 0]}
-                          />
-                        </group>
-                      );
-                    })
+                    :
+                    <group ref={meshRef}>
+                      { 
+                        modelTiles.map((tile, i) => {
+                          return (
+                            <ModelTile 
+                              modelPath={name2file[tile["file"]]} 
+                              position={tile["position"]}
+                              rotation={[0, tile["rotation"] * Math.PI / 2, 0]}
+                            />
+                          );
+                        })
+                      }
+                    </group>
                   }
                 </Canvas>
             </Paper>
             {
-              tilePanel? <TilePanel /> : <ControlPanel />
+              showTileSettings? <TileSettings /> : <ControlPanel />
             }
           </div>
         </div>

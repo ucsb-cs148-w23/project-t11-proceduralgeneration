@@ -17,7 +17,8 @@ const fileTileMap = {
   "twowindow.gltf": m5,
   "twowindowsimp.gltf": m6,
   "onewayroad.gltf": m7,
-  "twowayroad.gltf": m8
+  "twowayroad.gltf": m8,
+  "": "none"
 };
 
 const defaultFile2id = {
@@ -2345,7 +2346,7 @@ const defaultCollapsed = {
     },
     "m9": {
         "mesh": "",
-        "label": "",
+        "label": "none",
         "rotation": 0,
         "sockets": {
             "nx": "-1",

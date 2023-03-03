@@ -9,18 +9,26 @@ import Paper from '@mui/material/Paper';
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useMemo, useRef, useState, createContext } from 'react';
+import { useEffect, useMemo, useRef, useState, createContext } from 'react';
 import { fileTileMap, defaultCollapsed, defaultFile2id } from './defaultTiles.js';
+import jwt_decode from 'jwt-decode';
 
+const dir2pos = {
+  "px": [1, 0, 0],
+  "nx": [-1, 0, 0],
+  "pz": [0, 1, 0],
+  "nz": [0, -1, 0],
+  "py": [0, 0, 1],
+  "ny": [0, 0, -1]
+};
 const ControlsContext = createContext();
 
 function App() {
   const [scaleX, setScaleX] = useState(8);
   const [scaleY, setScaleY] = useState(8);
   const [scaleZ, setScaleZ] = useState(8);
-  // const [color, setColor] = useState("#FEFBEA");
   const [numDownload, setNumDownload] = useState(0);
-  const [mode, setMode] = useState("light");;
+  const [mode, setMode] = useState("light");
   const [modelTiles, setModelTiles] = useState([]);
   const [showTileSettings, setShowTileSettings] = useState(false); // [true, false
   const [tile, setTile] = useState(null);
@@ -28,6 +36,7 @@ function App() {
   const [tiles, setTiles] = useState(defaultCollapsed);
   const [file2id, setFile2id] = useState(defaultFile2id);
   const [name2file, setName2file] = useState(fileTileMap);
+  const [user, setUser] = useState({});
   const meshRef = useRef();
 
   // light/dark mode toggle
@@ -40,14 +49,26 @@ function App() {
     [],
   );
 
-  const dir2pos = {
-    "px": [1, 0, 0],
-    "nx": [-1, 0, 0],
-    "pz": [0, 1, 0],
-    "nz": [0, -1, 0],
-    "py": [0, 0, 1],
-    "ny": [0, 0, -1]
+  function handleCallbackResponse(response){
+    console.log("encoded JWT ID token: "+ response.credential);
+    let userObject = jwt_decode(response.credential);
+    console.log(userObject);
+    setUser(userObject);
   }
+  useEffect(()=>{
+    /* global google */
+    google.accounts.id.initialize({
+      client_id:"971264102154-4lp0bdl42fgvpatk5933gvsg6kk36quf.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      {theme:"outline",size:"large"}
+    );
+
+  }, [])
+
 
   // custom MUI theme
   const theme = useMemo(

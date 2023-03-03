@@ -1,15 +1,24 @@
-import { useRef, useEffect, useContext } from 'react';
+import { useRef, useEffect, useContext, useState, createContext } from 'react';
 import { DoubleSide } from "three";
 import { defaultVertexCount } from '../constants.js';
 import { ControlsContext } from '../App.js';
-import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+// import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 // import { Canvas, useFrame } from '@react-three/fiber'
 // import { OrbitControls } from '@react-three/drei'
 
 export default function Model(props) {
   console.log("re-render!\nlogging from Model: ", props.vertices);
   const pointsRef = useRef(props.vertices);
-  const { color, numDownload } = useContext(ControlsContext);
+  var refContext = ControlsContext;
+  // For testing purposes
+  if(useContext(ControlsContext) === undefined){
+    console.log("null context");
+    const color = "#FEFBEA";
+    const numDownload = 0;
+    refContext = createContext({color,numDownload});
+  }
+  const { color, numDownload } = useContext(refContext);
   
   const meshRef = useRef();
 

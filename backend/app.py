@@ -1,6 +1,7 @@
 import argparse
 import json
 import random
+import pymongo
 from copy import deepcopy
 from flask import Flask, jsonify, request
 from flask_cors import CORS 
@@ -11,6 +12,10 @@ from height_option_map import build_height_options
 
 app = Flask(__name__)
 CORS(app)
+
+mongodb_client = pymongo.MongoClient("mongodb+srv://christinetu:test123@cs148.id7aaen.mongodb.net/?retryWrites=true&w=majority")
+db = mongodb_client.get_database('users')
+records = db.register
 
 DEFAULT_TILE_PATH = "../prototypes/p2.json"
 with open(DEFAULT_TILE_PATH) as f:
@@ -56,6 +61,33 @@ def random_triangles():
     count = request.args.get('count', default=1, type=int)
     vertices = [random.uniform(-scale, scale) for _ in range(count * 9)]
     return jsonify(vertices=vertices)
+
+@app.route('/login', methods=['POST', 'GET'])
+def login_user():
+    # if email isn't in db, add new account
+    print(request.data)
+    print(request.get_json())
+    user_email = request.get_json().get("email")
+    user_found = records.find_one({"email": user_email})
+    print(user_email)
+    print(user_found)
+    # because there's a null user in db
+    if request.method == "POST":
+        if not user_found:
+            create_new_user = {
+                "email": user_email,
+                "saved_models": {}
+            }
+            records.insert_one(create_new_user)
+            return {"result": "user saved"}
+        return {"result": user_found["email"]}
+    elif request.method == "GET":
+        # get saved files
+        if user_found:
+            return {"models": user_found["saved_models"]}
+        else:
+            return "User not found!"
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

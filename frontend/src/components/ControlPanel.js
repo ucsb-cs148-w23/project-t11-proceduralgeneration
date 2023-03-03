@@ -10,7 +10,7 @@ import { ControlsContext } from '../App.js';
 import { MAX_POINTS } from '../constants.js';
 import { defaultExpanded, defaultCollapsed } from '../defaultTiles.js';
 
-export default function ControlPanel() {
+export default function ControlPanel(props) {
   const { 
     numDownload, setNumDownload,
     scaleX, setScaleX,
@@ -173,6 +173,12 @@ export default function ControlPanel() {
           console log lol
         </Button>
       </Grid>
+      {(props.isLoggedIn) ?       
+      <Grid item>
+        <Button variant="outlined" color="secondary" onClick={debugLogs}>
+          Save Model
+        </Button>
+      </Grid> : null}
     </Grid>
   );
 }

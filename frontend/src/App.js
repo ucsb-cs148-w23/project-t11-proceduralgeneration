@@ -5,6 +5,7 @@ import Header from './components/Header.js'
 import Lato from "./fonts/Lato-Regular.ttf";
 import Model from './components/Model.js'
 import ModelTile from './components/ModelTile.js'
+// import onSignIn from './components/LogIn.js';
 import Paper from '@mui/material/Paper';
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
@@ -20,11 +21,54 @@ const ControlsContext = createContext();
 
 function App() {
   const [user, setUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  function onSignIn(user_email) {
+    console.log("user is signing in");
+  
+    // -> local testing
+    const domain = "http://127.0.0.1"
+    // -> server testing
+    // const domain = "3.132.124.203"
+    // -> prod
+    // const domain = "https://deez.mturk.monster"
+    
+    const logInUrl = new URL(`${domain}:8080/login`);
+    console.log(logInUrl);
+  
+    const postData = {
+        "email": user_email
+    }
+  
+    console.log(JSON.stringify(postData));
+    
+    fetch(logInUrl, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postData)
+      })
+      .then(r => r.json())
+      .then(data => {
+        console.log(data);
+        console.log("yay!");
+        //now turn sign in button to user dropdown
+        setLoggedIn(true);
+    });
+    
+  }
+
   function handleCallbackResponse(response){
     console.log("encoded JWT ID token: "+ response.credential);
     let userObject = jwt_decode(response.credential);
     console.log(userObject);
     setUser(userObject);
+    // send email to backend to add account
+    const user_email = userObject.email;
+    console.log(user_email);
+    onSignIn(user_email);
   }
   useEffect(()=>{
     /* global google */
@@ -98,7 +142,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="App">
-          <Header className="header" />
+          <Header className="header" isLoggedIn={loggedIn}/>
           <div className="content"> 
             <Paper className="canvas-container">
                 <Canvas>
@@ -133,7 +177,7 @@ function App() {
 
                 </Canvas>
             </Paper>
-            <ControlPanel />
+            <ControlPanel isLoggedIn={loggedIn} />
           </div>
         </div>
       </ThemeProvider>

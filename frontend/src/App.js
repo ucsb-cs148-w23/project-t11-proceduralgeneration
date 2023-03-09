@@ -22,6 +22,7 @@ const ControlsContext = createContext();
 function App() {
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState();
 
   function onSignIn(user_email) {
     console.log("user is signing in");
@@ -66,9 +67,10 @@ function App() {
     console.log(userObject);
     setUser(userObject);
     // send email to backend to add account
-    const user_email = userObject.email;
-    console.log(user_email);
-    onSignIn(user_email);
+    // const user_email = ;
+    // console.log(user_email);
+    onSignIn(userObject.email);
+    setUserEmail(userObject.email);
   }
   useEffect(()=>{
     /* global google */
@@ -142,7 +144,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="App">
-          <Header className="header" isLoggedIn={loggedIn}/>
+          <Header className="header" isLoggedIn={loggedIn} userEmail={userEmail} />
           <div className="content"> 
             <Paper className="canvas-container">
                 <Canvas>
@@ -177,7 +179,7 @@ function App() {
 
                 </Canvas>
             </Paper>
-            <ControlPanel isLoggedIn={loggedIn} />
+            <ControlPanel isLoggedIn={loggedIn} userEmail={userEmail} />
           </div>
         </div>
       </ThemeProvider>

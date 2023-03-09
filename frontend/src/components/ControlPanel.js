@@ -1,15 +1,17 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { TwitterPicker } from 'react-color';
-
-
 import InputSlider from './InputSlider.js'
 import { ControlsContext } from '../App.js';
 import { MAX_POINTS } from '../constants.js';
 import { defaultExpanded, defaultCollapsed } from '../defaultTiles.js';
 import SavedDialogue from './SavedDialogue.js';
+import EditIcon from '@mui/icons-material/Edit';
+import DownloadIcon from '@mui/icons-material/Download';
+import LoopIcon from '@mui/icons-material/Loop';
+import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+import { defaultCollapsed } from '../defaultTiles.js';
 
 export default function ControlPanel(props) {
   const { 
@@ -17,41 +19,55 @@ export default function ControlPanel(props) {
     scaleX, setScaleX,
     scaleY, setScaleY,
     scaleZ, setScaleZ,
-    color, setColor,
-    setVertices, 
-    setVertexCount,
-    modelTiles, setModelTiles
+    setModelTiles,
+    setShowTileSettings,
+    meshRef
   } = useContext(ControlsContext);
+  //
+  // create persistent variable, initialize once
+  const link = useRef();
+  useEffect(() => {
+    link.current = document.createElement('a');
+    link.current.style.display = 'none';
+    document.body.appendChild(link.current);
+  })
 
-  function requestGeneration() {
-    console.log("clicked generate");
-    
-    // -> local testing
-    // const domain = "http://127.0.0.1"
-    // -> server testing
-    // const domain = "3.132.124.203"
-    // -> prod
-    const domain = "https://deez.mturk.monster"
-    
-    const generateUrl = new URL(`${domain}:8080/generate_map`);
-    generateUrl.searchParams.append("x", scaleX);
-    generateUrl.searchParams.append("y", scaleY);
-    generateUrl.searchParams.append("z", scaleZ);
-    
-    fetch(generateUrl)
-      .then(r => r.json())
-      .then(data => {
-        console.log(data);
-        if (data.vertices.length <= MAX_POINTS * 3) {
-          setVertices(new Float32Array(data.vertices));
-          setVertexCount(data.vertices.length / 3);
-        } else {
-          console.log("error: too many points");
-        }
-      });
+  // ---------------------
+  // save file functions
+  function saveFile(blob, filename) {
+    link.current.href = URL.createObjectURL(blob);
+    link.current.download = filename;
+    link.current.click();
   }
 
-  function requestGeneration2() {
+  function saveString(text, filename) {
+    saveFile( new Blob( [ text ], { type: 'text/plain' } ), filename );
+  }
+
+  function saveArrayBuffer( buffer, filename ) {
+    saveFile( new Blob( [ buffer ], { type: 'application/octet-stream' } ), filename );
+  }
+  
+  // numDownload change ~= set download flag
+  useEffect(() => {
+    if (numDownload > 0) {
+      const exporter = new GLTFExporter();
+      exporter.parse(
+        meshRef.current, 
+        (gltf) => {
+          const output = JSON.stringify(gltf, null, 2);
+          console.log('File gltf stringified', output);
+          saveString(output, 'model.gltf');
+        }, 
+        (error) => {
+          console.log('Error when parsing', error);
+        },
+        {} // options
+      );
+    }
+  }, [numDownload]);
+
+  function requestGeneration() {
     console.log("clicked generate");
     
     // -> local testing
@@ -62,19 +78,15 @@ export default function ControlPanel(props) {
     // const domain = "https://deez.mturk.monster"
     
     const generateUrl = new URL(`${domain}:8080/generate`);
-    // generateUrl.searchParams.append("x", scaleX);
-    // generateUrl.searchParams.append("y", scaleY);
-    // generateUrl.searchParams.append("z", scaleZ);
     const postData = {
       "scale": {
         "x": scaleX,
         "y": scaleY,
         "z": scaleZ
       },
-      // "tile_data": defaultCollapsed
-      "tile_data": defaultExpanded
+      "expand_rotation": true,
+      "tile_data": defaultCollapsed
     };
-    console.log(postData);
     
     fetch(generateUrl, {
         method: 'POST',
@@ -86,27 +98,24 @@ export default function ControlPanel(props) {
       })
       .then(r => r.json())
       .then(data => {
-        console.log(data);
         setModelTiles(data["tiles"]);
-        console.log("model tiles:", modelTiles)
-      });
+        // console.log(data);
+        // console.log("model tiles:", modelTiles)
+      }
+    );
   }
 
   function requestDownload(){
-    console.log("download requested");
-    setNumDownload(numDownload+1);
+    // console.log("download requested");
+    setNumDownload(numDownload + 1);
   }
 
+  /**
   function handleColorChange(color, event) {
     console.log("clicked color!");
     setColor(color.hex);
   }
-
-  
-  function debugLogs() {
-    console.log("debug log!");
-    console.log(modelTiles);
-  }
+  */
 
   // function saveModel() {
   //   // save model to user by calling endpoinit
@@ -183,6 +192,7 @@ export default function ControlPanel(props) {
           className="control-panel-item"
         />
       </Grid>
+      {/* 
       <Grid item>
         <Typography sx={{marginBottom: 2}} gutterBottom>
           Mesh Color
@@ -191,29 +201,36 @@ export default function ControlPanel(props) {
           color={color}
           onChangeComplete={handleColorChange}
         />
-      </Grid>
+      </Grid> 
+      */}
       <Grid item></Grid>
-      <Grid
-        container
-        direction="row"
-        columnSpacing={3}>
-        <Grid item>
-          <Button variant="outlined" onClick={requestGeneration2}>
-            Generate
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button variant="outlined" color="secondary" onClick={requestDownload}>
-            Download
-          </Button>
-        </Grid>
-      </Grid>
-      {/* <Grid item>
-        <Button variant="outlined" color="secondary" onClick={debugLogs}>
-          console log lol
+      <Grid item >
+        <Button 
+          variant="outlined" 
+          startIcon={<EditIcon />}
+          onClick={() => {setShowTileSettings(true)}}
+        >
+          Customize
         </Button>
-      </Grid> */}
-      {/* ALSO CHECK THAT A MODEL HAS BEEN GENERATED */}
+      </Grid>
+      <Grid item >
+        <Button 
+          variant="outlined" 
+          startIcon={<LoopIcon />}
+          onClick={requestGeneration}
+        >
+          Generate
+        </Button>
+      </Grid>
+      <Grid item >
+        <Button 
+          variant="outlined" 
+          startIcon={<DownloadIcon />}
+          onClick={requestDownload}
+        >
+          Download
+        </Button>
+      </Grid> 
       {(props.isLoggedIn) ?       
       <Grid item>
         {/* <Button variant="outlined" color="secondary" onClick={saveModel}>

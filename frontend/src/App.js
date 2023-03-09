@@ -5,12 +5,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Header from './components/Header.js'
 import Lato from "./fonts/Lato-Regular.ttf";
 import ModelTile from './components/ModelTile.js'
+import Loader from './components/Loader.js'
 import Paper from '@mui/material/Paper';
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useEffect, useMemo, useRef, useState, createContext } from 'react';
+import { useEffect, useMemo, useRef, useState, createContext, Suspense } from 'react';
 import { fileTileMap, defaultCollapsed, defaultFile2id } from './defaultTiles.js';
+import { usePromiseTracker } from "react-promise-tracker";
 import jwt_decode from 'jwt-decode';
 
 const dir2pos = {
@@ -38,6 +40,7 @@ function App() {
   const [name2file, setName2file] = useState(fileTileMap);
   const [user, setUser] = useState({});
   const meshRef = useRef();
+  const { promiseInProgress } = usePromiseTracker();
 
   // light/dark mode toggle
   const colorMode = useMemo(
@@ -93,6 +96,15 @@ function App() {
     [mode],
   );
 
+  /*
+  function Loader() {
+    console.log("within loader");
+    return ( promiseInProgress &&
+    <Html center>loading...</Html>
+    );
+  }
+  */
+
   return (
     <ControlsContext.Provider 
       value={{ 
@@ -108,7 +120,8 @@ function App() {
         name2file, setName2file,
         neighbor, setNeighbor,
         colorMode,
-        meshRef
+        meshRef,
+        promiseInProgress
       }}
     >
       <ThemeProvider theme={theme}>
@@ -118,44 +131,49 @@ function App() {
           <div className="content"> 
             <Paper className="canvas-container">
                 <Canvas>
-                  <ambientLight intensity={0.5} />
-                  <pointLight position={[20, 20, 20]} />
-                  <OrbitControls />
-                  { 
-                    showTileSettings?
-                    (
-                      tile && 
-                      <group>
-                        <ModelTile 
-                          modelPath={name2file[tile]} 
-                          position={[0, 0, 0]} 
-                          rotation={[0, 0, 0]} 
-                        />
-                        {
-                          (neighbor && (neighbor["label"] != "none")) &&
-                          <ModelTile
-                            modelPath={name2file[tiles[neighbor["id"]]["mesh"]]}
-                            position={dir2pos[neighbor["direction"]].map(x => x * 2)}
-                            rotation={[0, neighbor["rotation"] * Math.PI / 2, 0]}
+                <Loader/>
+                { !promiseInProgress && (
+                  <Suspense fallback={null}>
+                    <ambientLight intensity={0.5} />
+                    <pointLight position={[20, 20, 20]} />
+                    <OrbitControls />
+                    { 
+                      showTileSettings?
+                      (
+                        tile && 
+                        <group>
+                          <ModelTile 
+                            modelPath={name2file[tile]} 
+                            position={[0, 0, 0]} 
+                            rotation={[0, 0, 0]} 
                           />
+                          {
+                            (neighbor && (neighbor["label"] != "none")) &&
+                            <ModelTile
+                              modelPath={name2file[tiles[neighbor["id"]]["mesh"]]}
+                              position={dir2pos[neighbor["direction"]].map(x => x * 2)}
+                              rotation={[0, neighbor["rotation"] * Math.PI / 2, 0]}
+                            />
+                          }
+                        </group>
+                      )
+                      :
+                      <group ref={meshRef}>
+                        { 
+                          modelTiles.map((tile, i) => {
+                            return (
+                              <ModelTile 
+                                modelPath={name2file[tile["file"]]} 
+                                position={tile["position"]}
+                                rotation={[0, tile["rotation"] * Math.PI / 2, 0]}
+                              />
+                            );
+                          })
                         }
                       </group>
-                    )
-                    :
-                    <group ref={meshRef}>
-                      { 
-                        modelTiles.map((tile, i) => {
-                          return (
-                            <ModelTile 
-                              modelPath={name2file[tile["file"]]} 
-                              position={tile["position"]}
-                              rotation={[0, tile["rotation"] * Math.PI / 2, 0]}
-                            />
-                          );
-                        })
-                      }
-                    </group>
-                  }
+                    }
+                  </Suspense>
+                )}
                 </Canvas>
             </Paper>
             {

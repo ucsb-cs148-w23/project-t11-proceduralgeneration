@@ -62,31 +62,51 @@ def random_triangles():
     vertices = [random.uniform(-scale, scale) for _ in range(count * 9)]
     return jsonify(vertices=vertices)
 
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['POST'])
 def login_user():
     # if email isn't in db, add new account
-    print(request.data)
-    print(request.get_json())
+    # print(request.data)
+    # print(request.get_json())
     user_email = request.get_json().get("email")
     user_found = records.find_one({"email": user_email})
-    print(user_email)
-    print(user_found)
+    # print(user_email)
+    # print(user_found)
     # because there's a null user in db
-    if request.method == "POST":
-        if not user_found:
-            create_new_user = {
-                "email": user_email,
-                "saved_models": {}
-            }
-            records.insert_one(create_new_user)
-            return {"result": "user saved"}
-        return {"result": user_found["email"]}
-    elif request.method == "GET":
-        # get saved files
-        if user_found:
-            return {"models": user_found["saved_models"]}
-        else:
-            return "User not found!"
+    if not user_found:
+        create_new_user = {
+            "email": user_email,
+            "saved_models": []
+        }
+        records.insert_one(create_new_user)
+        return {"result": "user saved"}
+    return {"result": user_found["email"]}
+
+@app.route('/get_saved', methods=['POST'])
+def get_saved_models():
+    user_email = request.get_json().get("email")
+    user_found = records.find_one({"email": user_email})
+
+    # get saved files
+    if user_found:
+        return {"models": user_found["saved_models"]}
+    else:
+        return {"resp": "User not found!"}
+
+@app.route('/save_model', methods=['POST'])
+def saved_model():
+    user_email = request.get_json().get("email")
+    save_model = request.get_json().get("model")
+    user_found = records.find_one({"email": user_email})
+
+    # get saved files
+    if user_found:
+        updated_user = deepcopy(user_found)
+        updated_user["saved_models"].append(save_model)
+        #DOUBLE CHECK THAT THIS UPDATES!!!
+        records.replace_one(user_found, updated_user)
+        return {"resp": "saved model!"}
+    else:
+        return {"resp": "User not found!"}
 
 
 if __name__ == '__main__':

@@ -37,7 +37,7 @@ export default function Header(props) {
       {/* <div id="signInDiv"></div> */}
       {/* if is logged in, show user dropdown else show login */}
       
-      {(props.isLoggedIn) ? <UserDropdown /> : <LogIn />}
+      {(props.isLoggedIn) ? <UserDropdown userEmail={props.userEmail} /> : <LogIn />}
       <Box
         sx={{
           display: 'flex',

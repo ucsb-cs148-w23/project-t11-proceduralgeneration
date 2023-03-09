@@ -9,6 +9,7 @@ import InputSlider from './InputSlider.js'
 import { ControlsContext } from '../App.js';
 import { MAX_POINTS } from '../constants.js';
 import { defaultExpanded, defaultCollapsed } from '../defaultTiles.js';
+import SavedDialogue from './SavedDialogue.js';
 
 export default function ControlPanel(props) {
   const { 
@@ -107,6 +108,45 @@ export default function ControlPanel(props) {
     console.log(modelTiles);
   }
 
+  // function saveModel() {
+  //   // save model to user by calling endpoinit
+  //   // pass in email & json of vertices
+  //   console.log("user is saving a model");
+  
+  //   // -> local testing
+  //   const domain = "http://127.0.0.1"
+  //   // -> server testing
+  //   // const domain = "3.132.124.203"
+  //   // -> prod
+  //   // const domain = "https://deez.mturk.monster"
+    
+  //   const saveModelUrl = new URL(`${domain}:8080/save_model`);
+  //   console.log(saveModelUrl);
+  
+  //   const postData = {
+  //       "email": props.userEmail,
+  //       "model": modelTiles
+  //   }
+  
+  //   console.log(JSON.stringify(postData));
+    
+  //   fetch(saveModelUrl, {
+  //       method: 'POST',
+  //       mode: 'cors',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(postData)
+  //     })
+  //     .then(r => r.json())
+  //     .then(data => {
+  //       console.log(data);
+  //       console.log("yay!");
+  //       //now turn sign in button to user dropdown
+  //   });
+    
+  // }
+
   return (
     <Grid 
       container
@@ -168,16 +208,18 @@ export default function ControlPanel(props) {
           </Button>
         </Grid>
       </Grid>
-      <Grid item>
+      {/* <Grid item>
         <Button variant="outlined" color="secondary" onClick={debugLogs}>
           console log lol
         </Button>
-      </Grid>
+      </Grid> */}
+      {/* ALSO CHECK THAT A MODEL HAS BEEN GENERATED */}
       {(props.isLoggedIn) ?       
       <Grid item>
-        <Button variant="outlined" color="secondary" onClick={debugLogs}>
+        {/* <Button variant="outlined" color="secondary" onClick={saveModel}>
           Save Model
-        </Button>
+        </Button> */}
+        <SavedDialogue userEmail={props.userEmail} modelTiles={modelTiles} />
       </Grid> : null}
     </Grid>
   );

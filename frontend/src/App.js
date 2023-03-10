@@ -147,6 +147,7 @@ function App() {
                             modelPath={name2file[tile]} 
                             position={[0, 0, 0]} 
                             rotation={[0, 0, 0]} 
+                            onClick={() => null}
                           />
                           {
                             (neighbor && (neighbor["label"] != "none")) &&
@@ -154,6 +155,7 @@ function App() {
                               modelPath={name2file[tiles[neighbor["id"]]["mesh"]]}
                               position={dir2pos[neighbor["direction"]].map(x => x * 2)}
                               rotation={[0, neighbor["rotation"] * Math.PI / 2, 0]}
+                              onClick={() => null}
                             />
                           }
                         </group>

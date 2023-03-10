@@ -57,7 +57,7 @@ export default function SavedModels(props) {
         setNumDownload(numDownload+1);
     }
     return (
-        <div>
+        <div className="saved-model">
             <Grid container spacing={2}>
                 {/* {
                   props.model.map((tile, i) => {

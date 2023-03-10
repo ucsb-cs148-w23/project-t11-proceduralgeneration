@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Header from './components/Header.js'
 import Lato from "./fonts/Lato-Regular.ttf";
 import ModelTile from './components/ModelTile.js'
+// import onSignIn from './components/LogIn.js';
 import Loader from './components/Loader.js'
 import Paper from '@mui/material/Paper';
 import { Canvas } from '@react-three/fiber'
@@ -48,6 +49,36 @@ function App() {
   const [name2file, setName2file] = useState(fileTileMap);
   const [user, setUser] = useState({});
   const [clickedTile, setClickedTile] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState();
+
+  function onSignIn(user_email) {
+    // -> local testing
+    const domain = "http://127.0.0.1"
+    // -> server testing
+    // const domain = "3.132.124.203"
+    // -> prod
+    // const domain = "https://deez.mturk.monster"
+    
+    const logInUrl = new URL(`${domain}:8080/login`);
+    const postData = {
+        "email": user_email
+    }
+    fetch(logInUrl, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postData)
+      })
+      .then(r => r.json())
+      .then(data => {
+        // now turn sign in button to user dropdown
+        setLoggedIn(true);
+    });
+  }
+
   const meshRef = useRef();
   const { promiseInProgress } = usePromiseTracker();
 
@@ -62,10 +93,15 @@ function App() {
   );
 
   function handleCallbackResponse(response){
-    console.log("encoded JWT ID token: "+ response.credential);
+    // console.log("encoded JWT ID token: "+ response.credential);
     let userObject = jwt_decode(response.credential);
-    console.log(userObject);
+    // console.log(userObject);
     setUser(userObject);
+    // send email to backend to add account
+    // const user_email = ;
+    // console.log(user_email);
+    onSignIn(userObject.email);
+    setUserEmail(userObject.email);
   }
   useEffect(()=>{
     /* global google */
@@ -128,7 +164,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="App">
-          <Header className="header" />
+          <Header className="header" isLoggedIn={loggedIn} userEmail={userEmail} />
           <div className="content"> 
             <Paper className="canvas-container">
                 <Canvas>
@@ -189,7 +225,11 @@ function App() {
                 )}
                 </Canvas>
             </Paper>
-            { showTileSettings? <TileSettings /> : <ControlPanel /> }
+            {
+              showTileSettings? 
+              <TileSettings /> 
+              : <ControlPanel isLoggedIn={loggedIn} userEmail={userEmail} />
+            }
           </div>
         </div>
       </ThemeProvider>

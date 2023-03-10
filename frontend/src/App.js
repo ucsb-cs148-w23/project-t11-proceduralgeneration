@@ -64,6 +64,7 @@ function App() {
     const postData = {
         "email": user_email
     }
+
     fetch(logInUrl, {
         method: 'POST',
         mode: 'cors',
@@ -74,7 +75,6 @@ function App() {
       })
       .then(r => r.json())
       .then(data => {
-        // now turn sign in button to user dropdown
         setLoggedIn(true);
     });
   }
@@ -97,9 +97,6 @@ function App() {
     let userObject = jwt_decode(response.credential);
     // console.log(userObject);
     setUser(userObject);
-    // send email to backend to add account
-    // const user_email = ;
-    // console.log(user_email);
     onSignIn(userObject.email);
     setUserEmail(userObject.email);
   }

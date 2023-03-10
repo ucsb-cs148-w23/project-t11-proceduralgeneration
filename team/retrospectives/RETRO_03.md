@@ -22,5 +22,5 @@ Absent: NA <br>
 
 ## Retro Assessment
 * For this retro, we decided to keep using the start/stop/continue method that we used for Retro 1 & 2. I think this system fits really well for our team as it is very straightforward and lets us clearly identify what needs to be done/changed.
-* After a successful MVP deployment, taking the next steps to add to our product and make sure everything is thoroughly tested is the primary goal that the team decided on moving forward today. Overall, discussion went well and many echoed the same sentiments about testing being the next focus.
+* With code freeze coming soon, our goal is to add the last bit of features, refactor/fix the code, and document them. Overall, discussion went well and many shared the same goal as the next focus.
 * Based on today's retro, one piece of advice I'd give to the next retro leader is to try to create an environment where everyone feels comfortable sharing their thoughts and ideas.

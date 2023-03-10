@@ -44,7 +44,7 @@ function App() {
   const [userEmail, setUserEmail] = useState();
 
   function onSignIn(user_email) {
-    console.log("user is signing in");
+    // console.log("user is signing in");
   
     // -> local testing
     const domain = "http://127.0.0.1"
@@ -54,13 +54,13 @@ function App() {
     // const domain = "https://deez.mturk.monster"
     
     const logInUrl = new URL(`${domain}:8080/login`);
-    console.log(logInUrl);
+    // console.log(logInUrl);
   
     const postData = {
         "email": user_email
     }
   
-    console.log(JSON.stringify(postData));
+    // console.log(JSON.stringify(postData));
     
     fetch(logInUrl, {
         method: 'POST',
@@ -72,8 +72,8 @@ function App() {
       })
       .then(r => r.json())
       .then(data => {
-        console.log(data);
-        console.log("yay!");
+        // console.log(data);
+        // console.log("yay!");
         //now turn sign in button to user dropdown
         setLoggedIn(true);
     });
@@ -94,9 +94,9 @@ function App() {
   );
 
   function handleCallbackResponse(response){
-    console.log("encoded JWT ID token: "+ response.credential);
+    // console.log("encoded JWT ID token: "+ response.credential);
     let userObject = jwt_decode(response.credential);
-    console.log(userObject);
+    // console.log(userObject);
     setUser(userObject);
     // send email to backend to add account
     // const user_email = ;

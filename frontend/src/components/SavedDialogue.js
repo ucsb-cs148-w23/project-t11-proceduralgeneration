@@ -25,7 +25,7 @@ export default function AlertDialogSlide(props) {
   function saveModel() {
     // save model to user by calling endpoinit
     // pass in email & json of vertices
-    console.log("user is saving a model");
+    // console.log("user is saving a model");
   
     // -> local testing
     const domain = "http://127.0.0.1"
@@ -35,14 +35,14 @@ export default function AlertDialogSlide(props) {
     // const domain = "https://deez.mturk.monster"
     
     const saveModelUrl = new URL(`${domain}:8080/save_model`);
-    console.log(saveModelUrl);
+    // console.log(saveModelUrl);
   
     const postData = {
         "email": props.userEmail,
         "model": props.modelTiles
     }
   
-    console.log(JSON.stringify(postData));
+    // console.log(JSON.stringify(postData));
     
     fetch(saveModelUrl, {
         method: 'POST',
@@ -54,8 +54,8 @@ export default function AlertDialogSlide(props) {
       })
       .then(r => r.json())
       .then(data => {
-        console.log(data);
-        console.log("yay! 2");
+        // console.log(data);
+        // console.log("yay! 2");
         setOpen(true);
         //now turn sign in button to user dropdown
     });

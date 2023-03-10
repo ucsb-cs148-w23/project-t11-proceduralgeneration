@@ -33,19 +33,19 @@ export default function SavedModels(props) {
     }
     // each saved model has a box for the model (small box), button to download, button to share a link
     useEffect(() => {
-        console.log("useEffect reached");
-        console.log(numDownload);
+        // console.log("useEffect reached");
+        // console.log(numDownload);
         if (numDownload > 0) {
           const exporter = new GLTFExporter();
           exporter.parse(
             meshRef.current, 
             (gltf) => {
               const output = JSON.stringify(gltf, null, 2);
-              console.log('File gltf stringified', output);
+            //   console.log('File gltf stringified', output);
               saveString(output, 'model.gltf');
             }, 
             (error) => {
-              console.log('Error when parsing', error);
+            //   console.log('Error when parsing', error);
             },
             {} // options
           );
@@ -53,7 +53,7 @@ export default function SavedModels(props) {
       }, [numDownload]);
 
     function requestDownload() {
-        console.log("download requested");
+        // console.log("download requested");
         setNumDownload(numDownload+1);
     }
     return (

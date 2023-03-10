@@ -12,7 +12,7 @@ export default function UserDropdown(props) {
     const [savedModels, setSavedModels] = useState();
     
     function getSavedModels() {
-        console.log("retrieving saved models");      
+        // console.log("retrieving saved models");      
         // -> local testing
         const domain = "http://127.0.0.1"
         // -> server testing
@@ -21,7 +21,7 @@ export default function UserDropdown(props) {
         // const domain = "https://deez.mturk.monster"
         
         const getSavedUrl = new URL(`${domain}:8080/get_saved`);
-        console.log(getSavedUrl);
+        // console.log(getSavedUrl);
       
         const postData = {
             "email": props.userEmail
@@ -39,8 +39,8 @@ export default function UserDropdown(props) {
           })
           .then(r => r.json())
           .then(data => {
-            console.log(data);
-            console.log("yay! 3");
+            // console.log(data);
+            // console.log("yay! 3");
             // quick popup saying your model has been saved
             setSavedModels(data.models);
             setOpen(true);
@@ -59,17 +59,17 @@ export default function UserDropdown(props) {
         setOption(opt?.target?.value);
 
         // setOption(opt?.target?.value);
-        console.log(option);
+        // console.log(option);
         if (opt?.target?.value === 10) {
             //go to saved models
-            console.log("going to user's saved models");
+            // console.log("going to user's saved models");
             // savedModels = getSavedModels();
             getSavedModels();
-            console.log("open: ", open);
+            // console.log("open: ", open);
             // setOpen(true);
         } else if (opt?.target?.value === 20) {
             //sign out
-            console.log("signing out");
+            // console.log("signing out");
             //just reload to logout and maybe show popup
             window.location.reload(true);
         }

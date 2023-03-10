@@ -82,6 +82,7 @@ export default function TileSettings() {
     tiles[tid]["include"] = !tileInclusion;
     setTileInclusion(!tileInclusion);
     setTiles(tiles);
+    console.log(tiles);
   }
 
   function toggleGroundStatus() {
@@ -184,6 +185,8 @@ export default function TileSettings() {
             setW(newValue["weight"] || 1);
             if (newValue["include"] === undefined) {
               setTileInclusion(true);
+            } else {
+              setTileInclusion(newValue["include"]);
             }
             // setTileInclusion(newValue["include"]);
             setGroundStatus(newValue["ground"] === false);

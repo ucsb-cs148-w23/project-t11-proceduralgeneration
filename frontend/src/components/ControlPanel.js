@@ -246,7 +246,10 @@ export default function ControlPanel() {
         <Button 
           variant="outlined" 
           startIcon={<EditIcon />}
-          onClick={() => {setShowTileSettings(true)}}
+          onClick={() => {
+            setShowTileSettings(true);
+            setClickedTile(null);
+          }}
         >
           Customize
         </Button>

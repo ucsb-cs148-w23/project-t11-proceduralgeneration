@@ -44,9 +44,7 @@ function App() {
   const [userEmail, setUserEmail] = useState();
 
   function onSignIn(user_email) {
-    // console.log("user is signing in");
-  
-    // -> local testing
+
     const domain = "http://127.0.0.1"
     // -> server testing
     // const domain = "3.132.124.203"
@@ -54,13 +52,10 @@ function App() {
     // const domain = "https://deez.mturk.monster"
     
     const logInUrl = new URL(`${domain}:8080/login`);
-    // console.log(logInUrl);
   
     const postData = {
         "email": user_email
     }
-  
-    // console.log(JSON.stringify(postData));
     
     fetch(logInUrl, {
         method: 'POST',
@@ -72,9 +67,6 @@ function App() {
       })
       .then(r => r.json())
       .then(data => {
-        // console.log(data);
-        // console.log("yay!");
-        //now turn sign in button to user dropdown
         setLoggedIn(true);
     });
     
@@ -98,9 +90,6 @@ function App() {
     let userObject = jwt_decode(response.credential);
     // console.log(userObject);
     setUser(userObject);
-    // send email to backend to add account
-    // const user_email = ;
-    // console.log(user_email);
     onSignIn(userObject.email);
     setUserEmail(userObject.email);
   }

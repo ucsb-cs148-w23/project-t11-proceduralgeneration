@@ -6,12 +6,9 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { fileTileMap } from '../defaultTiles.js';
 import { ControlsContext } from '../App.js';
-// import Loader from './Loader.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 
 export default function SavedModels(props) {
-    // console.log("rendering saved model");
-    // console.log(props.model);
     const { numDownload, setNumDownload } = useContext(ControlsContext);
     const meshRef = useRef();
 
@@ -32,49 +29,29 @@ export default function SavedModels(props) {
         saveFile( new Blob( [ text ], { type: 'text/plain' } ), filename );
     }
     // each saved model has a box for the model (small box), button to download, button to share a link
+    // later add ability to give model a name (reconfigure from list to dict in backend), delete model
     useEffect(() => {
-        // console.log("useEffect reached");
-        // console.log(numDownload);
         if (numDownload > 0) {
           const exporter = new GLTFExporter();
           exporter.parse(
             meshRef.current, 
             (gltf) => {
               const output = JSON.stringify(gltf, null, 2);
-            //   console.log('File gltf stringified', output);
               saveString(output, 'model.gltf');
             }, 
             (error) => {
-            //   console.log('Error when parsing', error);
             },
-            {} // options
+            {} 
           );
         }
       }, [numDownload]);
 
     function requestDownload() {
-        // console.log("download requested");
         setNumDownload(numDownload+1);
     }
     return (
         <div className="saved-model">
             <Grid container spacing={2}>
-                {/* {
-                  props.model.map((tile, i) => {
-                    return (
-                        <Grid item>
-                            <Suspense fallback={<Loading />}>
-                                <ModelTile 
-                                    modelPath={fileTileMap[tile["file"]]} 
-                                    position={tile["position"]}
-                                    rotation={[0, tile["rotation"] * Math.PI / 2, 0]}
-                                />
-                            </Suspense>
-                        </Grid>
-                        
-                    );
-                  })
-                } */}
                 <div className="saved-content"> 
                     <Paper className="canvas-container">
                         <Canvas>

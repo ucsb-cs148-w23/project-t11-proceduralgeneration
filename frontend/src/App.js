@@ -54,11 +54,11 @@ function App() {
 
   function onSignIn(user_email) {
     // -> local testing
-    const domain = "http://127.0.0.1"
+    // const domain = "http://127.0.0.1";
     // -> server testing
-    // const domain = "3.132.124.203"
+    // const domain = "3.132.124.203";
     // -> prod
-    // const domain = "https://deez.mturk.monster"
+    const domain = "https://shadydomain.click";
     
     const logInUrl = new URL(`${domain}:8080/login`);
     const postData = {
@@ -80,6 +80,7 @@ function App() {
   }
 
   const meshRef = useRef();
+  const loginBoxRef = useRef();
   const { promiseInProgress } = usePromiseTracker();
 
   // light/dark mode toggle
@@ -100,18 +101,17 @@ function App() {
     onSignIn(userObject.email);
     setUserEmail(userObject.email);
   }
-  useEffect(()=>{
+
+  useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
       client_id:"971264102154-4lp0bdl42fgvpatk5933gvsg6kk36quf.apps.googleusercontent.com",
       callback: handleCallbackResponse
     });
-
     google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      {theme:"outline",size:"large"}
+      loginBoxRef.current,
+      { theme: "outline", size: "large" }
     );
-
   }, [])
 
 
@@ -155,6 +155,7 @@ function App() {
         clickedTile, setClickedTile,
         colorMode,
         meshRef,
+        loginBoxRef,
         promiseInProgress
       }}
     >

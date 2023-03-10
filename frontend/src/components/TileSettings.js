@@ -78,15 +78,11 @@ export default function TileSettings() {
   
   function toggleTileInclusion() {
     // console.log("new incude value = " + !tileInclusion);
-    setTileInclusion(!tileInclusion);
     const tid = file2id[tile];
-    // default ~= true
-    if (tiles[tid]["include"] === undefined) {
-      tiles[tid]["include"] = false;
-    } else {
-      tiles[tid]["include"] = !tiles[tid]["include"];
-    }
+    tiles[tid]["include"] = !tileInclusion;
+    setTileInclusion(!tileInclusion);
     setTiles(tiles);
+    console.log(tiles);
   }
 
   function toggleGroundStatus() {
@@ -189,6 +185,8 @@ export default function TileSettings() {
             setW(newValue["weight"] || 1);
             if (newValue["include"] === undefined) {
               setTileInclusion(true);
+            } else {
+              setTileInclusion(newValue["include"]);
             }
             // setTileInclusion(newValue["include"]);
             setGroundStatus(newValue["ground"] === false);

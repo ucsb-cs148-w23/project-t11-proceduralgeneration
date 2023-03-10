@@ -132,3 +132,7 @@ dist
 
 # pycache
 backend/__pycache__/
+
+# my things (msho)
+.DS_Store
+env/

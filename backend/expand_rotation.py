@@ -21,7 +21,8 @@ def expand_rotations(tile_data):
                 "rotation": rotation, 
                 "valid_neighbors": _rotate_neighbors(tile["valid_neighbors"], rotation, tile_data),
                 "weight": tile.get("weight", 1),
-                "ground": tile.get("ground", False)
+                "ground": tile.get("ground", False),
+                "include": tile.get("include", True)
             }
             # print(name, tile, r_name, expanded[r_name], sep='\n')
 

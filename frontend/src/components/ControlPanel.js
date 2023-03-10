@@ -237,7 +237,10 @@ export default function ControlPanel(props) {
         <Button 
           variant="outlined" 
           startIcon={<EditIcon />}
-          onClick={() => {setShowTileSettings(true)}}
+          onClick={() => {
+            setShowTileSettings(true);
+            setClickedTile(null);
+          }}
         >
           Customize
         </Button>

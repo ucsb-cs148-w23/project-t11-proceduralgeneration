@@ -6,7 +6,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { fileTileMap } from '../defaultTiles.js';
 import { ControlsContext } from '../App.js';
-import Loading from './Loading.js';
+// import Loader from './Loader.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 
 export default function SavedModels(props) {

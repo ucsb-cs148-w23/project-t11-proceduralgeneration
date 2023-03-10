@@ -11,7 +11,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import DownloadIcon from '@mui/icons-material/Download';
 import LoopIcon from '@mui/icons-material/Loop';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
-import { defaultCollapsed } from '../defaultTiles.js';
 import { trackPromise } from 'react-promise-tracker';
 
 export default function ControlPanel(props) {
@@ -20,7 +19,7 @@ export default function ControlPanel(props) {
     scaleX, setScaleX,
     scaleY, setScaleY,
     scaleZ, setScaleZ,
-    setModelTiles,
+    modelTiles, setModelTiles,
     setShowTileSettings,
     meshRef
   } = useContext(ControlsContext);

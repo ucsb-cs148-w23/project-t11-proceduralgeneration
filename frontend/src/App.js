@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useEffect, useMemo, useRef, useState, createContext } from 'react';
+import { useEffect, useMemo, useRef, useState, createContext, Fragment } from 'react';
 import { fileTileMap, defaultCollapsed, defaultFile2id } from './defaultTiles.js';
 import jwt_decode from 'jwt-decode';
 
@@ -37,6 +37,7 @@ function App() {
   const [file2id, setFile2id] = useState(defaultFile2id);
   const [name2file, setName2file] = useState(fileTileMap);
   const [user, setUser] = useState({});
+  const [clickedTile, setClickedTile] = useState(null);
   const meshRef = useRef();
 
   // light/dark mode toggle
@@ -107,6 +108,7 @@ function App() {
         file2id, setFile2id,
         name2file, setName2file,
         neighbor, setNeighbor,
+        clickedTile, setClickedTile,
         colorMode,
         meshRef
       }}
@@ -142,19 +144,29 @@ function App() {
                       </group>
                     )
                     :
-                    <group ref={meshRef}>
-                      { 
-                        modelTiles.map((tile, i) => {
-                          return (
-                            <ModelTile 
-                              modelPath={name2file[tile["file"]]} 
-                              position={tile["position"]}
-                              rotation={[0, tile["rotation"] * Math.PI / 2, 0]}
-                            />
-                          );
-                        })
+                    <Fragment>
+                      <group ref={meshRef}>
+                        { 
+                          modelTiles.map((tile, i) => {
+                            return (
+                              <ModelTile 
+                                idx={i}
+                                modelPath={name2file[tile["file"]]} 
+                                position={tile["position"]}
+                                rotation={[0, tile["rotation"] * Math.PI / 2, 0]}
+                              />
+                            );
+                          })
+                        }
+                      </group>
+                      {
+                        clickedTile &&
+                        <mesh position={modelTiles[clickedTile]["position"]} scale={2.05}>
+                          <boxGeometry />
+                          <meshPhongMaterial color="#ff0000" opacity={0.1} transparent />
+                        </mesh>
                       }
-                    </group>
+                    </Fragment>
                   }
                 </Canvas>
             </Paper>

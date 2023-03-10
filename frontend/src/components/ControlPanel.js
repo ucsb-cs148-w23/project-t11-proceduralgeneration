@@ -1,12 +1,20 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef, useState, Fragment } from 'react';
+import Autocomplete from '@mui/material/Autocomplete';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import InputSlider from './InputSlider.js'
 import { ControlsContext } from '../App.js';
-import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import DownloadIcon from '@mui/icons-material/Download';
+import EditIcon from '@mui/icons-material/Edit';
 import LoopIcon from '@mui/icons-material/Loop';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 import { defaultCollapsed } from '../defaultTiles.js';
 
@@ -16,11 +24,16 @@ export default function ControlPanel() {
     scaleX, setScaleX,
     scaleY, setScaleY,
     scaleZ, setScaleZ,
-    setModelTiles,
+    modelTiles, setModelTiles,
     setShowTileSettings,
+    clickedTile, setClickedTile,
+    tiles,
     meshRef
   } = useContext(ControlsContext);
-  //
+
+  const [current, setCurrent] = useState(null);
+  const [replacement, setReplacement] = useState("");
+
   // create persistent variable, initialize once
   const link = useRef();
   useEffect(() => {
@@ -28,6 +41,12 @@ export default function ControlPanel() {
     link.current.style.display = 'none';
     document.body.appendChild(link.current);
   })
+
+  useEffect(() => {
+    if (clickedTile !== null) {
+      setCurrent(modelTiles[clickedTile]["file"]);
+    }
+  }, [clickedTile]);
 
   // ---------------------
   // save file functions
@@ -95,11 +114,21 @@ export default function ControlPanel() {
       })
       .then(r => r.json())
       .then(data => {
+        for (let i = 0; i < data["tiles"].length; i++) {
+          data["tiles"][i]["idx"] = i;
+        }
         setModelTiles(data["tiles"]);
         // console.log(data);
         // console.log("model tiles:", modelTiles)
       }
     );
+  }
+
+  function deleteClickedTile() {
+    if (clickedTile !== null) {
+      setModelTiles(modelTiles => modelTiles.filter((tile, idx) => idx !== clickedTile));
+      setClickedTile(null);
+    }
   }
 
   function requestDownload(){
@@ -119,18 +148,18 @@ export default function ControlPanel() {
       container
       className="control-panel"
       direction="column"
-      rowSpacing={3}
+      rowSpacing={2}
     >
       <Grid item>
-        <Typography>
-          Choose the dimensions of the generated environment.
+        <Typography variant="h6">
+          Environment Dimensions
         </Typography>
       </Grid>
       <Grid item>
           <InputSlider 
             value={scaleX} 
             setValue={setScaleX} 
-            label="X Scale" 
+            label="Width" 
             className="control-panel-item"
           />
       </Grid>
@@ -138,7 +167,7 @@ export default function ControlPanel() {
         <InputSlider 
           value={scaleY} 
           setValue={setScaleY}
-          label="Y Scale" 
+          label="Height" 
           className="control-panel-item"
         />
       </Grid>
@@ -146,21 +175,70 @@ export default function ControlPanel() {
         <InputSlider 
           value={scaleZ} 
           setValue={setScaleZ}
-          label="Z Scale"
+          label="Depth"
           className="control-panel-item"
         />
       </Grid>
-      {/* 
-      <Grid item>
-        <Typography sx={{marginBottom: 2}} gutterBottom>
-          Mesh Color
-        </Typography>
-        <TwitterPicker
-          color={color}
-          onChangeComplete={handleColorChange}
-        />
-      </Grid> 
-      */}
+      { clickedTile &&
+        <Fragment>
+          <Grid item>
+            <Typography variant="h6">
+              Selected Tile
+            </Typography>
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={Object.values(tiles)}
+              value={current}
+              onChange={(event, newValue) => {
+                setReplacement(newValue["mesh"]);
+                // setModelTiles([...modelTiles]);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+            <ButtonGroup
+              variant="outlined" 
+            >
+              <Tooltip title="Unselect">
+                <IconButton
+                  onClick={() => {setClickedTile(null)}}
+                >
+                  <ArrowBackIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Delete">
+                <IconButton
+                  onClick={deleteClickedTile}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Rotate">
+                <IconButton
+                  onClick={() => {
+                    let prevRotation = modelTiles[clickedTile]["rotation"];
+                    modelTiles[clickedTile]["rotation"] = (prevRotation + 1) % 4;
+                    setModelTiles([...modelTiles]);
+                  }}
+                >
+                  <LoopIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Replace">
+                <IconButton
+                  onClick={() => {
+                    // setReplacement(modelTiles[clickedTile]["mesh"]);
+                    modelTiles[clickedTile]["file"] = replacement;
+                    setModelTiles([...modelTiles]);
+                  }}
+                >
+                  <SwapHorizIcon />
+                </IconButton>
+              </Tooltip>
+            </ButtonGroup>
+          </Grid>
+        </Fragment>
+      }
       <Grid item></Grid>
       <Grid item >
         <Button 

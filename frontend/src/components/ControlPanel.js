@@ -9,6 +9,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import LoopIcon from '@mui/icons-material/Loop';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 import { defaultCollapsed } from '../defaultTiles.js';
+import { trackPromise } from 'react-promise-tracker';
 
 export default function ControlPanel() {
   const { 
@@ -85,6 +86,7 @@ export default function ControlPanel() {
       "tile_data": defaultCollapsed
     };
     
+    trackPromise(
     fetch(generateUrl, {
         method: 'POST',
         mode: 'cors',
@@ -99,7 +101,7 @@ export default function ControlPanel() {
         // console.log(data);
         // console.log("model tiles:", modelTiles)
       }
-    );
+    ));
   }
 
   function requestDownload(){

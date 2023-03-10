@@ -9,15 +9,36 @@ class SocketGenerator:
     TEST_MESH = o3d.io.read_triangle_mesh("../CityModels/onewayroad.gltf")
     _DIRECTIONS = ['px', 'py', 'pz', 'nx', 'ny', 'nz']
 
-    def __init__(self, mesh_list=None, mesh_size=2):
+    def __init__(self, mesh_list=[], mesh_size=2):
         self._protos = {f'proto_{i}': {"mesh": mesh, "rotation": 0, "sockets": {}} for (i, mesh) in enumerate(mesh_list)}
+        self._proto_counter = len(mesh_list)
         self._socket_counter = 0
         self._lateral_sockets = {}
         self._vertical_sockets = {}
         self._bounds = {d: (0.5 if d[0] == 'p' else -0.5) * mesh_size for d in SocketGenerator._DIRECTIONS}
         self._process_prototypes()
-        
 
+
+    def add_mesh(self, mesh_file):
+        proto_name = f'proto_{self._proto_counter}'
+        self._proto_counter += 1
+        self._protos[proto_name] = {"mesh": mesh_file, "rotation": 0, "sockets": {}}
+        mesh = o3d.io.read_triangle_mesh(mesh_file)
+        border_vertices = self._get_border_vertices(mesh)
+        for d in SocketGenerator._DIRECTIONS:
+            mode = "lateral" if d[1] != 'z' else "vertical"
+            self._protos[proto_name]["sockets"][d] = self._process_face(border_vertices[d], mode=mode)
+
+
+    def get_protos(self):
+        return self._protos
+
+
+    def write(self, path):
+        with open(path, "w") as outfile:
+            outfile.write(json.dumps(self.get_protos(), indent=4))
+
+    
     def test(self, mesh=TEST_MESH):
         border_vertices = self._get_border_vertices_dict(mesh)
         pprint.pprint(border_vertices)
@@ -169,15 +190,6 @@ class SocketGenerator:
             for d in SocketGenerator._DIRECTIONS:
                 mode = "lateral" if d[1] != 'z' else "vertical"
                 self._protos[key]["sockets"][d] = self._process_face(border_vertices[d], mode=mode)
-
-
-    def get_protos(self):
-        return self._protos
-
-
-    def write(self, path):
-        with open(path, "w") as outfile:
-            outfile.write(json.dumps(self.get_protos(), indent=4))
             
         
 if __name__ == "__main__":

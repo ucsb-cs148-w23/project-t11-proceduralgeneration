@@ -182,11 +182,15 @@ export default function TileSettings() {
           id="combo-box-demo"
           options={Object.values(tiles)}
           onChange={(event, newValue) => {
+            // console.log(newValue);
             // console.log(newValue["mesh"]);
             setTile(newValue["mesh"]);
             setNeighbor(null);
             setW(newValue["weight"] || 1);
-            setTileInclusion(newValue["include"] === true);
+            if (newValue["include"] === undefined) {
+              setTileInclusion(true);
+            }
+            // setTileInclusion(newValue["include"]);
             setGroundStatus(newValue["ground"] === false);
           }}
           renderInput={(params) => <TextField {...params} label="Tile" />}
@@ -199,7 +203,7 @@ export default function TileSettings() {
             <FormControlLabel 
               control={
                 <Switch 
-                  checked={tiles[file2id[tile]]["include"]}
+                  checked={tileInclusion}
                   onClick={toggleTileInclusion}
                 />
               } 

@@ -1,7 +1,7 @@
 ## Date of Retrospective: 03/10/2023
 
-Led by: Andy <br>
-Present: Christine, Matthew, Bryan, Richard, Shunning <br>
+Led by: Bryan <br>
+Present: Christine, Matthew, Andy, Richard, Shunning <br>
 Absent: NA <br>
 
 ## Action item

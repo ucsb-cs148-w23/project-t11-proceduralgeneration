@@ -6,15 +6,15 @@ Absent: NA <br>
 
 ## Action item
 
-* a goal: Start tailoring code to be testable and implement tests for the product.
-* a change: Make sure there are multiple reviewers before merging branches.
-* a measurement: We know we are headed in the right direction when less conflicts/bugs happen and we are able to easily create tests for the code that we've written.
+* a goal: Adding more features to the app before the code freeze.
+* a change: Make sure to follow good merging practices.
+* a measurement: We know we are headed in the right direction when we make more progress on features with less conflicts/bugs happening.
 
 ## Retro Notes:
 
 | Name:     | Start                                      | Stop                                                               | Continue                                                                  |
 |-----------|--------------------------------------------|--------------------------------------------------------------------|---------------------------------------------------------------------------|
-| Christine | Adding more unit/component tests   | messing up the dependency tree                       | Adding more features and finishing up link sharing |
+| Christine | Adding more unit/component tests | Messing up the dependency tree | Adding more features and finishing up link sharing |
 | Matthew   | Checking out PR branches to test other people locally before merging | Working on multiple issues at the same time (requires more local merges) | Making added small features + UX changes to polish final product |
 | Andy     | Making sure to plan features before implenting | Merging before testing everything (dependencies) | Adding features and improving ui |
 | Richard   | Pulling and resolving conflicts before pushing | Pushing before pulling remote changes | Using good naming convention |

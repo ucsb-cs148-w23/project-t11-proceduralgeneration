@@ -1,25 +1,26 @@
-import { useContext, useEffect, useRef, useState, Fragment } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import InputSlider from './InputSlider.js'
 import { ControlsContext } from '../App.js';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DownloadIcon from '@mui/icons-material/Download';
 import EditIcon from '@mui/icons-material/Edit';
-import LoopIcon from '@mui/icons-material/Loop';
-import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import InputSlider from './InputSlider.js'
+import LoopIcon from '@mui/icons-material/Loop';
+import SavedDialogue from './SavedDialogue.js';
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+import TextField from '@mui/material/TextField';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import { defaultCollapsed } from '../defaultTiles.js';
 import { trackPromise } from 'react-promise-tracker';
+import { useContext, useEffect, useRef, useState, Fragment } from 'react';
 
-export default function ControlPanel() {
+export default function ControlPanel(props) {
   const { 
     numDownload, setNumDownload,
     scaleX, setScaleX,
@@ -134,16 +135,8 @@ export default function ControlPanel() {
   }
 
   function requestDownload(){
-    // console.log("download requested");
     setNumDownload(numDownload + 1);
   }
-
-  /**
-  function handleColorChange(color, event) {
-    console.log("clicked color!");
-    setColor(color.hex);
-  }
-  */
 
   return (
     <Grid 
@@ -194,7 +187,6 @@ export default function ControlPanel() {
               value={current}
               onChange={(event, newValue) => {
                 setReplacement(newValue["mesh"]);
-                // setModelTiles([...modelTiles]);
               }}
               renderInput={(params) => <TextField {...params} />}
             />
@@ -229,7 +221,6 @@ export default function ControlPanel() {
               <Tooltip title="Replace">
                 <IconButton
                   onClick={() => {
-                    // setReplacement(modelTiles[clickedTile]["mesh"]);
                     modelTiles[clickedTile]["file"] = replacement;
                     setModelTiles([...modelTiles]);
                   }}
@@ -271,7 +262,11 @@ export default function ControlPanel() {
         >
           Download
         </Button>
-      </Grid>
+      </Grid> 
+      {(props.isLoggedIn) &&       
+      <Grid item>
+        <SavedDialogue userEmail={props.userEmail} modelTiles={modelTiles} />
+      </Grid>}
     </Grid>
   );
 }

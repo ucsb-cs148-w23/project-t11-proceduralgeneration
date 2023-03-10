@@ -1,6 +1,7 @@
 import argparse
 import json
 import random
+import pymongo
 from copy import deepcopy
 from flask import Flask, jsonify, request
 from flask_cors import CORS 
@@ -11,6 +12,10 @@ from height_option_map import build_height_options
 
 app = Flask(__name__)
 CORS(app)
+
+mongodb_client = pymongo.MongoClient("mongodb+srv://christinetu:test123@cs148.id7aaen.mongodb.net/?retryWrites=true&w=majority")
+db = mongodb_client.get_database('users')
+records = db.register
 
 DEFAULT_TILE_PATH = "../prototypes/target.json"
 with open(DEFAULT_TILE_PATH) as f:
@@ -51,12 +56,54 @@ def generate():
     return jsonify(tiles=tiles)
 
 @app.route('/random_triangles')
-# @cross_origin()
 def random_triangles():
     scale = request.args.get('scale', default=5, type=float)
     count = request.args.get('count', default=1, type=int)
     vertices = [random.uniform(-scale, scale) for _ in range(count * 9)]
     return jsonify(vertices=vertices)
+
+@app.route('/login', methods=['POST'])
+def login_user():
+    # if email isn't in db, add new account
+    user_email = request.get_json().get("email")
+    user_found = records.find_one({"email": user_email})
+    # because there's a null user in db
+    if not user_found:
+        create_new_user = {
+            "email": user_email,
+            "saved_models": []
+        }
+        records.insert_one(create_new_user)
+        return {"result": "user saved"}
+    return {"result": user_found["email"]}
+
+@app.route('/get_saved', methods=['POST'])
+def get_saved_models():
+    user_email = request.get_json().get("email")
+    user_found = records.find_one({"email": user_email})
+
+    # get saved files
+    if user_found:
+        return {"models": user_found["saved_models"]}
+    else:
+        return {"resp": "User not found!"}
+
+@app.route('/save_model', methods=['POST'])
+def saved_model():
+    user_email = request.get_json().get("email")
+    save_model = request.get_json().get("model")
+    user_found = records.find_one({"email": user_email})
+
+    # get saved files
+    if user_found:
+        updated_user = deepcopy(user_found)
+        updated_user["saved_models"].append(save_model)
+        #DOUBLE CHECK THAT THIS UPDATES!!!
+        records.replace_one(user_found, updated_user)
+        return {"resp": "saved model!"}
+    else:
+        return {"resp": "User not found!"}
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

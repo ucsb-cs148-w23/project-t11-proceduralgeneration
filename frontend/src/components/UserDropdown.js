@@ -128,7 +128,7 @@ export default function UserDropdown(props) {
                                 />
                             ))}
                         </Grid> */}
-                        <SavedModels savedModels={savedModels} />
+                        <SavedModels savedModels={savedModels} userEmail={props.userEmail} />
                     </DialogContent>
                 </div>
                 <DialogActions>

@@ -14,11 +14,11 @@ Absent: NA <br>
 
 | Name:     | Start                                      | Stop                                                               | Continue                                                                  |
 |-----------|--------------------------------------------|--------------------------------------------------------------------|---------------------------------------------------------------------------|
-| Christine | Writing more unit tests/tests in general   | Writing code that is untestable                       | Working on issues and keeping on track with requirements |
-| Matthew   | Prioritize tasks for next milestone. More efficient retrospective for retro 3 | Waiting for deadlines to get started on next features | Communicating with team about progress                                  |
-| Bryan     | Learning and write threejs unit test       | Using unclear naming   | Working on issues         |
-| Richard   | Writing unit tests for the backend         | Merging before testing code | Requesting reviewers for each PR |
-| Shuning   | Learning mongodb            | Creating merge conflict       | Learning JavaScript |
+| Christine | Adding more unit/component tests   | messing up the dependency tree                       | Adding more features and finishing up link sharing |
+| Matthew   | Checking out PR branches to test other people locally before merging | Working on multiple issues at the same time (requires more local merges) | Making added small features + UX changes to polish final product |
+| Andy     | Making sure to plan features before implenting | Merging before testing everything (dependencies) | Adding features and improving ui |
+| Richard   | Pulling and resolving conflicts before pushing | Pushing before pulling remote changes | Using good naming convention |
+| Shuning   | Doing more pulling to catch up with others | Waiting to last minute to work | Working on manual docs |
 
 ## Retro Assessment
 * For this retro, we decided to keep using the start/stop/continue method that we used for Retro 1. I think this system fits really well for our team as it is very straightforward and lets us clearly identify what needs to be done/changed.

@@ -232,13 +232,13 @@ export default function ControlPanel(props) {
           Download
         </Button>
       </Grid> 
-      {(props.isLoggedIn) ?       
+      {(props.isLoggedIn) &&       
       <Grid item>
         {/* <Button variant="outlined" color="secondary" onClick={saveModel}>
           Save Model
         </Button> */}
         <SavedDialogue userEmail={props.userEmail} modelTiles={modelTiles} />
-      </Grid> : null}
+      </Grid>}
     </Grid>
   );
 }

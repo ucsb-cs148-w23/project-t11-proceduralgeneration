@@ -5,12 +5,22 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Header from './components/Header.js'
 import Lato from "./fonts/Lato-Regular.ttf";
 import ModelTile from './components/ModelTile.js'
+import Loader from './components/Loader.js'
 import Paper from '@mui/material/Paper';
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useEffect, useMemo, useRef, useState, createContext, Fragment } from 'react';
+import { 
+  useEffect, 
+  useMemo, 
+  useRef, 
+  useState, 
+  createContext, 
+  Fragment, 
+  Suspense 
+} from 'react';
 import { fileTileMap, defaultCollapsed, defaultFile2id } from './defaultTiles.js';
+import { usePromiseTracker } from "react-promise-tracker";
 import jwt_decode from 'jwt-decode';
 
 const dir2pos = {
@@ -39,6 +49,7 @@ function App() {
   const [user, setUser] = useState({});
   const [clickedTile, setClickedTile] = useState(null);
   const meshRef = useRef();
+  const { promiseInProgress } = usePromiseTracker();
 
   // light/dark mode toggle
   const colorMode = useMemo(
@@ -110,7 +121,8 @@ function App() {
         neighbor, setNeighbor,
         clickedTile, setClickedTile,
         colorMode,
-        meshRef
+        meshRef,
+        promiseInProgress
       }}
     >
       <ThemeProvider theme={theme}>
@@ -120,59 +132,62 @@ function App() {
           <div className="content"> 
             <Paper className="canvas-container">
                 <Canvas>
-                  <ambientLight intensity={0.5} />
-                  <pointLight position={[20, 20, 20]} />
-                  <OrbitControls />
-                  { 
-                    showTileSettings?
-                    (
-                      tile && 
-                      <group>
-                        <ModelTile 
-                          modelPath={name2file[tile]} 
-                          position={[0, 0, 0]} 
-                          rotation={[0, 0, 0]} 
-                        />
-                        {
-                          (neighbor && (neighbor["label"] != "none")) &&
-                          <ModelTile
-                            modelPath={name2file[tiles[neighbor["id"]]["mesh"]]}
-                            position={dir2pos[neighbor["direction"]].map(x => x * 2)}
-                            rotation={[0, neighbor["rotation"] * Math.PI / 2, 0]}
+                <Loader/>
+                { !promiseInProgress && (
+                  <Suspense fallback={null}>
+                    <ambientLight intensity={0.5} />
+                    <pointLight position={[20, 20, 20]} />
+                    <OrbitControls />
+                    { 
+                      showTileSettings?
+                      (
+                        tile && 
+                        <group>
+                          <ModelTile 
+                            modelPath={name2file[tile]} 
+                            position={[0, 0, 0]} 
+                            rotation={[0, 0, 0]} 
                           />
+                          {
+                            (neighbor && (neighbor["label"] != "none")) &&
+                            <ModelTile
+                              modelPath={name2file[tiles[neighbor["id"]]["mesh"]]}
+                              position={dir2pos[neighbor["direction"]].map(x => x * 2)}
+                              rotation={[0, neighbor["rotation"] * Math.PI / 2, 0]}
+                            />
+                          }
+                        </group>
+                      )
+                      :
+                      <Fragment>
+                        <group ref={meshRef}>
+                          { 
+                            modelTiles.map((tile, i) => {
+                              return (
+                                <ModelTile 
+                                  idx={i}
+                                  modelPath={name2file[tile["file"]]} 
+                                  position={tile["position"]}
+                                  rotation={[0, tile["rotation"] * Math.PI / 2, 0]}
+                                />
+                              );
+                            })
+                          }
+                        </group>
+                        {
+                          clickedTile &&
+                          <mesh position={modelTiles[clickedTile]["position"]} scale={2.05}>
+                            <boxGeometry />
+                            <meshPhongMaterial color="#ff0000" opacity={0.1} transparent />
+                          </mesh>
                         }
-                      </group>
-                    )
-                    :
-                    <Fragment>
-                      <group ref={meshRef}>
-                        { 
-                          modelTiles.map((tile, i) => {
-                            return (
-                              <ModelTile 
-                                idx={i}
-                                modelPath={name2file[tile["file"]]} 
-                                position={tile["position"]}
-                                rotation={[0, tile["rotation"] * Math.PI / 2, 0]}
-                              />
-                            );
-                          })
-                        }
-                      </group>
-                      {
-                        clickedTile &&
-                        <mesh position={modelTiles[clickedTile]["position"]} scale={2.05}>
-                          <boxGeometry />
-                          <meshPhongMaterial color="#ff0000" opacity={0.1} transparent />
-                        </mesh>
-                      }
-                    </Fragment>
-                  }
+                      </Fragment>
+                    }
+                  </Suspense>
+                )}
                 </Canvas>
             </Paper>
-            {
-              showTileSettings? <TileSettings /> : <ControlPanel />
-            }
+            { showTileSettings? <TileSettings /> : <ControlPanel /> }
           </div>
         </div>
       </ThemeProvider>

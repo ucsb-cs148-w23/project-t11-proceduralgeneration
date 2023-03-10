@@ -192,5 +192,5 @@ if __name__ == "__main__":
                  "../CityModels/twowindowsimp.gltf"]
 
     sg = SocketGenerator(mesh_list)
-    sg.test()
-    pprint.pprint(sg.get_protos())
+    sg.write("../prototypes/generated.json")
+

@@ -48,6 +48,7 @@ export default function ControlPanel(props) {
     if (clickedTile !== null) {
       setCurrent(modelTiles[clickedTile]["file"]);
     }
+    setReplacement("");
   }, [clickedTile]);
 
   // ---------------------
@@ -221,8 +222,10 @@ export default function ControlPanel(props) {
               <Tooltip title="Replace">
                 <IconButton
                   onClick={() => {
-                    modelTiles[clickedTile]["file"] = replacement;
-                    setModelTiles([...modelTiles]);
+                    if (replacement != "") {
+                      modelTiles[clickedTile]["file"] = replacement;
+                      setModelTiles([...modelTiles]);
+                    }
                   }}
                 >
                   <SwapHorizIcon />

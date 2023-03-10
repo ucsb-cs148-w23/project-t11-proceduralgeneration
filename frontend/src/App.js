@@ -80,6 +80,7 @@ function App() {
   }
 
   const meshRef = useRef();
+  const loginBoxRef = useRef();
   const { promiseInProgress } = usePromiseTracker();
 
   // light/dark mode toggle
@@ -103,18 +104,17 @@ function App() {
     onSignIn(userObject.email);
     setUserEmail(userObject.email);
   }
-  useEffect(()=>{
+
+  useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
       client_id:"971264102154-4lp0bdl42fgvpatk5933gvsg6kk36quf.apps.googleusercontent.com",
       callback: handleCallbackResponse
     });
-
     google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      {theme:"outline",size:"large"}
+      loginBoxRef.current,
+      { theme: "outline", size: "large" }
     );
-
   }, [])
 
 
@@ -158,6 +158,7 @@ function App() {
         clickedTile, setClickedTile,
         colorMode,
         meshRef,
+        loginBoxRef,
         promiseInProgress
       }}
     >

@@ -4,20 +4,22 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import InputSlider from './InputSlider.js'
 import { ControlsContext } from '../App.js';
+import { MAX_POINTS } from '../constants.js';
+import { defaultExpanded, defaultCollapsed } from '../defaultTiles.js';
+import SavedDialogue from './SavedDialogue.js';
 import EditIcon from '@mui/icons-material/Edit';
 import DownloadIcon from '@mui/icons-material/Download';
 import LoopIcon from '@mui/icons-material/Loop';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
-import { defaultCollapsed } from '../defaultTiles.js';
 import { trackPromise } from 'react-promise-tracker';
 
-export default function ControlPanel() {
+export default function ControlPanel(props) {
   const { 
     numDownload, setNumDownload,
     scaleX, setScaleX,
     scaleY, setScaleY,
     scaleZ, setScaleZ,
-    setModelTiles,
+    modelTiles, setModelTiles,
     setShowTileSettings,
     meshRef
   } = useContext(ControlsContext);
@@ -116,6 +118,45 @@ export default function ControlPanel() {
   }
   */
 
+  // function saveModel() {
+  //   // save model to user by calling endpoinit
+  //   // pass in email & json of vertices
+  //   console.log("user is saving a model");
+  
+  //   // -> local testing
+  //   const domain = "http://127.0.0.1"
+  //   // -> server testing
+  //   // const domain = "3.132.124.203"
+  //   // -> prod
+  //   // const domain = "https://deez.mturk.monster"
+    
+  //   const saveModelUrl = new URL(`${domain}:8080/save_model`);
+  //   console.log(saveModelUrl);
+  
+  //   const postData = {
+  //       "email": props.userEmail,
+  //       "model": modelTiles
+  //   }
+  
+  //   console.log(JSON.stringify(postData));
+    
+  //   fetch(saveModelUrl, {
+  //       method: 'POST',
+  //       mode: 'cors',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(postData)
+  //     })
+  //     .then(r => r.json())
+  //     .then(data => {
+  //       console.log(data);
+  //       console.log("yay!");
+  //       //now turn sign in button to user dropdown
+  //   });
+    
+  // }
+
   return (
     <Grid 
       container
@@ -190,7 +231,14 @@ export default function ControlPanel() {
         >
           Download
         </Button>
-      </Grid>
+      </Grid> 
+      {(props.isLoggedIn) &&       
+      <Grid item>
+        {/* <Button variant="outlined" color="secondary" onClick={saveModel}>
+          Save Model
+        </Button> */}
+        <SavedDialogue userEmail={props.userEmail} modelTiles={modelTiles} />
+      </Grid>}
     </Grid>
   );
 }

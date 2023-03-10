@@ -10,9 +10,13 @@ import IconButton from '@mui/material/IconButton';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
-export default function Header() {
+import LogIn from './LogIn.js';
+import UserDropdown from './UserDropdown.js'
+
+export default function Header(props) {
   const { colorMode } = useContext(ControlsContext);
   const theme = useTheme();
+  console.log(props);
 
   return (
     <Toolbar
@@ -30,8 +34,10 @@ export default function Header() {
         >
           3D Environment Procedural Generator
       </Typography>
-      <div id="signInDiv"></div>
-
+      {/* <div id="signInDiv"></div> */}
+      {/* if is logged in, show user dropdown else show login */}
+      
+      {(props.isLoggedIn) ? <UserDropdown userEmail={props.userEmail} /> : <LogIn />}
       <Box
         sx={{
           display: 'flex',

@@ -1,0 +1,110 @@
+{
+    "proto_0": {
+        "mesh": "../CityModels/default.gltf",
+        "rotation": 0,
+        "sockets": {
+            "px": "0_s",
+            "py": "0_s",
+            "pz": "1_0",
+            "nx": "0_s",
+            "ny": "0_s",
+            "nz": "1_0"
+        }
+    },
+    "proto_1": {
+        "mesh": "../CityModels/doorblock.gltf",
+        "rotation": 0,
+        "sockets": {
+            "px": "0_s",
+            "py": "0_s",
+            "pz": "2_0",
+            "nx": "0_s",
+            "ny": "3_s",
+            "nz": "1_0"
+        }
+    },
+    "proto_2": {
+        "mesh": "../CityModels/onewayroad.gltf",
+        "rotation": 0,
+        "sockets": {
+            "px": "4",
+            "py": "5",
+            "pz": "6_0",
+            "nx": "4_f",
+            "ny": "0_s",
+            "nz": "6_0"
+        }
+    },
+    "proto_3": {
+        "mesh": "../CityModels/roofedge.gltf",
+        "rotation": 0,
+        "sockets": {
+            "px": "7",
+            "py": "8",
+            "pz": "9_0",
+            "nx": "10",
+            "ny": "0_s",
+            "nz": "11_0"
+        }
+    },
+    "proto_4": {
+        "mesh": "../CityModels/roofside.gltf",
+        "rotation": 0,
+        "sockets": {
+            "px": "10_f",
+            "py": "12_s",
+            "pz": "9_0",
+            "nx": "10",
+            "ny": "0_s",
+            "nz": "1_0"
+        }
+    },
+    "proto_5": {
+        "mesh": "../CityModels/stair.gltf",
+        "rotation": 0,
+        "sockets": {
+            "px": "7",
+            "py": "7_f",
+            "pz": "13_0",
+            "nx": "0_s",
+            "ny": "0_s",
+            "nz": "13_0"
+        }
+    },
+    "proto_6": {
+        "mesh": "../CityModels/twowayroad.gltf",
+        "rotation": 0,
+        "sockets": {
+            "px": "14",
+            "py": "5",
+            "pz": "6_0",
+            "nx": "14_f",
+            "ny": "0_s",
+            "nz": "6_0"
+        }
+    },
+    "proto_7": {
+        "mesh": "../CityModels/twowindow.gltf",
+        "rotation": 0,
+        "sockets": {
+            "px": "0_s",
+            "py": "0_s",
+            "pz": "15_0",
+            "nx": "0_s",
+            "ny": "0_s",
+            "nz": "1_0"
+        }
+    },
+    "proto_8": {
+        "mesh": "../CityModels/twowindowsimp.gltf",
+        "rotation": 0,
+        "sockets": {
+            "px": "0_s",
+            "py": "0_s",
+            "pz": "16_0",
+            "nx": "0_s",
+            "ny": "0_s",
+            "nz": "1_0"
+        }
+    }
+}

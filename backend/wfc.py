@@ -71,14 +71,13 @@ class EnvironmentGenerator:
                 # - only select if it's the only remaining option
                 if len(collapse_target) > 1:
                     collapse_target.discard(self.empty_tile)
-                selected_option = random.choice(list(collapse_target))
-                # choices = list(collapse_target)
-                # selected_option = random.choices(
-                #     choices,
-                #     weights=[self.tile_data[opt]["weight"] for opt in choices],
-                #     k=1
-                # )[0]
-                # print(f"--> len choices: {len(choices)}")
+                # selected_option = random.choice(list(collapse_target))
+                choices = list(collapse_target)
+                selected_option = random.choices(
+                    choices,
+                    weights=[self.tile_data[opt]["weight"] for opt in choices],
+                    k=1
+                )[0]
             self._set_cell(collapse_target_idxs, {selected_option})
 
             if self.debug:

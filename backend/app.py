@@ -121,5 +121,8 @@ if __name__ == '__main__':
         app.run(
             host=args.host,
             port=args.port,
-            ssl_context=('cert.pem', 'key.pem')
+            ssl_context=(
+                "/etc/letsencrypt/live/shadydomain.click/fullchain.pem",
+                "/etc/letsencrypt/live/shadydomain.click/privkey.pem"
+            )
         )

@@ -14,7 +14,7 @@ export default function ModelTile(props) {
   function selectTile(e) {
     e.stopPropagation();
     setClickedTile(props.idx);
-    console.log(modelTiles[props.idx]);
+    // console.log(modelTiles[props.idx]);
   }
 
   // load model

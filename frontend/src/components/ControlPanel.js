@@ -48,6 +48,7 @@ export default function ControlPanel(props) {
     if (clickedTile !== null) {
       setCurrent(modelTiles[clickedTile]["file"]);
     }
+    setReplacement("");
   }, [clickedTile]);
 
   // ---------------------
@@ -188,6 +189,7 @@ export default function ControlPanel(props) {
               onChange={(event, newValue) => {
                 setReplacement(newValue["mesh"]);
               }}
+              isOptionEqualToValue={(option, value) => option["mesh"] === value}
               renderInput={(params) => <TextField {...params} />}
             />
             <ButtonGroup
@@ -221,8 +223,11 @@ export default function ControlPanel(props) {
               <Tooltip title="Replace">
                 <IconButton
                   onClick={() => {
-                    modelTiles[clickedTile]["file"] = replacement;
-                    setModelTiles([...modelTiles]);
+                    if (replacement != "" && replacement != "none") {
+                      modelTiles[clickedTile]["file"] = replacement;
+                      setModelTiles([...modelTiles]);
+                      setCurrent(replacement);
+                    }
                   }}
                 >
                   <SwapHorizIcon />

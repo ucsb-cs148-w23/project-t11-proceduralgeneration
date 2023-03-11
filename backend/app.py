@@ -154,6 +154,29 @@ def update_model_name():
     else:
         return {"resp": "User not found!"}
 
+@app.route('/get_model', methods=['POST'])
+def get_model():
+    user_email = request.get_json().get("email")
+    model_id = request.get_json().get("id")
+    user_found = records.find_one({"email": user_email})
+
+    # get saved model
+    if user_found:
+        """
+        hash: {
+            vertices: [list of vertices],
+            name: name of saved model
+        }
+        """
+        model = user_found["saved_models"][model_id]
+        #DOUBLE CHECK THAT THIS UPDATES!!!
+        return {
+            "id": model_id,
+            "model": model
+        }
+    else:
+        return {"resp": "User not found!"}
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

@@ -9,6 +9,7 @@ import { ControlsContext } from '../App.js';
 // import Loader from './Loader.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 
+
 export default function SavedModels(props) {
     // console.log("rendering saved model");
     // console.log(props.model);
@@ -67,11 +68,13 @@ export default function SavedModels(props) {
 
     function exportLink() {
         //TODO
-        //get json of points, hash it to url search params, copy
-        const json = props.model;
-        if (json.hash) {
+        // create url with id, user email
+
+        if (props.userEmail && props.id) {
             const url = new URL(window.location.href);
-            url.searchParams.append("json", json.hash);
+            url.searchParams.append("modelId", props.id);
+            url.searchParams.append("userEmail", props.userEmail);
+            console.log(url);
             
             //should await this...
             navigator.clipboard.writeText(url.toString());

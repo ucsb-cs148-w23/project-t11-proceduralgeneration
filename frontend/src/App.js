@@ -93,6 +93,50 @@ function App() {
     [],
   );
 
+  function getUrlParams() {
+    const url = new URL(window.location.href);
+    console.log(window.location.href);
+    // console.log(url.searchParams);
+    const email = url.searchParams.get("userEmail");
+    const id = url.searchParams.get("modelId");
+    //if there exist search params, then do a get request and display model in canvas
+    // console.log(email, id, url.searchParams.has("modelId"));
+    if (email && id) {
+      //make get request to get model vertices 
+      const domain = "http://127.0.0.1"
+      // -> server testing
+      // const domain = "3.132.124.203"
+      // -> prod
+      // const domain = "https://deez.mturk.monster"
+      
+      const getUpdateNameUrl = new URL(`${domain}:8080/get_model`);
+      
+      const postData = {
+          "email": email,
+          "id": id,
+      }
+      // console.log(postData);
+      
+      fetch(getUpdateNameUrl, {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(postData)
+        })
+        .then(r => r.json())
+        .then(data => {
+          // console.log("save data: ", data);
+          setModelTiles(data.resp.vertices);
+          // return data;
+      });
+
+  }
+
+  }
+  
+
   function handleCallbackResponse(response){
     // console.log("encoded JWT ID token: "+ response.credential);
     let userObject = jwt_decode(response.credential);
@@ -115,6 +159,8 @@ function App() {
       document.getElementById("signInDiv"),
       {theme:"outline",size:"large"}
     );
+
+    getUrlParams();
 
   }, [])
 

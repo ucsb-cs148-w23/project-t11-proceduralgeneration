@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Header from './components/Header.js'
 import Lato from "./fonts/Lato-Regular.ttf";
 import ModelTile from './components/ModelTile.js'
+import WaterPlane from './components/WaterPlane.js'
 // import onSignIn from './components/LogIn.js';
 import Loader from './components/Loader.js'
 import Paper from '@mui/material/Paper';
@@ -51,6 +52,7 @@ function App() {
   const [clickedTile, setClickedTile] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState();
+  const [showWater, setShowWater] = useState(false);
 
   function onSignIn(user_email) {
     // -> local testing
@@ -156,7 +158,8 @@ function App() {
         colorMode,
         meshRef,
         loginBoxRef,
-        promiseInProgress
+        promiseInProgress,
+        showWater, setShowWater
       }}
     >
       <ThemeProvider theme={theme}>
@@ -166,12 +169,18 @@ function App() {
           <div className="content"> 
             <Paper className="canvas-container">
                 <Canvas>
-                <Loader/>
+                <Loader/>  
                 { !promiseInProgress && (
                   <Suspense fallback={null}>
                     <ambientLight intensity={0.5} />
                     <pointLight position={[20, 20, 20]} />
                     <OrbitControls />
+                    
+                    {
+                      showWater &&
+                      <WaterPlane xSize={scaleX} zSize={scaleZ}/>
+                    }
+
                     { 
                       showTileSettings?
                       (
@@ -184,7 +193,7 @@ function App() {
                             onClick={() => null}
                           />
                           {
-                            (neighbor && (neighbor["label"] != "none")) &&
+                            (neighbor && (neighbor["label"] !== "none")) &&
                             <ModelTile
                               modelPath={name2file[tiles[neighbor["id"]]["mesh"]]}
                               position={dir2pos[neighbor["direction"]].map(x => x * 2)}

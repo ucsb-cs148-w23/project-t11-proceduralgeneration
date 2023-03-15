@@ -26,7 +26,7 @@ export default function WaterPlane(props){
     }, []);
 
     const ref = useRef()
-    const planeSize = Math.max(props.xSize, props.zSize) * 16;
+    const planeSize = Math.max(props.xSize, props.zSize) * 24;
 
     const distortionMap = useLoader(TextureLoader, distortionImg);
 
@@ -44,7 +44,7 @@ export default function WaterPlane(props){
         ref.current.material.uniforms.u_cameraNear.value = camera.near;
         ref.current.material.uniforms.u_cameraFar.value = camera.far;
         ref.current.material.uniforms.u_depthDistance.value = 0.5;
-        ref.current.material.uniforms.u_waveLength.value = 3.0/2.0 * planeSize/16;
+        ref.current.material.uniforms.u_waveLength.value = 3.0/2.0 * planeSize/24;
         state.gl.setRenderTarget(null);
         state.gl.render(scene, camera);
     })

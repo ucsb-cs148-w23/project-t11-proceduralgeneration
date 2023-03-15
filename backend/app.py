@@ -115,14 +115,14 @@ def saved_model():
         # create a new hash => save 
         """
         hash: {
-            vertices: [list of vertices],
+            tiles: [list of tiles],
             name: name of saved model
         }
         """
         model_id = str(uuid.uuid1())
 
         updated_user["saved_models"][model_id] = {
-            "vertices": save_model,
+            "tiles": save_model,
             "name": model_name
         }
         #DOUBLE CHECK THAT THIS UPDATES!!!
@@ -143,7 +143,7 @@ def update_model_name():
         updated_user = deepcopy(user_found)
         """
         hash: {
-            vertices: [list of vertices],
+            tiles: [list of tiles],
             name: name of saved model
         }
         """
@@ -164,7 +164,7 @@ def get_model():
     if user_found:
         """
         hash: {
-            vertices: [list of vertices],
+            tiles: [list of tiles],
             name: name of saved model
         }
         """

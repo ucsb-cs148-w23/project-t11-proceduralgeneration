@@ -137,7 +137,7 @@ export default function SavedModels(props) {
                         <pointLight position={[20, 20, 20]} />
                         <OrbitControls />
                         { 
-                        props.model.vertices.map((tile, i) => {
+                        props.model.tiles.map((tile, i) => {
                             return (
                             <ModelTile 
                                 modelPath={fileTileMap[tile["file"]]} 

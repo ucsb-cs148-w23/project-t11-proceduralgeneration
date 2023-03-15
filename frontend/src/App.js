@@ -128,7 +128,7 @@ function App() {
         .then(r => r.json())
         .then(data => {
           // console.log("save data: ", data);
-          setModelTiles(data.resp.vertices);
+          setModelTiles(data.resp.tiles);
           // return data;
       });
 

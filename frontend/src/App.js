@@ -104,11 +104,11 @@ function App() {
 
   useEffect(() => {
     /* global google */
-    window.google.accounts.id.initialize({
+    window?.google?.accounts?.id?.initialize({
       client_id:"971264102154-4lp0bdl42fgvpatk5933gvsg6kk36quf.apps.googleusercontent.com",
       callback: handleCallbackResponse
     });
-    google.accounts.id.renderButton(
+    window?.google?.accounts?.id?.renderButton(
       loginBoxRef.current,
       { theme: "outline", size: "large" }
     );

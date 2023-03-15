@@ -1,12 +1,11 @@
 import {useRef, useMemo} from 'react'
-import {WaterShader} from "./WaterShader"
 import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import * as THREE from 'three'
 import distortionImg from '../textures/WaterDistortion.png'
 
 export default function WaterPlane(props){
-    const {gl, scene, camera} = useThree();
+    const {scene, camera} = useThree();
     const [ target ] = useMemo( () => {
         const target = new THREE.WebGLRenderTarget(
             window.innerWidth,

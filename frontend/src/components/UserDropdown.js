@@ -1,7 +1,6 @@
-import { useRef, useEffect, useContext, useState, createContext } from 'react';
-import { FormControl, InputLabel, NativeSelect, Select, MenuItem } from '@mui/material';
-import { Modal, Grid, Button, Dialog, DialogTitle, DialogActions, DialogContent } from '@mui/material';
-import SavedModel from './SavedModel.js';
+import { useState } from 'react';
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from '@mui/material';
 import SavedModels from './SavedModels.js';
 
 export default function UserDropdown(props) {

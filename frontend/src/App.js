@@ -6,12 +6,11 @@ import Header from './components/Header.js'
 import Lato from "./fonts/Lato-Regular.ttf";
 import ModelTile from './components/ModelTile.js'
 import WaterPlane from './components/WaterPlane.js'
-import WaterSettings from './components/WaterSettings.js'
 // import onSignIn from './components/LogIn.js';
 import Loader from './components/Loader.js'
 import Paper from '@mui/material/Paper';
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, PerspectiveCamera, useDepthBuffer } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { 
   useEffect, 
@@ -25,7 +24,6 @@ import {
 import { fileTileMap, defaultCollapsed, defaultFile2id } from './defaultTiles.js';
 import { usePromiseTracker } from "react-promise-tracker";
 import jwt_decode from 'jwt-decode';
-import * as THREE from 'three'
 
 const dir2pos = {
   "px": [1, 0, 0],
@@ -178,10 +176,9 @@ function App() {
                     <pointLight position={[20, 20, 20]} />
                     <OrbitControls />
                     
-                    {showWater &&
-                    
+                    {
+                      showWater &&
                       <WaterPlane xSize={scaleX} zSize={scaleZ}/>
-                    
                     }
 
                     { 
@@ -240,7 +237,6 @@ function App() {
               <TileSettings /> 
               : <ControlPanel isLoggedIn={loggedIn} userEmail={userEmail} />
             }
-            <WaterSettings/>
           </div>
         </div>
       </ThemeProvider>

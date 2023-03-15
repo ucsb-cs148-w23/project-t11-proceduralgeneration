@@ -16,6 +16,7 @@ import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import WaterSettings from './WaterSettings.js'
 import { defaultCollapsed } from '../defaultTiles.js';
 import { trackPromise } from 'react-promise-tracker';
 import { useContext, useEffect, useRef, useState, Fragment } from 'react';
@@ -49,7 +50,7 @@ export default function ControlPanel(props) {
       setCurrent(modelTiles[clickedTile]["file"]);
     }
     setReplacement("");
-  }, [clickedTile]);
+  }, [clickedTile, modelTiles]);
 
   // ---------------------
   // save file functions
@@ -63,10 +64,6 @@ export default function ControlPanel(props) {
     saveFile( new Blob( [ text ], { type: 'text/plain' } ), filename );
   }
 
-  function saveArrayBuffer( buffer, filename ) {
-    saveFile( new Blob( [ buffer ], { type: 'application/octet-stream' } ), filename );
-  }
-  
   // numDownload change ~= set download flag
   useEffect(() => {
     if (numDownload > 0) {
@@ -175,6 +172,7 @@ export default function ControlPanel(props) {
           className="control-panel-item"
         />
       </Grid>
+      <WaterSettings />
       { clickedTile &&
         <Fragment>
           <Grid item>
@@ -223,7 +221,7 @@ export default function ControlPanel(props) {
               <Tooltip title="Replace">
                 <IconButton
                   onClick={() => {
-                    if (replacement != "" && replacement != "none") {
+                    if (replacement !== "" && replacement !== "none") {
                       modelTiles[clickedTile]["file"] = replacement;
                       setModelTiles([...modelTiles]);
                       setCurrent(replacement);
@@ -268,10 +266,12 @@ export default function ControlPanel(props) {
           Download
         </Button>
       </Grid> 
-      {(props.isLoggedIn) &&       
-      <Grid item>
-        <SavedDialogue userEmail={props.userEmail} modelTiles={modelTiles} />
-      </Grid>}
+      {
+        (props.isLoggedIn) &&       
+        <Grid item>
+          <SavedDialogue userEmail={props.userEmail} modelTiles={modelTiles} />
+        </Grid>
+      }
     </Grid>
   );
 }

@@ -16,7 +16,6 @@ import UserDropdown from './UserDropdown.js'
 export default function Header(props) {
   const { colorMode } = useContext(ControlsContext);
   const theme = useTheme();
-  console.log(props);
 
   return (
     <Toolbar

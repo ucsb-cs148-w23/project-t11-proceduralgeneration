@@ -78,15 +78,11 @@ export default function TileSettings() {
   
   function toggleTileInclusion() {
     // console.log("new incude value = " + !tileInclusion);
-    setTileInclusion(!tileInclusion);
     const tid = file2id[tile];
-    // default ~= true
-    if (tiles[tid]["include"] === undefined) {
-      tiles[tid]["include"] = false;
-    } else {
-      tiles[tid]["include"] = !tiles[tid]["include"];
-    }
+    tiles[tid]["include"] = !tileInclusion;
+    setTileInclusion(!tileInclusion);
     setTiles(tiles);
+    console.log(tiles);
   }
 
   function toggleGroundStatus() {
@@ -182,11 +178,17 @@ export default function TileSettings() {
           id="combo-box-demo"
           options={Object.values(tiles)}
           onChange={(event, newValue) => {
+            // console.log(newValue);
             // console.log(newValue["mesh"]);
             setTile(newValue["mesh"]);
             setNeighbor(null);
             setW(newValue["weight"] || 1);
-            setTileInclusion(newValue["include"] === true);
+            if (newValue["include"] === undefined) {
+              setTileInclusion(true);
+            } else {
+              setTileInclusion(newValue["include"]);
+            }
+            // setTileInclusion(newValue["include"]);
             setGroundStatus(newValue["ground"] === false);
           }}
           renderInput={(params) => <TextField {...params} label="Tile" />}
@@ -199,7 +201,7 @@ export default function TileSettings() {
             <FormControlLabel 
               control={
                 <Switch 
-                  checked={tiles[file2id[tile]]["include"]}
+                  checked={tileInclusion}
                   onClick={toggleTileInclusion}
                 />
               } 

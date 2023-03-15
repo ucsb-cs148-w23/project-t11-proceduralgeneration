@@ -11,7 +11,15 @@ import Paper from '@mui/material/Paper';
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useEffect, useMemo, useRef, useState, createContext, Suspense } from 'react';
+import { 
+  useEffect, 
+  useMemo, 
+  useRef, 
+  useState, 
+  createContext, 
+  Fragment, 
+  Suspense 
+} from 'react';
 import { fileTileMap, defaultCollapsed, defaultFile2id } from './defaultTiles.js';
 import { usePromiseTracker } from "react-promise-tracker";
 import jwt_decode from 'jwt-decode';
@@ -40,28 +48,23 @@ function App() {
   const [file2id, setFile2id] = useState(defaultFile2id);
   const [name2file, setName2file] = useState(fileTileMap);
   const [user, setUser] = useState({});
+  const [clickedTile, setClickedTile] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState();
 
   function onSignIn(user_email) {
-    // console.log("user is signing in");
-  
     // -> local testing
-    const domain = "http://127.0.0.1"
+    // const domain = "http://127.0.0.1";
     // -> server testing
-    // const domain = "3.132.124.203"
+    // const domain = "3.132.124.203";
     // -> prod
-    // const domain = "https://deez.mturk.monster"
+    const domain = "https://shadydomain.click";
     
     const logInUrl = new URL(`${domain}:8080/login`);
-    // console.log(logInUrl);
-  
     const postData = {
         "email": user_email
     }
-  
-    // console.log(JSON.stringify(postData));
-    
+
     fetch(logInUrl, {
         method: 'POST',
         mode: 'cors',
@@ -72,15 +75,12 @@ function App() {
       })
       .then(r => r.json())
       .then(data => {
-        // console.log(data);
-        // console.log("yay!");
-        //now turn sign in button to user dropdown
         setLoggedIn(true);
     });
-    
   }
 
   const meshRef = useRef();
+  const loginBoxRef = useRef();
   const { promiseInProgress } = usePromiseTracker();
 
   // light/dark mode toggle
@@ -142,22 +142,19 @@ function App() {
     let userObject = jwt_decode(response.credential);
     // console.log(userObject);
     setUser(userObject);
-    // send email to backend to add account
-    // const user_email = ;
-    // console.log(user_email);
     onSignIn(userObject.email);
     setUserEmail(userObject.email);
   }
-  useEffect(()=>{
+
+  useEffect(() => {
     /* global google */
-    google.accounts.id.initialize({
+    window?.google?.accounts?.id?.initialize({
       client_id:"971264102154-4lp0bdl42fgvpatk5933gvsg6kk36quf.apps.googleusercontent.com",
       callback: handleCallbackResponse
     });
-
-    google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      {theme:"outline",size:"large"}
+    window?.google?.accounts?.id?.renderButton(
+      loginBoxRef.current,
+      { theme: "outline", size: "large" }
     );
 
     getUrlParams();
@@ -188,15 +185,6 @@ function App() {
     [mode],
   );
 
-  /*
-  function Loader() {
-    console.log("within loader");
-    return ( promiseInProgress &&
-    <Html center>loading...</Html>
-    );
-  }
-  */
-
   return (
     <ControlsContext.Provider 
       value={{ 
@@ -211,8 +199,10 @@ function App() {
         file2id, setFile2id,
         name2file, setName2file,
         neighbor, setNeighbor,
+        clickedTile, setClickedTile,
         colorMode,
         meshRef,
+        loginBoxRef,
         promiseInProgress
       }}
     >
@@ -238,6 +228,7 @@ function App() {
                             modelPath={name2file[tile]} 
                             position={[0, 0, 0]} 
                             rotation={[0, 0, 0]} 
+                            onClick={() => null}
                           />
                           {
                             (neighbor && (neighbor["label"] != "none")) &&
@@ -245,31 +236,44 @@ function App() {
                               modelPath={name2file[tiles[neighbor["id"]]["mesh"]]}
                               position={dir2pos[neighbor["direction"]].map(x => x * 2)}
                               rotation={[0, neighbor["rotation"] * Math.PI / 2, 0]}
+                              onClick={() => null}
                             />
                           }
                         </group>
                       )
                       :
-                      <group ref={meshRef}>
-                        { 
-                          modelTiles.map((tile, i) => {
-                            return (
-                              <ModelTile 
-                                modelPath={name2file[tile["file"]]} 
-                                position={tile["position"]}
-                                rotation={[0, tile["rotation"] * Math.PI / 2, 0]}
-                              />
-                            );
-                          })
+                      <Fragment>
+                        <group ref={meshRef}>
+                          { 
+                            modelTiles.map((tile, i) => {
+                              return (
+                                <ModelTile 
+                                  idx={i}
+                                  modelPath={name2file[tile["file"]]} 
+                                  position={tile["position"]}
+                                  rotation={[0, tile["rotation"] * Math.PI / 2, 0]}
+                                />
+                              );
+                            })
+                          }
+                        </group>
+                        {
+                          clickedTile &&
+                          <mesh position={modelTiles[clickedTile]["position"]} scale={2.05}>
+                            <boxGeometry />
+                            <meshPhongMaterial color="#ff0000" opacity={0.1} transparent />
+                          </mesh>
                         }
-                      </group>
+                      </Fragment>
                     }
                   </Suspense>
                 )}
                 </Canvas>
             </Paper>
             {
-              showTileSettings? <TileSettings /> : <ControlPanel isLoggedIn={loggedIn} userEmail={userEmail} />
+              showTileSettings? 
+              <TileSettings /> 
+              : <ControlPanel isLoggedIn={loggedIn} userEmail={userEmail} />
             }
           </div>
         </div>

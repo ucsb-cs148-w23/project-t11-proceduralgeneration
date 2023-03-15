@@ -111,6 +111,14 @@
   
 }
 
+.saved-model {
+  z-index: 8388639;
+}
+
+.saved-models-dialog {
+  z-index: 8388639;
+}
+
 .scale-slider {
   width: 100%;
   max-width: 500px;
@@ -159,7 +167,8 @@
 }
 
 .canvas-container {
-  min-width: 70%;
+  min-width: 65%;
+  z-index: 1;
 }
 
 .control-panel {

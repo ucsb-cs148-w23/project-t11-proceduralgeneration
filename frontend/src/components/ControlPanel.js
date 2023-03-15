@@ -1,17 +1,24 @@
-import { useContext, useEffect, useRef } from 'react';
+import Autocomplete from '@mui/material/Autocomplete';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import InputSlider from './InputSlider.js'
+import ButtonGroup from '@mui/material/ButtonGroup';
 import { ControlsContext } from '../App.js';
-import { MAX_POINTS } from '../constants.js';
-import { defaultExpanded, defaultCollapsed } from '../defaultTiles.js';
-import SavedDialogue from './SavedDialogue.js';
-import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import DownloadIcon from '@mui/icons-material/Download';
-import LoopIcon from '@mui/icons-material/Loop';
+import EditIcon from '@mui/icons-material/Edit';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import InputSlider from './InputSlider.js'
+import LoopIcon from '@mui/icons-material/Loop';
+import SavedDialogue from './SavedDialogue.js';
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+import TextField from '@mui/material/TextField';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import { defaultCollapsed } from '../defaultTiles.js';
 import { trackPromise } from 'react-promise-tracker';
+import { useContext, useEffect, useRef, useState, Fragment } from 'react';
 
 export default function ControlPanel(props) {
   const { 
@@ -21,9 +28,14 @@ export default function ControlPanel(props) {
     scaleZ, setScaleZ,
     modelTiles, setModelTiles,
     setShowTileSettings,
+    clickedTile, setClickedTile,
+    tiles,
     meshRef
   } = useContext(ControlsContext);
-  //
+
+  const [current, setCurrent] = useState(null);
+  const [replacement, setReplacement] = useState("");
+
   // create persistent variable, initialize once
   const link = useRef();
   useEffect(() => {
@@ -31,6 +43,13 @@ export default function ControlPanel(props) {
     link.current.style.display = 'none';
     document.body.appendChild(link.current);
   })
+
+  useEffect(() => {
+    if (clickedTile !== null) {
+      setCurrent(modelTiles[clickedTile]["file"]);
+    }
+    setReplacement("");
+  }, [clickedTile]);
 
   // ---------------------
   // save file functions
@@ -71,11 +90,11 @@ export default function ControlPanel(props) {
     console.log("clicked generate");
     
     // -> local testing
-    const domain = "http://127.0.0.1"
+    // const domain = "http://127.0.0.1";
     // -> server testing
-    // const domain = "3.132.124.203"
+    // const domain = "3.132.124.203";
     // -> prod
-    // const domain = "https://deez.mturk.monster"
+    const domain = "https://shadydomain.click";
     
     const generateUrl = new URL(`${domain}:8080/generate`);
     const postData = {
@@ -99,6 +118,9 @@ export default function ControlPanel(props) {
       })
       .then(r => r.json())
       .then(data => {
+        for (let i = 0; i < data["tiles"].length; i++) {
+          data["tiles"][i]["idx"] = i;
+        }
         setModelTiles(data["tiles"]);
         // console.log(data);
         // console.log("model tiles:", modelTiles)
@@ -106,74 +128,34 @@ export default function ControlPanel(props) {
     ));
   }
 
+  function deleteClickedTile() {
+    if (clickedTile !== null) {
+      setModelTiles(modelTiles => modelTiles.filter((tile, idx) => idx !== clickedTile));
+      setClickedTile(null);
+    }
+  }
+
   function requestDownload(){
-    // console.log("download requested");
     setNumDownload(numDownload + 1);
   }
-
-  /**
-  function handleColorChange(color, event) {
-    console.log("clicked color!");
-    setColor(color.hex);
-  }
-  */
-
-  // function saveModel() {
-  //   // save model to user by calling endpoinit
-  //   // pass in email & json of vertices
-  //   console.log("user is saving a model");
-  
-  //   // -> local testing
-  //   const domain = "http://127.0.0.1"
-  //   // -> server testing
-  //   // const domain = "3.132.124.203"
-  //   // -> prod
-  //   // const domain = "https://deez.mturk.monster"
-    
-  //   const saveModelUrl = new URL(`${domain}:8080/save_model`);
-  //   console.log(saveModelUrl);
-  
-  //   const postData = {
-  //       "email": props.userEmail,
-  //       "model": modelTiles
-  //   }
-  
-  //   console.log(JSON.stringify(postData));
-    
-  //   fetch(saveModelUrl, {
-  //       method: 'POST',
-  //       mode: 'cors',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(postData)
-  //     })
-  //     .then(r => r.json())
-  //     .then(data => {
-  //       console.log(data);
-  //       console.log("yay!");
-  //       //now turn sign in button to user dropdown
-  //   });
-    
-  // }
 
   return (
     <Grid 
       container
       className="control-panel"
       direction="column"
-      rowSpacing={3}
+      rowSpacing={2}
     >
       <Grid item>
-        <Typography>
-          Choose the dimensions of the generated environment.
+        <Typography variant="h6">
+          Environment Dimensions
         </Typography>
       </Grid>
       <Grid item>
           <InputSlider 
             value={scaleX} 
             setValue={setScaleX} 
-            label="X Scale" 
+            label="Width" 
             className="control-panel-item"
           />
       </Grid>
@@ -181,7 +163,7 @@ export default function ControlPanel(props) {
         <InputSlider 
           value={scaleY} 
           setValue={setScaleY}
-          label="Y Scale" 
+          label="Height" 
           className="control-panel-item"
         />
       </Grid>
@@ -189,27 +171,81 @@ export default function ControlPanel(props) {
         <InputSlider 
           value={scaleZ} 
           setValue={setScaleZ}
-          label="Z Scale"
+          label="Depth"
           className="control-panel-item"
         />
       </Grid>
-      {/* 
-      <Grid item>
-        <Typography sx={{marginBottom: 2}} gutterBottom>
-          Mesh Color
-        </Typography>
-        <TwitterPicker
-          color={color}
-          onChangeComplete={handleColorChange}
-        />
-      </Grid> 
-      */}
+      { clickedTile &&
+        <Fragment>
+          <Grid item>
+            <Typography variant="h6">
+              Selected Tile
+            </Typography>
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={Object.values(tiles)}
+              value={current}
+              onChange={(event, newValue) => {
+                setReplacement(newValue["mesh"]);
+              }}
+              isOptionEqualToValue={(option, value) => option["mesh"] === value}
+              renderInput={(params) => <TextField {...params} />}
+            />
+            <ButtonGroup
+              variant="outlined" 
+            >
+              <Tooltip title="Unselect">
+                <IconButton
+                  onClick={() => {setClickedTile(null)}}
+                >
+                  <ArrowBackIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Delete">
+                <IconButton
+                  onClick={deleteClickedTile}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Rotate">
+                <IconButton
+                  onClick={() => {
+                    let prevRotation = modelTiles[clickedTile]["rotation"];
+                    modelTiles[clickedTile]["rotation"] = (prevRotation + 1) % 4;
+                    setModelTiles([...modelTiles]);
+                  }}
+                >
+                  <LoopIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Replace">
+                <IconButton
+                  onClick={() => {
+                    if (replacement != "" && replacement != "none") {
+                      modelTiles[clickedTile]["file"] = replacement;
+                      setModelTiles([...modelTiles]);
+                      setCurrent(replacement);
+                    }
+                  }}
+                >
+                  <SwapHorizIcon />
+                </IconButton>
+              </Tooltip>
+            </ButtonGroup>
+          </Grid>
+        </Fragment>
+      }
       <Grid item></Grid>
       <Grid item >
         <Button 
           variant="outlined" 
           startIcon={<EditIcon />}
-          onClick={() => {setShowTileSettings(true)}}
+          onClick={() => {
+            setShowTileSettings(true);
+            setClickedTile(null);
+          }}
         >
           Customize
         </Button>
@@ -234,9 +270,6 @@ export default function ControlPanel(props) {
       </Grid> 
       {(props.isLoggedIn) &&       
       <Grid item>
-        {/* <Button variant="outlined" color="secondary" onClick={saveModel}>
-          Save Model
-        </Button> */}
         <SavedDialogue userEmail={props.userEmail} modelTiles={modelTiles} />
       </Grid>}
     </Grid>

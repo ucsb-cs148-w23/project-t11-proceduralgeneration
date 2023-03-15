@@ -14,15 +14,11 @@ from height_option_map import build_height_options
 app = Flask(__name__)
 CORS(app)
 
-
 mongodb_client = pymongo.MongoClient("mongodb+srv://christinetu:test123@cs148.id7aaen.mongodb.net/?retryWrites=true&w=majority")
 db = mongodb_client.get_database('users')
 records = db.register
 
-
-# DEFAULT_TILE_PATH = "../prototypes/p2.json"
 DEFAULT_TILE_PATH = "../prototypes/target.json"
-
 with open(DEFAULT_TILE_PATH) as f:
     default_tile_data = json.load(f)
 
@@ -45,19 +41,15 @@ def generate():
     x = request_data["scale"].get("x", 8)
     y = request_data["scale"].get("y", 8)
     z = request_data["scale"].get("z", 8)
-    # tile_data = deepcopy(default_tile_data)
     tile_data = request_data.get("tile_data", deepcopy(default_tile_data))
-    # rotation expand doesn't work rn
     use_defaults = not request_data.get("expand_rotation", False)
     
     if use_defaults:
         env_gen = EnvironmentGenerator(shape=(x, y, z), tile_data=tile_data)
     else:
         tile_data = expand_rotations(tile_data)
-        # gotta add more detailed height mapping, just use default
         height_option_map = build_height_options(tile_data)
         env_gen = EnvironmentGenerator(shape=(x, y, z), tile_data=tile_data, height_option_map=height_option_map)
-        # env_gen.debug = True
 
     env_gen.generate()
     tiles = env_gen.format_tile_array()
@@ -65,7 +57,6 @@ def generate():
     return jsonify(tiles=tiles)
 
 @app.route('/random_triangles')
-# @cross_origin()
 def random_triangles():
     scale = request.args.get('scale', default=5, type=float)
     count = request.args.get('count', default=1, type=int)
@@ -75,12 +66,8 @@ def random_triangles():
 @app.route('/login', methods=['POST'])
 def login_user():
     # if email isn't in db, add new account
-    # print(request.data)
-    # print(request.get_json())
     user_email = request.get_json().get("email")
     user_found = records.find_one({"email": user_email})
-    # print(user_email)
-    # print(user_found)
     # because there's a null user in db
     if not user_found:
         create_new_user = {
@@ -194,5 +181,8 @@ if __name__ == '__main__':
         app.run(
             host=args.host,
             port=args.port,
-            ssl_context=('cert.pem', 'key.pem')
+            ssl_context=(
+                "/etc/letsencrypt/live/shadydomain.click/fullchain.pem",
+                "/etc/letsencrypt/live/shadydomain.click/privkey.pem"
+            )
         )

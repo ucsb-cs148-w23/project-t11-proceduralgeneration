@@ -1,15 +1,10 @@
-import { useRef, useEffect, useContext, useState, createContext } from 'react';
+import Box from '@mui/material/Box';
+import { useContext } from 'react';
+import { ControlsContext } from '../App.js';
 
 export default function LogIn() {
-
-    // function signOut() {
-    //     var auth2 = gapi.auth2.getAuthInstance();
-    //     auth2.signOut().then(function() {
-    //         console.log("User signed out.");
-    //     });
-    // }
-    
-    return (
-        <div id="signInDiv"></div>
-    );
+  const { loginBoxRef } = useContext(ControlsContext);
+  return (
+    <Box ref={loginBoxRef} ></Box>
+  )
 }

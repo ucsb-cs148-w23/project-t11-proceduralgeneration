@@ -2,18 +2,14 @@ import { useRef, useEffect, useContext, useState, createContext } from 'react';
 import { FormControl, InputLabel, NativeSelect, Select, MenuItem } from '@mui/material';
 import { Modal, Grid, Button, Dialog, DialogTitle, DialogActions, DialogContent } from '@mui/material';
 import SavedModel from './SavedModel.js';
-// import { diffProps } from '@react-three/fiber/dist/declarations/src/core/utils';
 import SavedModels from './SavedModels.js';
 
 export default function UserDropdown(props) {
     const [option, setOption] = useState(0);      
     const [open, setOpen] = useState(false);
-    // let savedModels = [];
     const [savedModels, setSavedModels] = useState();
     
     function getSavedModels() {
-        // console.log("retrieving saved models");      
-        // -> local testing
         const domain = "http://127.0.0.1"
         // -> server testing
         // const domain = "3.132.124.203"
@@ -21,13 +17,10 @@ export default function UserDropdown(props) {
         // const domain = "https://deez.mturk.monster"
         
         const getSavedUrl = new URL(`${domain}:8080/get_saved`);
-        // console.log(getSavedUrl);
       
         const postData = {
             "email": props.userEmail
         }
-      
-        // console.log(JSON.stringify(postData));
         
         fetch(getSavedUrl, {
             method: 'POST',
@@ -39,9 +32,6 @@ export default function UserDropdown(props) {
           })
           .then(r => r.json())
           .then(data => {
-            // console.log(data);
-            // console.log("yay! 3");
-            // quick popup saying your model has been saved
             setSavedModels(data.models);
             setOpen(true);
             return data.models;
@@ -57,34 +47,12 @@ export default function UserDropdown(props) {
 
     function handleSelect(opt) {
         setOption(opt?.target?.value);
-
-        // setOption(opt?.target?.value);
-        // console.log(option);
         if (opt?.target?.value === 10) {
-            //go to saved models
-            // console.log("going to user's saved models");
-            // savedModels = getSavedModels();
             getSavedModels();
-            // console.log("open: ", open);
-            // setOpen(true);
         } else if (opt?.target?.value === 20) {
-            //sign out
-            // console.log("signing out");
-            //just reload to logout and maybe show popup
             window.location.reload(true);
         }
     }
-
-    function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-    }
-
-    // function signOut() {
-    //     var auth2 = gapi.auth2.getAuthInstance();
-    //     auth2.signOut().then(function() {
-    //         console.log("User signed out.");
-    //     });
-    // }
     
     return (
         <div id="user-dropdown">
@@ -107,7 +75,6 @@ export default function UserDropdown(props) {
                 </Select>
 
             </FormControl>
-            {/* <SavedModels open={open} userEmail={props.userEmail} /> */}
             {(open) ? <Dialog
                 fullWidth
                 maxWidth="xl"

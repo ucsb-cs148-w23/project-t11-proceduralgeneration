@@ -22,14 +22,6 @@ export default function InputSlider(props) {
     props.setValue(event.target.value === '' ? '' : Number(event.target.value));
   };
   
-  const handleBlur = () => {
-    if (props.value < 0) {
-      props.setValue(0);
-    } else if (props.value > 100) {
-      props.setValue(100);
-    }
-  }
-
   return (
     <Box>
       <Typography id="input-slider" gutterBottom>
@@ -50,7 +42,6 @@ export default function InputSlider(props) {
             value={props.value}
             size="small"
             onChange={handleInputChange}
-            handleBlur={handleBlur}
             inputProps={{
               step: 1,
               min: props.min || DEFAULT_MIN,

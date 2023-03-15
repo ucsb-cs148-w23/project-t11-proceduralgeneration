@@ -1,4 +1,5 @@
 import {useRef, useMemo} from 'react'
+import { WaterShader } from "./WaterShader"
 import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import * as THREE from 'three'
@@ -48,9 +49,10 @@ export default function WaterPlane(props){
         state.gl.render(scene, camera);
     })
 
-
-    return <mesh ref={ref} position={[props.xSize, -1, props.zSize]} rotation={[-Math.PI/2.0, 0, 0]}>
-        <planeBufferGeometry args={[planeSize,planeSize,planeSize*2,planeSize*2]}/>
-        <waterShader u_Time={0.0} u_distortionTex={distortionMap} u_waveSteepness = {0.07} u_waveSpeed = {1.2}/>
-    </mesh>
+    return (
+      <mesh ref={ref} position={[props.xSize, -1, props.zSize]} rotation={[-Math.PI/2.0, 0, 0]}>
+          <planeBufferGeometry args={[planeSize,planeSize,planeSize*2,planeSize*2]}/>
+          <waterShader u_Time={0.0} u_distortionTex={distortionMap} u_waveSteepness = {0.07} u_waveSpeed = {1.2}/>
+      </mesh>
+    );
 }

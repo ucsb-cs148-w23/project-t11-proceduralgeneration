@@ -103,11 +103,11 @@ function App() {
     // console.log(email, id, url.searchParams.has("modelId"));
     if (email && id) {
       //make get request to get model vertices 
-      const domain = "http://127.0.0.1"
+      // const domain = "http://127.0.0.1"
       // -> server testing
       // const domain = "3.132.124.203"
       // -> prod
-      // const domain = "https://deez.mturk.monster"
+      const domain = "https://shadydomain.click";
       
       const getUpdateNameUrl = new URL(`${domain}:8080/get_model`);
       

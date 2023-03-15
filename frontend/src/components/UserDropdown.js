@@ -86,7 +86,15 @@ export default function UserDropdown(props) {
                 </div>
                 <div>
                     <DialogContent>
-                        <SavedModels savedModels={savedModels} />
+                        {/* <Grid container spacing={3}>
+                            {
+                                savedModels.map((model) => (
+                                <SavedModel
+                                    file={model}
+                                />
+                            ))}
+                        </Grid> */}
+                        <SavedModels savedModels={savedModels} userEmail={props.userEmail} />
                     </DialogContent>
                 </div>
                 <DialogActions>

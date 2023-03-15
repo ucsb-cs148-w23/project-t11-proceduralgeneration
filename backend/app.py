@@ -5,6 +5,7 @@ import pymongo
 from copy import deepcopy
 from flask import Flask, jsonify, request
 from flask_cors import CORS 
+import uuid
 
 from wfc import EnvironmentGenerator
 from expand_rotation import expand_rotations
@@ -71,7 +72,7 @@ def login_user():
     if not user_found:
         create_new_user = {
             "email": user_email,
-            "saved_models": []
+            "saved_models": {}
         }
         records.insert_one(create_new_user)
         return {"result": "user saved"}
@@ -92,15 +93,74 @@ def get_saved_models():
 def saved_model():
     user_email = request.get_json().get("email")
     save_model = request.get_json().get("model")
+    model_name = request.get_json().get("name")
     user_found = records.find_one({"email": user_email})
 
     # get saved files
     if user_found:
         updated_user = deepcopy(user_found)
-        updated_user["saved_models"].append(save_model)
+        # create a new hash => save 
+        """
+        hash: {
+            tiles: [list of tiles],
+            name: name of saved model
+        }
+        """
+        model_id = str(uuid.uuid1())
+
+        updated_user["saved_models"][model_id] = {
+            "tiles": save_model,
+            "name": model_name
+        }
         #DOUBLE CHECK THAT THIS UPDATES!!!
         records.replace_one(user_found, updated_user)
         return {"resp": "saved model!"}
+    else:
+        return {"resp": "User not found!"}
+
+@app.route('/update_model_name', methods=['POST'])
+def update_model_name():
+    user_email = request.get_json().get("email")
+    model_id = request.get_json().get("id")
+    new_model_name = request.get_json().get("name")
+    user_found = records.find_one({"email": user_email})
+
+    # get saved files
+    if user_found:
+        updated_user = deepcopy(user_found)
+        """
+        hash: {
+            tiles: [list of tiles],
+            name: name of saved model
+        }
+        """
+        updated_user["saved_models"][model_id]["name"] = new_model_name
+        #DOUBLE CHECK THAT THIS UPDATES!!!
+        records.replace_one(user_found, updated_user)
+        return {"resp": "your model has been updated! :D"}
+    else:
+        return {"resp": "User not found!"}
+
+@app.route('/get_model', methods=['POST'])
+def get_model():
+    user_email = request.get_json().get("email")
+    model_id = request.get_json().get("id")
+    user_found = records.find_one({"email": user_email})
+
+    # get saved model
+    if user_found:
+        """
+        hash: {
+            tiles: [list of tiles],
+            name: name of saved model
+        }
+        """
+        model = user_found["saved_models"][model_id]
+        #DOUBLE CHECK THAT THIS UPDATES!!!
+        return {
+            "id": model_id,
+            "model": model
+        }
     else:
         return {"resp": "User not found!"}
 

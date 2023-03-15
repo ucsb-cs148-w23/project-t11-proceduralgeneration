@@ -9,10 +9,12 @@ export default function SavedModels(props) {
     return (
         <div className="saved-models-dialog">
             <Grid container spacing={4} fullWidth>
-                {props.savedModels.map((m) => (
+                {Object.entries(props.savedModels).map(([id, model]) => (
                     <Grid item>
                         <SavedModel
-                            model={m}
+                            userEmail={props.userEmail}
+                            model={model}
+                            id={id}
                         />
                     </Grid>
                 ))}

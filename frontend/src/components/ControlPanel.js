@@ -115,6 +115,7 @@ export default function ControlPanel(props) {
           data["tiles"][i]["idx"] = i;
         }
         setModelTiles(data["tiles"]);
+        setClickedTile(null);
         // console.log(data);
         // console.log("model tiles:", modelTiles)
       }

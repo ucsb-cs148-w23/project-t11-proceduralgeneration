@@ -35,7 +35,7 @@ export default function AlertDialogSlide(props) {
     // -> server testing
     // const domain = "3.132.124.203"
     // -> prod
-    // const domain = "https://deez.mturk.monster"
+    // const domain = "https://shadydomain.click"
     
     const saveModelUrl = new URL(`${domain}:8080/save_model`);
     // console.log(saveModelUrl);

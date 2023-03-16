@@ -69,19 +69,17 @@ function App() {
 
   function getUrlParams() {
     const url = new URL(window.location.href);
-    console.log(window.location.href);
-    // console.log(url.searchParams);
+    // console.log(window.location.href);
     const email = url.searchParams.get("userEmail");
     const id = url.searchParams.get("modelId");
-    //if there exist search params, then do a get request and display model in canvas
-    // console.log(email, id, url.searchParams.has("modelId"));
+
     if (email && id) {
       //make get request to get model vertices 
-      // const domain = "http://127.0.0.1"
+      const domain = "http://127.0.0.1"
       // -> server testing
       // const domain = "3.132.124.203"
       // -> prod
-      const domain = "https://shadydomain.click";
+      // const domain = "https://shadydomain.click";
       
       const getUpdateNameUrl = new URL(`${domain}:8080/get_model`);
       

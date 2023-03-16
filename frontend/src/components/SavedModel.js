@@ -22,7 +22,7 @@ export default function SavedModels(props) {
         // -> server testing
         // const domain = "3.132.124.203"
         // -> prod
-        // const domain = "https://deez.mturk.monster"
+        // const domain = "https://shadydomain.click"
         
         const getUpdateNameUrl = new URL(`${domain}:8080/update_model_name`);
       

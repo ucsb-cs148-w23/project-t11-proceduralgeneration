@@ -60,15 +60,17 @@ export default function UserDropdown(props) {
                     id="user-dropdown-label" 
                     fullWidth={true}
                 >
-                    User Options
+                  Account Options
                 </InputLabel>
                 <Select
                     id="select-user-dropdown"
-                    label="UserName"
+                    label="Account Options"
                     autoWidth={true}
                     value={option}
                     onChange={handleSelect}
+                    size="small"
                 >
+                    <MenuItem value={0}>{props.userEmail}</MenuItem>
                     <MenuItem value={10}>Saved Models</MenuItem>
                     <MenuItem value={20}>Sign Out</MenuItem>
                 </Select>
@@ -86,15 +88,7 @@ export default function UserDropdown(props) {
                 </div>
                 <div>
                     <DialogContent>
-                        {/* <Grid container spacing={3}>
-                            {
-                                savedModels.map((model) => (
-                                <SavedModel
-                                    file={model}
-                                />
-                            ))}
-                        </Grid> */}
-                        <SavedModels savedModels={savedModels} userEmail={props.userEmail} />
+                      <SavedModels savedModels={savedModels} userEmail={props.userEmail} />
                     </DialogContent>
                 </div>
                 <DialogActions>

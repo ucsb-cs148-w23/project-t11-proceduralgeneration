@@ -18,11 +18,11 @@ export default function SavedModels(props) {
         setModelName(event.target.value);
         //make a post request to change in backend too
 
-        const domain = "http://127.0.0.1"
+        // const domain = "http://127.0.0.1"
         // -> server testing
         // const domain = "3.132.124.203"
         // -> prod
-        // const domain = "https://deez.mturk.monster"
+        const domain = "https://shadydomain.click"
         
         const getUpdateNameUrl = new URL(`${domain}:8080/update_model_name`);
       
@@ -71,7 +71,7 @@ export default function SavedModels(props) {
             const url = new URL(window.location.href);
             url.searchParams.append("modelId", props.id);
             url.searchParams.append("userEmail", props.userEmail);
-            console.log(url);
+            // console.log(url);
             
             //should await this...
             navigator.clipboard.writeText(url.toString());

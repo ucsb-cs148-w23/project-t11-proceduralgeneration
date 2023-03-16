@@ -23,7 +23,6 @@ import {
 } from 'react';
 import { fileTileMap, defaultCollapsed, defaultFile2id } from './defaultTiles.js';
 import { usePromiseTracker } from "react-promise-tracker";
-import jwt_decode from 'jwt-decode';
 
 const dir2pos = {
   "px": [1, 0, 0],
@@ -53,33 +52,6 @@ function App() {
   const [userEmail, setUserEmail] = useState();
   const [showWater, setShowWater] = useState(false);
 
-  function onSignIn(user_email) {
-    // -> local testing
-    // const domain = "http://127.0.0.1";
-    // -> server testing
-    // const domain = "3.132.124.203";
-    // -> prod
-    const domain = "https://shadydomain.click";
-    
-    const logInUrl = new URL(`${domain}:8080/login`);
-    const postData = {
-        "email": user_email
-    }
-
-    fetch(logInUrl, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(postData)
-      })
-      .then(r => r.json())
-      .then(data => {
-        setLoggedIn(true);
-    });
-  }
-
   const meshRef = useRef();
   const loginBoxRef = useRef();
   const { promiseInProgress } = usePromiseTracker();
@@ -96,12 +68,10 @@ function App() {
 
   function getUrlParams() {
     const url = new URL(window.location.href);
-    console.log(window.location.href);
-    // console.log(url.searchParams);
+    // console.log(window.location.href);
     const email = url.searchParams.get("userEmail");
     const id = url.searchParams.get("modelId");
-    //if there exist search params, then do a get request and display model in canvas
-    // console.log(email, id, url.searchParams.has("modelId"));
+
     if (email && id) {
       //make get request to get model vertices 
       // const domain = "http://127.0.0.1"
@@ -129,7 +99,7 @@ function App() {
         .then(r => r.json())
         .then(data => {
           // console.log("save data: ", data);
-          setModelTiles(data.resp.tiles);
+          setModelTiles(data?.model?.tiles);
           // return data;
       });
 
@@ -137,25 +107,7 @@ function App() {
 
   }
   
-
-  function handleCallbackResponse(response){
-    // console.log("encoded JWT ID token: "+ response.credential);
-    let userObject = jwt_decode(response.credential);
-    // console.log(userObject);
-    onSignIn(userObject.email);
-    setUserEmail(userObject.email);
-  }
-
   useEffect(() => {
-    /* global google */
-    window?.google?.accounts?.id?.initialize({
-      client_id:"971264102154-4lp0bdl42fgvpatk5933gvsg6kk36quf.apps.googleusercontent.com",
-      callback: handleCallbackResponse
-    });
-    window?.google?.accounts?.id?.renderButton(
-      loginBoxRef.current,
-      { theme: "outline", size: "large" }
-    );
 
     getUrlParams();
 
@@ -204,7 +156,10 @@ function App() {
         meshRef,
         loginBoxRef,
         promiseInProgress,
-        showWater, setShowWater
+        showWater, setShowWater,
+        user, setUser,
+        loggedIn, setLoggedIn,
+        userEmail, setUserEmail,
       }}
     >
       <ThemeProvider theme={theme}>

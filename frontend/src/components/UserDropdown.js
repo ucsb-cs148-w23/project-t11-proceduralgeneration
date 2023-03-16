@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { ControlsContext } from '../App.js';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from '@mui/material';
 import SavedModels from './SavedModels.js';
@@ -7,13 +8,16 @@ export default function UserDropdown(props) {
     const [option, setOption] = useState(0);      
     const [open, setOpen] = useState(false);
     const [savedModels, setSavedModels] = useState();
+    const { 
+        setLoggedIn
+    } = useContext(ControlsContext);
     
     function getSavedModels() {
         const domain = "http://127.0.0.1"
         // -> server testing
         // const domain = "3.132.124.203"
         // -> prod
-        // const domain = "https://deez.mturk.monster"
+        // const domain = "https://shadydomain.click"
         
         const getSavedUrl = new URL(`${domain}:8080/get_saved`);
       
@@ -50,6 +54,7 @@ export default function UserDropdown(props) {
             getSavedModels();
         } else if (opt?.target?.value === 20) {
             window.location.reload(true);
+            setLoggedIn(false);
         }
     }
     

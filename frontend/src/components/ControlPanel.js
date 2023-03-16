@@ -165,7 +165,7 @@ export default function ControlPanel(props) {
         />
       </Grid>
       <WaterSettings />
-      { clickedTile &&
+      { clickedTile !== null &&
         <Fragment>
           <Grid item>
             <Typography variant="h6">

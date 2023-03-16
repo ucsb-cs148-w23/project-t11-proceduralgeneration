@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext, Suspense } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { Grid, Button, TextField } from '@mui/material';
 import ModelTile from './ModelTile.js';
 import Paper from '@mui/material/Paper';

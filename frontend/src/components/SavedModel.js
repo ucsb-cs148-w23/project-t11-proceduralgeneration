@@ -7,6 +7,7 @@ import { OrbitControls } from '@react-three/drei';
 import { fileTileMap } from '../defaultTiles.js';
 import { ControlsContext } from '../App.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
+import { DOMAIN } from '../constants.js';
 
 
 export default function SavedModels(props) {
@@ -18,13 +19,7 @@ export default function SavedModels(props) {
         setModelName(event.target.value);
         //make a post request to change in backend too
 
-        // const domain = "http://127.0.0.1"
-        // -> server testing
-        // const domain = "3.132.124.203"
-        // -> prod
-        const domain = "https://shadydomain.click"
-        
-        const getUpdateNameUrl = new URL(`${domain}:8080/update_model_name`);
+        const getUpdateNameUrl = new URL(`${DOMAIN}:8080/update_model_name`);
       
         const postData = {
             "email": props.userEmail,

@@ -7,6 +7,7 @@ import { TextField, Grid } from '@mui/material';
 // import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import { DOMAIN } from "../constants.js";
 // import { TransitionProps } from '@mui/material/transitions';
 
 const Transition = React.forwardRef(function Transition(
@@ -30,14 +31,7 @@ export default function AlertDialogSlide(props) {
     // pass in email & json of vertices
     // console.log("user is saving a model");
   
-    // -> local testing
-    // const domain = "http://127.0.0.1"
-    // -> server testing
-    // const domain = "3.132.124.203"
-    // -> prod
-    const domain = "https://shadydomain.click"
-    
-    const saveModelUrl = new URL(`${domain}:8080/save_model`);
+    const saveModelUrl = new URL(`${DOMAIN}:8080/save_model`);
     // console.log(saveModelUrl);
     console.log("model name ", modelName);
   

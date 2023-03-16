@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { ControlsContext } from '../App.js';
 import { GoogleLogin } from '@react-oauth/google';
+import { DOMAIN } from "../constants.js";
 import jwt_decode from 'jwt-decode';
 
 export default function LogIn() {
@@ -10,14 +11,7 @@ export default function LogIn() {
   } = useContext(ControlsContext);
 
   function onSignIn(user_email) {
-    // -> local testing
-    // const domain = "http://127.0.0.1";
-    // -> server testing
-    // const domain = "3.132.124.203";
-    // -> prod
-    const domain = "https://shadydomain.click";
-    
-    const logInUrl = new URL(`${domain}:8080/login`);
+    const logInUrl = new URL(`${DOMAIN}:8080/login`);
     const postData = {
         "email": user_email
     }
@@ -37,10 +31,7 @@ export default function LogIn() {
   }
 
   function handleCallbackResponse(response){
-    // console.log("encoded JWT ID token: "+ response.credential);
     let userObject = jwt_decode(response.credential);
-    // console.log(userObject);
-    // setUser(userObject);
     onSignIn(userObject.email);
     setUserEmail(userObject.email);
   }
@@ -49,11 +40,7 @@ export default function LogIn() {
     console.log(error);
   };
 
-  // const { loginBoxRef } = useContext(ControlsContext);
-
-
   return (
-    // <Box ref={loginBoxRef} ></Box>
     <GoogleLogin onSuccess={handleCallbackResponse} onError={errorMessage} />
   )
 }

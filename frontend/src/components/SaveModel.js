@@ -1,14 +1,18 @@
 import * as React from 'react';
+import { useState, useRef, useContext } from 'react';
 import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import DownloadIcon from '@mui/icons-material/Download';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import { TextField, Grid } from '@mui/material';
-// import DialogContent from '@mui/material/DialogContent';
-// import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Divider from '@mui/material/Divider';
+import { TextField, Grid } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import Slide from '@mui/material/Slide';
+import { ControlsContext } from '../App.js';
 import { DOMAIN } from "../constants.js";
-// import { TransitionProps } from '@mui/material/transitions';
 
 const Transition = React.forwardRef(function Transition(
   props,
@@ -17,14 +21,15 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AlertDialogSlide(props) {
-  const [open, setOpen] = React.useState(false);
-  // const [modelName, setModelName] = React.useState();
-  const modelName = React.useRef('');
-
-//   const handleClickOpen = () => {
-//     setOpen(true);
-//   };
+export default function SaveModel(props) {
+  const [open, setOpen] = useState(false);
+  const { 
+    userEmail, 
+    modelTiles, 
+    loggedIn,
+    numDownload, setNumDownload,
+    modelName, setModelName
+  } = useContext(ControlsContext);
 
   function saveModel() {
     // save model to user by calling endpoinit
@@ -32,17 +37,14 @@ export default function AlertDialogSlide(props) {
     // console.log("user is saving a model");
   
     const saveModelUrl = new URL(`${DOMAIN}:8080/save_model`);
-    // console.log(saveModelUrl);
     console.log("model name ", modelName);
   
     const postData = {
-        "email": props.userEmail,
-        "name": modelName.current.value,
-        "model": props.modelTiles
+        "email": userEmail,
+        "name": modelName,
+        "model": modelTiles
     }
   
-    // console.log(JSON.stringify(postData));
-    
     fetch(saveModelUrl, {
         method: 'POST',
         mode: 'cors',
@@ -50,15 +52,15 @@ export default function AlertDialogSlide(props) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(postData)
-      })
+    })
       .then(r => r.json())
       .then(data => {
-        // console.log(data);
-        // console.log("yay! 2");
         setOpen(true);
-        //now turn sign in button to user dropdown
-    });
-    
+      });
+  }
+
+  function requestDownload(){
+    setNumDownload(numDownload + 1);
   }
 
   const handleClose = () => {
@@ -67,19 +69,47 @@ export default function AlertDialogSlide(props) {
 
   return (
     <div>
+      <Divider />
+      <Typography 
+        variant="h6" 
+        sx={{
+          marginTop: 2,
+          marginBottom: 2
+        }}
+      >
+        Save Model
+      </Typography>
       <Grid container spacing={1}>
         <Grid item>
           <TextField 
             label="Model Name" 
             placeholder="Model Name"
             variant="outlined" 
-            inputRef={modelName}
+            value={modelName}
+            onChange={(e) => setModelName(e.target.value)}
+            size="small"
           />
         </Grid>
         <Grid item>
-          <Button variant="outlined" onClick={saveModel}>
-            Save Model
-          </Button>
+          <ButtonGroup variant="outlined" aria-label="outlined primary button group">
+            <Button 
+              variant="outlined" 
+              startIcon={<DownloadIcon />}
+              onClick={requestDownload}
+            >
+              Download
+            </Button>
+            { 
+              loggedIn &&
+              <Button 
+                variant="outlined" 
+                onClick={saveModel}
+                startIcon={<CloudUploadIcon />}
+              >
+               Cloud 
+              </Button>
+            }
+          </ButtonGroup>
         </Grid>
       </Grid>
       <Dialog

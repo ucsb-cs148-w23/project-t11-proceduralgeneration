@@ -52,6 +52,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState();
   const [showWater, setShowWater] = useState(false);
+  const [modelName, setModelName] = useState("Untitled");
 
   const meshRef = useRef();
   const loginBoxRef = useRef();
@@ -153,6 +154,7 @@ function App() {
         showWater, setShowWater,
         loggedIn, setLoggedIn,
         userEmail, setUserEmail,
+        modelName, setModelName
       }}
     >
       <ThemeProvider theme={theme}>

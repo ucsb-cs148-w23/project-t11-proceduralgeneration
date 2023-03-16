@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState, useRef } from 'react';
 import { ControlsContext } from '../App.js';
+import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -33,8 +34,8 @@ export default function ConfigFile(props) {
   } = useContext(ControlsContext);
 
   const [file, setFile] = useState();
-  const [symmetry, setSymmetry] = useState(-1);
-  //
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+
   // create persistent variable, initialize once
   const link = useRef();
   useEffect(() => {
@@ -82,6 +83,7 @@ export default function ConfigFile(props) {
       
       setTile(null);
       setNeighbor(null);
+      setUploadSuccess(true);
     });
   }
 
@@ -111,15 +113,21 @@ export default function ConfigFile(props) {
   }
 
   function handleUploadClick() {
-    uploadConfig(file);
+    if (file) {
+      uploadConfig(file);
+    }
   }
-  
+
+  function onClose() {
+    props.setOpen(false);
+    setUploadSuccess(false);
+  }
 
   return (
     <div>
       <Modal
         open={props.open}
-        onClose={() => {props.setOpen(false)}}
+        onClose={onClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -170,6 +178,12 @@ export default function ConfigFile(props) {
                 {file ? file.name : "No file selected"}
               </Typography>
             </Grid>
+            {
+              uploadSuccess &&
+              <Grid item>
+                <Alert severity="success">Uploaded Succesfully!</Alert>
+              </Grid>
+            }
           </Grid>
         </Box>
       </Modal>

@@ -245,7 +245,7 @@ export default function ControlPanel(props) {
         <Box 
           display="flex"
           sx={{
-            marginTop: 5
+            marginTop: 3
           }}
         >
           <Button 

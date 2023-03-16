@@ -19,7 +19,7 @@ function LoadingScreen() {
 
   return (
     <mesh ref={myMesh} scale={[2,2,2]}>
-      <icosahedronBufferGeometry attach="geometry" args={[1, 1]}/>
+      <icosahedronGeometry attach="geometry" args={[1, 1]}/>
       <meshBasicMaterial attach="material" wireframe wireframeLinewidth={10} color="royalblue" toneMapped={false} />
     </mesh>
   );

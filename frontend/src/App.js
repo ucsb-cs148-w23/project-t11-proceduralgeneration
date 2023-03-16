@@ -49,7 +49,6 @@ function App() {
   const [name2file, setName2file] = useState(fileTileMap);
   const [clickedTile, setClickedTile] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState();
   const [userEmail, setUserEmail] = useState();
   const [showWater, setShowWater] = useState(false);
 
@@ -158,7 +157,6 @@ function App() {
         loginBoxRef,
         promiseInProgress,
         showWater, setShowWater,
-        user, setUser,
         loggedIn, setLoggedIn,
         userEmail, setUserEmail,
       }}

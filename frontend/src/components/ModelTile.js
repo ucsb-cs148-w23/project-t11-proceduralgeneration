@@ -3,18 +3,12 @@ import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { ControlsContext } from '../App.js';
 
-function defaultCallback() {
-  console.log("clicked");
-}
-
-
 export default function ModelTile(props) {
-  const { setClickedTile, modelTiles } = useContext(ControlsContext);
+  const { setClickedTile } = useContext(ControlsContext);
 
   function selectTile(e) {
     e.stopPropagation();
     setClickedTile(props.idx);
-    console.log(modelTiles[props.idx]);
   }
 
   // load model

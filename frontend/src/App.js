@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Header from './components/Header.js'
 import Lato from "./fonts/Lato-Regular.ttf";
 import ModelTile from './components/ModelTile.js'
+import WaterPlane from './components/WaterPlane.js'
 // import onSignIn from './components/LogIn.js';
 import Loader from './components/Loader.js'
 import Paper from '@mui/material/Paper';
@@ -22,7 +23,7 @@ import {
 } from 'react';
 import { fileTileMap, defaultCollapsed, defaultFile2id } from './defaultTiles.js';
 import { usePromiseTracker } from "react-promise-tracker";
-import jwt_decode from 'jwt-decode';
+import { DOMAIN } from "./constants.js";
 
 const dir2pos = {
   "px": [1, 0, 0],
@@ -47,37 +48,10 @@ function App() {
   const [tiles, setTiles] = useState(defaultCollapsed);
   const [file2id, setFile2id] = useState(defaultFile2id);
   const [name2file, setName2file] = useState(fileTileMap);
-  const [user, setUser] = useState({});
   const [clickedTile, setClickedTile] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState();
-
-  function onSignIn(user_email) {
-    // -> local testing
-    // const domain = "http://127.0.0.1";
-    // -> server testing
-    // const domain = "3.132.124.203";
-    // -> prod
-    const domain = "https://shadydomain.click";
-    
-    const logInUrl = new URL(`${domain}:8080/login`);
-    const postData = {
-        "email": user_email
-    }
-
-    fetch(logInUrl, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(postData)
-      })
-      .then(r => r.json())
-      .then(data => {
-        setLoggedIn(true);
-    });
-  }
+  const [showWater, setShowWater] = useState(false);
 
   const meshRef = useRef();
   const loginBoxRef = useRef();
@@ -93,25 +67,44 @@ function App() {
     [],
   );
 
-  function handleCallbackResponse(response){
-    // console.log("encoded JWT ID token: "+ response.credential);
-    let userObject = jwt_decode(response.credential);
-    // console.log(userObject);
-    setUser(userObject);
-    onSignIn(userObject.email);
-    setUserEmail(userObject.email);
+  function getUrlParams() {
+    const url = new URL(window.location.href);
+    // console.log(window.location.href);
+    const email = url.searchParams.get("userEmail");
+    const id = url.searchParams.get("modelId");
+
+    if (email && id) {
+      const getUpdateNameUrl = new URL(`${DOMAIN}:8080/get_model`);
+      
+      const postData = {
+          "email": email,
+          "id": id,
+      }
+      // console.log(postData);
+      
+      fetch(getUpdateNameUrl, {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(postData)
+        })
+        .then(r => r.json())
+        .then(data => {
+          // console.log("save data: ", data);
+          setModelTiles(data?.model?.tiles);
+          // return data;
+      });
+
   }
 
+  }
+  
   useEffect(() => {
-    /* global google */
-    google.accounts.id.initialize({
-      client_id:"971264102154-4lp0bdl42fgvpatk5933gvsg6kk36quf.apps.googleusercontent.com",
-      callback: handleCallbackResponse
-    });
-    google.accounts.id.renderButton(
-      loginBoxRef.current,
-      { theme: "outline", size: "large" }
-    );
+
+    getUrlParams();
+
   }, [])
 
 
@@ -156,7 +149,10 @@ function App() {
         colorMode,
         meshRef,
         loginBoxRef,
-        promiseInProgress
+        promiseInProgress,
+        showWater, setShowWater,
+        loggedIn, setLoggedIn,
+        userEmail, setUserEmail,
       }}
     >
       <ThemeProvider theme={theme}>
@@ -166,12 +162,18 @@ function App() {
           <div className="content"> 
             <Paper className="canvas-container">
                 <Canvas>
-                <Loader/>
+                <Loader/>  
                 { !promiseInProgress && (
                   <Suspense fallback={null}>
                     <ambientLight intensity={0.5} />
                     <pointLight position={[20, 20, 20]} />
                     <OrbitControls />
+                    
+                    {
+                      showWater &&
+                      <WaterPlane xSize={scaleX} zSize={scaleZ}/>
+                    }
+
                     { 
                       showTileSettings?
                       (
@@ -184,7 +186,7 @@ function App() {
                             onClick={() => null}
                           />
                           {
-                            (neighbor && (neighbor["label"] != "none")) &&
+                            (neighbor && (neighbor["label"] !== "none")) &&
                             <ModelTile
                               modelPath={name2file[tiles[neighbor["id"]]["mesh"]]}
                               position={dir2pos[neighbor["direction"]].map(x => x * 2)}
@@ -211,7 +213,7 @@ function App() {
                           }
                         </group>
                         {
-                          clickedTile &&
+                          clickedTile !== null &&
                           <mesh position={modelTiles[clickedTile]["position"]} scale={2.05}>
                             <boxGeometry />
                             <meshPhongMaterial color="#ff0000" opacity={0.1} transparent />

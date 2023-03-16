@@ -14,6 +14,9 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/three": "^0.148.1",
+    "babel-plugin-glsl": "^1.0.0",
+    "glsl-noise": "^0.0.0",
+    "glslify": "^7.1.1",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
@@ -26,7 +29,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -1,22 +1,20 @@
-import { useRef, useEffect, useContext, useState, createContext } from 'react';
-import { FormControl, InputLabel, NativeSelect, Select, MenuItem } from '@mui/material';
-import { Modal, Grid, Button, Dialog, DialogTitle, DialogActions, DialogContent } from '@mui/material';
-import SavedModel from './SavedModel.js';
+import { useState, useContext } from 'react';
+import { ControlsContext } from '../App.js';
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from '@mui/material';
+import { DOMAIN } from "../constants.js";
 import SavedModels from './SavedModels.js';
 
 export default function UserDropdown(props) {
     const [option, setOption] = useState(0);      
     const [open, setOpen] = useState(false);
     const [savedModels, setSavedModels] = useState();
+    const { 
+        setLoggedIn
+    } = useContext(ControlsContext);
     
     function getSavedModels() {
-        const domain = "http://127.0.0.1"
-        // -> server testing
-        // const domain = "3.132.124.203"
-        // -> prod
-        // const domain = "https://deez.mturk.monster"
-        
-        const getSavedUrl = new URL(`${domain}:8080/get_saved`);
+        const getSavedUrl = new URL(`${DOMAIN}:8080/get_saved`);
       
         const postData = {
             "email": props.userEmail
@@ -51,6 +49,7 @@ export default function UserDropdown(props) {
             getSavedModels();
         } else if (opt?.target?.value === 20) {
             window.location.reload(true);
+            setLoggedIn(false);
         }
     }
     
@@ -87,7 +86,15 @@ export default function UserDropdown(props) {
                 </div>
                 <div>
                     <DialogContent>
-                        <SavedModels savedModels={savedModels} />
+                        {/* <Grid container spacing={3}>
+                            {
+                                savedModels.map((model) => (
+                                <SavedModel
+                                    file={model}
+                                />
+                            ))}
+                        </Grid> */}
+                        <SavedModels savedModels={savedModels} userEmail={props.userEmail} />
                     </DialogContent>
                 </div>
                 <DialogActions>

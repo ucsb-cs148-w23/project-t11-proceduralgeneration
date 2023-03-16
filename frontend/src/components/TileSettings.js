@@ -21,6 +21,7 @@ import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import UploadTile from './UploadTile.js';
+import WaterSettings from './WaterSettings.js'
 
 // order for rotation += 1
 const directionOrder = ["ny", "nx", "py", "px"];
@@ -44,7 +45,6 @@ export default function TileSettings() {
 
   const [openAddTile, setOpenAddTile] = useState(false);
   const [w, setW] = useState(1);
-  const [ground, setGround] = useState(false);
   const [addNeighborMode, setAddNeighborMode] = useState(false);
   const [newNeighborDirection, setNewNeighborDirection] = useState(null);
   const [newNeighborRotation, setNewNeighborRotation] = useState(0);
@@ -351,6 +351,7 @@ export default function TileSettings() {
           </ButtonGroup>
         </Grid>
       }
+      <WaterSettings />
     </Grid>
   );
 }

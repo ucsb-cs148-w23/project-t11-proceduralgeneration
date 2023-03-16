@@ -16,6 +16,8 @@ import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import WaterSettings from './WaterSettings.js'
+import { DOMAIN } from "../constants.js";
 import { defaultCollapsed } from '../defaultTiles.js';
 import { trackPromise } from 'react-promise-tracker';
 import { useContext, useEffect, useRef, useState, Fragment } from 'react';
@@ -48,7 +50,8 @@ export default function ControlPanel(props) {
     if (clickedTile !== null) {
       setCurrent(modelTiles[clickedTile]["file"]);
     }
-  }, [clickedTile]);
+    setReplacement("");
+  }, [clickedTile, modelTiles]);
 
   // ---------------------
   // save file functions
@@ -62,10 +65,6 @@ export default function ControlPanel(props) {
     saveFile( new Blob( [ text ], { type: 'text/plain' } ), filename );
   }
 
-  function saveArrayBuffer( buffer, filename ) {
-    saveFile( new Blob( [ buffer ], { type: 'application/octet-stream' } ), filename );
-  }
-  
   // numDownload change ~= set download flag
   useEffect(() => {
     if (numDownload > 0) {
@@ -86,16 +85,7 @@ export default function ControlPanel(props) {
   }, [numDownload]);
 
   function requestGeneration() {
-    console.log("clicked generate");
-    
-    // -> local testing
-    // const domain = "http://127.0.0.1";
-    // -> server testing
-    // const domain = "3.132.124.203";
-    // -> prod
-    const domain = "https://shadydomain.click";
-    
-    const generateUrl = new URL(`${domain}:8080/generate`);
+    const generateUrl = new URL(`${DOMAIN}:8080/generate`);
     const postData = {
       "scale": {
         "x": scaleX,
@@ -174,7 +164,8 @@ export default function ControlPanel(props) {
           className="control-panel-item"
         />
       </Grid>
-      { clickedTile &&
+      <WaterSettings />
+      { clickedTile !== null &&
         <Fragment>
           <Grid item>
             <Typography variant="h6">
@@ -188,6 +179,7 @@ export default function ControlPanel(props) {
               onChange={(event, newValue) => {
                 setReplacement(newValue["mesh"]);
               }}
+              isOptionEqualToValue={(option, value) => option["mesh"] === value}
               renderInput={(params) => <TextField {...params} />}
             />
             <ButtonGroup
@@ -221,8 +213,11 @@ export default function ControlPanel(props) {
               <Tooltip title="Replace">
                 <IconButton
                   onClick={() => {
-                    modelTiles[clickedTile]["file"] = replacement;
-                    setModelTiles([...modelTiles]);
+                    if (replacement !== "" && replacement !== "none") {
+                      modelTiles[clickedTile]["file"] = replacement;
+                      setModelTiles([...modelTiles]);
+                      setCurrent(replacement);
+                    }
                   }}
                 >
                   <SwapHorizIcon />
@@ -263,10 +258,12 @@ export default function ControlPanel(props) {
           Download
         </Button>
       </Grid> 
-      {(props.isLoggedIn) &&       
-      <Grid item>
-        <SavedDialogue userEmail={props.userEmail} modelTiles={modelTiles} />
-      </Grid>}
+      {
+        (props.isLoggedIn) &&       
+        <Grid item>
+          <SavedDialogue userEmail={props.userEmail} modelTiles={modelTiles} />
+        </Grid>
+      }
     </Grid>
   );
 }

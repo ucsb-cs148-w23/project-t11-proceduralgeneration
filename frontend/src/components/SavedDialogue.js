@@ -2,10 +2,12 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
+import { TextField, Grid } from '@mui/material';
 // import DialogContent from '@mui/material/DialogContent';
 // import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import { DOMAIN } from "../constants.js";
 // import { TransitionProps } from '@mui/material/transitions';
 
 const Transition = React.forwardRef(function Transition(
@@ -17,6 +19,8 @@ const Transition = React.forwardRef(function Transition(
 
 export default function AlertDialogSlide(props) {
   const [open, setOpen] = React.useState(false);
+  // const [modelName, setModelName] = React.useState();
+  const modelName = React.useRef('');
 
 //   const handleClickOpen = () => {
 //     setOpen(true);
@@ -27,18 +31,13 @@ export default function AlertDialogSlide(props) {
     // pass in email & json of vertices
     // console.log("user is saving a model");
   
-    // -> local testing
-    const domain = "http://127.0.0.1"
-    // -> server testing
-    // const domain = "3.132.124.203"
-    // -> prod
-    // const domain = "https://deez.mturk.monster"
-    
-    const saveModelUrl = new URL(`${domain}:8080/save_model`);
+    const saveModelUrl = new URL(`${DOMAIN}:8080/save_model`);
     // console.log(saveModelUrl);
+    console.log("model name ", modelName);
   
     const postData = {
         "email": props.userEmail,
+        "name": modelName.current.value,
         "model": props.modelTiles
     }
   
@@ -68,9 +67,21 @@ export default function AlertDialogSlide(props) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={saveModel}>
-        Save Model
-      </Button>
+      <Grid container spacing={1}>
+        <Grid item>
+          <TextField 
+            label="Model Name" 
+            placeholder="Model Name"
+            variant="outlined" 
+            inputRef={modelName}
+          />
+        </Grid>
+        <Grid item>
+          <Button variant="outlined" onClick={saveModel}>
+            Save Model
+          </Button>
+        </Grid>
+      </Grid>
       <Dialog
         open={open}
         TransitionComponent={Transition}

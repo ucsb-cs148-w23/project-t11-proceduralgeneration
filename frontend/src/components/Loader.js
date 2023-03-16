@@ -3,6 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import { ControlsContext } from '../App.js';
 import { Html, Text, PerspectiveCamera } from '@react-three/drei'
 import { useTheme } from '@mui/material/styles';
+import Lato from "../fonts/Lato-Regular.ttf";
 import './style.css'
 
 
@@ -73,15 +74,18 @@ export default function Loader(props) {
         position={[0,-1,8]}
       />
       <LoadingScreen />
-      <Text color = {theme.palette.mode === "dark" ? "white" : "black"}
-        fontSize={0.2}
+      <Text 
+        color={theme.palette.mode === "dark" ? "white" : "black"}
+        fontSize={0.1}
         position={[0,-2.75,0]}
         textAlign="center"
-        lineHeight={2}>
-          Did you know?{"\n"}{wiki}
+        lineHeight={2}
+        font={Lato}
+      >
+        Did you know?{"\n"}{wiki}
       </Text>
       <Html center>
-        <div className='loaderText'>
+        <div className='loaderText' style={{fontFamily: "Lato"}}>
           {loadText}
         </div>
       </Html>

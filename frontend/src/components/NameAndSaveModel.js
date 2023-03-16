@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useRef, useContext } from 'react';
+import { useState, useContext } from 'react';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -21,7 +21,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function SaveModel(props) {
+export default function NameAndSaveModel(props) {
   const [open, setOpen] = useState(false);
   const { 
     userEmail, 

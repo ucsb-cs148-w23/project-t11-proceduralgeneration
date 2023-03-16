@@ -6,15 +6,13 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import { ControlsContext } from '../App.js';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Divider from '@mui/material/Divider';
-import DownloadIcon from '@mui/icons-material/Download';
 import EditIcon from '@mui/icons-material/Edit';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import InputSlider from './InputSlider.js'
 import LoopIcon from '@mui/icons-material/Loop';
-import SaveModel from './SaveModel.js';
-// import SavedDialogue from './SavedDialogue.js';
+import NameAndSaveModel from './NameAndSaveModel.js'
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
@@ -27,7 +25,7 @@ import { useContext, useEffect, useRef, useState, Fragment } from 'react';
 
 export default function ControlPanel(props) {
   const { 
-    numDownload, setNumDownload,
+    numDownload,
     scaleX, setScaleX,
     scaleY, setScaleY,
     scaleZ, setScaleZ,
@@ -240,7 +238,7 @@ export default function ControlPanel(props) {
       {
         modelTiles.length > 0 &&       
         <Grid item>
-          <SaveModel />
+          <NameAndSaveModel />
         </Grid>
       }
       <Grid item >

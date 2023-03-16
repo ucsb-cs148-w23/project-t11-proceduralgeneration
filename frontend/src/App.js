@@ -100,7 +100,7 @@ function App() {
         .then(r => r.json())
         .then(data => {
           // console.log("save data: ", data);
-          setModelTiles(data.resp.tiles);
+          setModelTiles(data?.model?.tiles);
           // return data;
       });
 

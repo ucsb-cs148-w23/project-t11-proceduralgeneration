@@ -17,6 +17,7 @@ import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import WaterSettings from './WaterSettings.js'
+import { DOMAIN } from "../constants.js";
 import { defaultCollapsed } from '../defaultTiles.js';
 import { trackPromise } from 'react-promise-tracker';
 import { useContext, useEffect, useRef, useState, Fragment } from 'react';
@@ -84,16 +85,7 @@ export default function ControlPanel(props) {
   }, [numDownload]);
 
   function requestGeneration() {
-    console.log("clicked generate");
-    
-    // -> local testing
-    // const domain = "http://127.0.0.1";
-    // -> server testing
-    // const domain = "3.132.124.203";
-    // -> prod
-    const domain = "https://shadydomain.click";
-    
-    const generateUrl = new URL(`${domain}:8080/generate`);
+    const generateUrl = new URL(`${DOMAIN}:8080/generate`);
     const postData = {
       "scale": {
         "x": scaleX,

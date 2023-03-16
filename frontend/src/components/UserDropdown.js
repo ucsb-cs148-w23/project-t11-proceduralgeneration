@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { ControlsContext } from '../App.js';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from '@mui/material';
+import { DOMAIN } from "../constants.js";
 import SavedModels from './SavedModels.js';
 
 export default function UserDropdown(props) {
@@ -13,13 +14,7 @@ export default function UserDropdown(props) {
     } = useContext(ControlsContext);
     
     function getSavedModels() {
-        // const domain = "http://127.0.0.1"
-        // -> server testing
-        // const domain = "3.132.124.203"
-        // -> prod
-        const domain = "https://shadydomain.click"
-        
-        const getSavedUrl = new URL(`${domain}:8080/get_saved`);
+        const getSavedUrl = new URL(`${DOMAIN}:8080/get_saved`);
       
         const postData = {
             "email": props.userEmail

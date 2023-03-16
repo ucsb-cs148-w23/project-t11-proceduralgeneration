@@ -23,6 +23,7 @@ import {
 } from 'react';
 import { fileTileMap, defaultCollapsed, defaultFile2id } from './defaultTiles.js';
 import { usePromiseTracker } from "react-promise-tracker";
+import { DOMAIN } from "./constants.js";
 
 const dir2pos = {
   "px": [1, 0, 0],
@@ -73,14 +74,7 @@ function App() {
     const id = url.searchParams.get("modelId");
 
     if (email && id) {
-      //make get request to get model vertices 
-      // const domain = "http://127.0.0.1"
-      // -> server testing
-      // const domain = "3.132.124.203"
-      // -> prod
-      const domain = "https://shadydomain.click";
-      
-      const getUpdateNameUrl = new URL(`${domain}:8080/get_model`);
+      const getUpdateNameUrl = new URL(`${DOMAIN}:8080/get_model`);
       
       const postData = {
           "email": email,

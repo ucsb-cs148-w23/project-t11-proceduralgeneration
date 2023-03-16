@@ -48,7 +48,6 @@ function App() {
   const [tiles, setTiles] = useState(defaultCollapsed);
   const [file2id, setFile2id] = useState(defaultFile2id);
   const [name2file, setName2file] = useState(fileTileMap);
-  const [user, setUser] = useState({});
   const [clickedTile, setClickedTile] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState();
@@ -143,7 +142,6 @@ function App() {
     // console.log("encoded JWT ID token: "+ response.credential);
     let userObject = jwt_decode(response.credential);
     // console.log(userObject);
-    setUser(userObject);
     onSignIn(userObject.email);
     setUserEmail(userObject.email);
   }

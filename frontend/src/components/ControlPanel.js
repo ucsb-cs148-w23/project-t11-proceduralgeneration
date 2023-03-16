@@ -87,11 +87,11 @@ export default function ControlPanel(props) {
     console.log("clicked generate");
     
     // -> local testing
-    const domain = "http://127.0.0.1";
+    // const domain = "http://127.0.0.1";
     // -> server testing
     // const domain = "3.132.124.203";
     // -> prod
-    // const domain = "https://shadydomain.click";
+    const domain = "https://shadydomain.click";
     
     const generateUrl = new URL(`${domain}:8080/generate`);
     const postData = {

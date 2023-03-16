@@ -8,7 +8,6 @@ export default function LogIn() {
   const { 
     setUserEmail,
     setLoggedIn,
-    setUser,
   } = useContext(ControlsContext);
 
   function onSignIn(user_email) {
@@ -32,10 +31,7 @@ export default function LogIn() {
   }
 
   function handleCallbackResponse(response){
-    // console.log("encoded JWT ID token: "+ response.credential);
     let userObject = jwt_decode(response.credential);
-    // console.log(userObject);
-    setUser(userObject);
     onSignIn(userObject.email);
     setUserEmail(userObject.email);
   }
@@ -44,11 +40,7 @@ export default function LogIn() {
     console.log(error);
   };
 
-  // const { loginBoxRef } = useContext(ControlsContext);
-
-
   return (
-    // <Box ref={loginBoxRef} ></Box>
     <GoogleLogin onSuccess={handleCallbackResponse} onError={errorMessage} />
   )
 }

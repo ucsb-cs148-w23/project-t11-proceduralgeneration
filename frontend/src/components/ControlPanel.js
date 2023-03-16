@@ -95,7 +95,7 @@ export default function ControlPanel(props) {
         "z": scaleZ
       },
       "expand_rotation": true,
-      "tile_data": defaultCollapsed
+      "tile_data": tiles
     };
     
     trackPromise(

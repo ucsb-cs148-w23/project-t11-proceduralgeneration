@@ -219,7 +219,7 @@ function App() {
                           }
                         </group>
                         {
-                          clickedTile &&
+                          clickedTile !== null &&
                           <mesh position={modelTiles[clickedTile]["position"]} scale={2.05}>
                             <boxGeometry />
                             <meshPhongMaterial color="#ff0000" opacity={0.1} transparent />

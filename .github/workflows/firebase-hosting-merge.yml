@@ -14,7 +14,7 @@ jobs:
       - run: cd ./frontend; npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          entryPoint: ./frontend
+          entryPoint: "./frontend"
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HELLOWORLD_66BB0 }}'
           channelId: live

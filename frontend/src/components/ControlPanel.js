@@ -1,17 +1,18 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { ControlsContext } from '../App.js';
 import DeleteIcon from '@mui/icons-material/Delete';
-import DownloadIcon from '@mui/icons-material/Download';
+import Divider from '@mui/material/Divider';
 import EditIcon from '@mui/icons-material/Edit';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import InputSlider from './InputSlider.js'
 import LoopIcon from '@mui/icons-material/Loop';
-import SavedDialogue from './SavedDialogue.js';
+import NameAndSaveModel from './NameAndSaveModel.js'
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
@@ -24,13 +25,14 @@ import { useContext, useEffect, useRef, useState, Fragment } from 'react';
 
 export default function ControlPanel(props) {
   const { 
-    numDownload, setNumDownload,
+    numDownload,
     scaleX, setScaleX,
     scaleY, setScaleY,
     scaleZ, setScaleZ,
     modelTiles, setModelTiles,
     setShowTileSettings,
     clickedTile, setClickedTile,
+    modelName, 
     tiles,
     meshRef
   } = useContext(ControlsContext);
@@ -74,7 +76,7 @@ export default function ControlPanel(props) {
         (gltf) => {
           const output = JSON.stringify(gltf, null, 2);
           console.log('File gltf stringified', output);
-          saveString(output, 'model.gltf');
+          saveString(output, modelName + '.gltf');
         }, 
         (error) => {
           console.log('Error when parsing', error);
@@ -111,6 +113,7 @@ export default function ControlPanel(props) {
           data["tiles"][i]["idx"] = i;
         }
         setModelTiles(data["tiles"]);
+        setClickedTile(null);
         // console.log(data);
         // console.log("model tiles:", modelTiles)
       }
@@ -124,9 +127,6 @@ export default function ControlPanel(props) {
     }
   }
 
-  function requestDownload(){
-    setNumDownload(numDownload + 1);
-  }
 
   return (
     <Grid 
@@ -168,7 +168,14 @@ export default function ControlPanel(props) {
       { clickedTile !== null &&
         <Fragment>
           <Grid item>
-            <Typography variant="h6">
+            <Divider />
+            <Typography 
+              variant="h6"
+              sx={{
+                marginTop: 2,
+                marginBottom: 2
+              }}
+            >
               Selected Tile
             </Typography>
             <Autocomplete
@@ -228,42 +235,41 @@ export default function ControlPanel(props) {
         </Fragment>
       }
       <Grid item></Grid>
-      <Grid item >
-        <Button 
-          variant="outlined" 
-          startIcon={<EditIcon />}
-          onClick={() => {
-            setShowTileSettings(true);
-            setClickedTile(null);
-          }}
-        >
-          Customize
-        </Button>
-      </Grid>
-      <Grid item >
-        <Button 
-          variant="outlined" 
-          startIcon={<LoopIcon />}
-          onClick={requestGeneration}
-        >
-          Generate
-        </Button>
-      </Grid>
-      <Grid item >
-        <Button 
-          variant="outlined" 
-          startIcon={<DownloadIcon />}
-          onClick={requestDownload}
-        >
-          Download
-        </Button>
-      </Grid> 
       {
-        (props.isLoggedIn) &&       
+        modelTiles.length > 0 &&       
         <Grid item>
-          <SavedDialogue userEmail={props.userEmail} modelTiles={modelTiles} />
+          <NameAndSaveModel />
         </Grid>
       }
+      <Grid item >
+        <Box 
+          display="flex"
+          sx={{
+            marginTop: 5
+          }}
+        >
+          <Button 
+            variant="outlined" 
+            startIcon={<EditIcon />}
+            onClick={() => {
+              setShowTileSettings(true);
+              setClickedTile(null);
+            }}
+            sx={{
+              marginRight: 1
+            }}
+          >
+            Customize
+          </Button>
+          <Button 
+            variant="outlined" 
+            startIcon={<LoopIcon />}
+            onClick={requestGeneration}
+          >
+            Generate
+          </Button>
+        </Box>
+      </Grid>
     </Grid>
   );
 }

@@ -151,7 +151,6 @@ function App() {
         loginBoxRef,
         promiseInProgress,
         showWater, setShowWater,
-        user, setUser,
         loggedIn, setLoggedIn,
         userEmail, setUserEmail,
       }}

@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Divider from '@mui/material/Divider';
+import FileCopyIcon from '@mui/icons-material/FileCopy';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
@@ -21,6 +22,7 @@ import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import UploadTile from './UploadTile.js';
+import ConfigFile from './ConfigFile.js';
 import WaterSettings from './WaterSettings.js'
 
 // order for rotation += 1
@@ -44,6 +46,7 @@ export default function TileSettings() {
   } = useContext(ControlsContext);
 
   const [openAddTile, setOpenAddTile] = useState(false);
+  const [openConfigFile, setOpenConfigFile] = useState(false);
   const [w, setW] = useState(1);
   const [addNeighborMode, setAddNeighborMode] = useState(false);
   const [newNeighborDirection, setNewNeighborDirection] = useState(null);
@@ -69,6 +72,7 @@ export default function TileSettings() {
     return fmtd;
   }
 
+
   function updateWeight(w) {
     const tid = file2id[tile];
     tiles[tid]["weight"] = w;
@@ -77,12 +81,10 @@ export default function TileSettings() {
   }
   
   function toggleTileInclusion() {
-    // console.log("new incude value = " + !tileInclusion);
     const tid = file2id[tile];
     tiles[tid]["include"] = !tileInclusion;
     setTileInclusion(!tileInclusion);
     setTiles(tiles);
-    console.log(tiles);
   }
 
   function toggleGroundStatus() {
@@ -115,7 +117,6 @@ export default function TileSettings() {
     // neighbor to target
     const neighbors2 = tiles[nid]["valid_neighbors"];
     let neighborDir = oppositeDirection[newNeighborDirection];
-    // console.log("neighborDir: ", neighborDir);
     // get initial rotation number corresponding to neighbor -> target direction
     const remainingRotations = (4 - newNeighborRotation) % 4;
     if (neighborDir === "pz" || neighborDir === "nz") {
@@ -163,8 +164,15 @@ export default function TileSettings() {
           >
             New Tile
           </Button>
+          <Button 
+            startIcon={<FileCopyIcon />}
+            onClick={() => setOpenConfigFile(true)}
+          >
+            Config File
+          </Button>
         </ButtonGroup>
         <UploadTile open={openAddTile} setOpen={setOpenAddTile} />
+        <ConfigFile open={openConfigFile} setOpen={setOpenConfigFile} />
       </Grid>
       <Grid item>
         <Typography 
@@ -178,8 +186,6 @@ export default function TileSettings() {
           id="combo-box-demo"
           options={Object.values(tiles)}
           onChange={(event, newValue) => {
-            // console.log(newValue);
-            // console.log(newValue["mesh"]);
             setTile(newValue["mesh"]);
             setNeighbor(null);
             setW(newValue["weight"] || 1);
@@ -240,7 +246,9 @@ export default function TileSettings() {
                 <Autocomplete
                   disablePortal
                   options={getNeighbors()}
+                  isOptionEqualToValue={(option, value) => option.label === value.label}
                   onChange={(event, newValue) => {
+                    console.log("new neighbor value: ", newValue);
                     setNeighbor(newValue);
                   }}
                   renderInput={(params) => <TextField {...params} label="Neighbor" />}

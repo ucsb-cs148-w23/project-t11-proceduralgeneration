@@ -73,7 +73,7 @@ export default function Loader(props) {
         position={[0,-1,8]}
       />
       <LoadingScreen />
-      <Text color = {theme.palette.mode == "dark" ? "white" : "black"}
+      <Text color = {theme.palette.mode === "dark" ? "white" : "black"}
         fontSize={0.2}
         position={[0,-2.75,0]}
         textAlign="center"

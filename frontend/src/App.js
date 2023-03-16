@@ -47,7 +47,6 @@ function App() {
   const [tiles, setTiles] = useState(defaultCollapsed);
   const [file2id, setFile2id] = useState(defaultFile2id);
   const [name2file, setName2file] = useState(fileTileMap);
-  const [user, setUser] = useState({});
   const [clickedTile, setClickedTile] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState();
@@ -108,7 +107,6 @@ function App() {
 
   }
   
-
   useEffect(() => {
 
     getUrlParams();

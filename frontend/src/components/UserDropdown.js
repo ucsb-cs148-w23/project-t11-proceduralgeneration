@@ -37,7 +37,8 @@ export default function UserDropdown(props) {
   const [alertMsg, setAlertMsg] = useState('');
 
   const { 
-    setLoggedIn
+    setLoggedIn,
+    name2file
   } = useContext(ControlsContext);
   
   function getSavedModels() {
@@ -47,6 +48,8 @@ export default function UserDropdown(props) {
       "email": props.userEmail
     }
     
+    let missingTiles = new Set();
+
     fetch(getSavedUrl, {
       method: 'POST',
       mode: 'cors',
@@ -57,7 +60,27 @@ export default function UserDropdown(props) {
     })
       .then(r => r.json())
       .then(data => {
-        setSavedModels(data.models);
+        let cpy = {};
+        Object.entries(data.models).forEach(([id, model]) => {
+          let ok = true;
+          for (let i = 0; i < model.tiles.length; i++) {
+            if (!(model.tiles[i].file in name2file)) {
+              ok = false;
+              missingTiles.add(model.tiles[i].file);
+            }
+          }
+          if (ok) {
+            cpy[id] = model;
+          }
+        });
+        missingTiles = [...missingTiles];
+        if (missingTiles.length > 0) {
+          setAlertMsg(
+            `The following tiles are missing from your current instance: ${missingTiles.join(', ')}. `
+            + `Please upload these models to view the models containing them.`
+          );
+        }
+        setSavedModels(cpy);
         setOpen(true);
         return data.models;
     });

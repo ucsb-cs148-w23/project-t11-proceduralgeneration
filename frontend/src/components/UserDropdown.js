@@ -1,10 +1,5 @@
 import { useState, useContext } from 'react';
-<<<<<<< HEAD
 import { ControlsContext } from '../Root.js';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from '@mui/material';
-=======
-import { ControlsContext } from '../App.js';
 import { 
   Alert,
   FormControl, 
@@ -16,7 +11,6 @@ import {
   Box,
   Typography
 } from '@mui/material';
->>>>>>> main
 import { DOMAIN } from "../constants.js";
 import SavedModels from './SavedModels.js';
 

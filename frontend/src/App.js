@@ -17,31 +17,24 @@ import {
 } from 'react';
 import { DOMAIN, DIR2POS } from "./constants.js";
 
-const ControlsContext = createContext();
 
 function App() {
 
   const {
-    scaleX, setScaleX,
-    scaleY, setScaleY,
-    scaleZ, setScaleZ,
+    scaleX,
+    scaleZ,
     modelTiles, setModelTiles,
-    numDownload, setNumDownload,
-    showTileSettings, setShowTileSettings,
-    tile, setTile,
-    tiles, setTiles,
-    file2id, setFile2id,
-    name2file, setName2file,
-    neighbor, setNeighbor,
-    clickedTile, setClickedTile,
-    colorMode,
+    showTileSettings,
+    tile,
+    tiles,
+    name2file,
+    neighbor,
+    clickedTile,
     meshRef,
-    loginBoxRef,
     promiseInProgress,
-    showWater, setShowWater,
-    loggedIn, setLoggedIn,
-    userEmail, setUserEmail,
-    modelName, setModelName
+    showWater,
+    loggedIn,
+    userEmail,
   } = useContext(ControlsContext);
 
   function getUrlParams() {

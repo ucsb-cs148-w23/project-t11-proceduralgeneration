@@ -1,6 +1,6 @@
 import './style.css';
 import Image1 from '../resources/FrontPage.png'
-import Image2 from '../resources/ErrorPage.png'
+import Image2 from '../resources/team.png'
 import Image3 from '../resources/p1.png'
 import Image4 from '../resources/p2.png'
 import Image5 from '../resources/p3.png'
@@ -96,7 +96,7 @@ function Contents(){
             <img src={Image10} className="Img"/>
                 <p>Click the sign-in button, to choose the Google account you want to choose to log in. Then you can upload your own models for creating city models, or you can save your generated city models to your accounts.</p>
         <h2 id="header2-3">Meet the Team</h2>
-            <img src={Image1} className="Img"/>
+            <img src={Image2} className="Img"/>
             <p></p>
       </div>
     );

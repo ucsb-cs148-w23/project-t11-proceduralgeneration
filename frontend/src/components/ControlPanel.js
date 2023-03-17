@@ -167,10 +167,7 @@ export default function ControlPanel(props) {
             <Divider />
             <Typography 
               variant="h6"
-              sx={{
-                marginTop: 2,
-                marginBottom: 2
-              }}
+              sx={{marginTop: 2, marginBottom: 2}}
             >
               Selected Tile
             </Typography>
@@ -240,9 +237,7 @@ export default function ControlPanel(props) {
       <Grid item >
         <Box 
           display="flex"
-          sx={{
-            marginTop: 3
-          }}
+          sx={{marginTop: 3}}
         >
           <Button 
             variant="outlined" 
@@ -251,9 +246,7 @@ export default function ControlPanel(props) {
               setShowTileSettings(true);
               setClickedTile(null);
             }}
-            sx={{
-              marginRight: 1
-            }}
+            sx={{marginRight: 1}}
           >
             Customize
           </Button>

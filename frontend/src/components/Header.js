@@ -13,6 +13,8 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import LogIn from './LogIn.js';
 import UserDropdown from './UserDropdown.js'
 
+import NavBar from './NavBar';
+
 export default function Header(props) {
   const { colorMode } = useContext(ControlsContext);
   const theme = useTheme();
@@ -37,6 +39,7 @@ export default function Header(props) {
       {/* if is logged in, show user dropdown else show login */}
       
       {(props.isLoggedIn) ? <UserDropdown userEmail={props.userEmail} /> : <LogIn />}
+      <NavBar></NavBar>
       <Box
         sx={{
           display: 'flex',

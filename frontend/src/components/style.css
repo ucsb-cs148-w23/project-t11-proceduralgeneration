@@ -4,3 +4,43 @@
     width: 200px;
     text-align: center;
 }
+
+.NavBar ul li{
+    display: inline;
+    list-style-type: none;
+    margin-top: 1em;
+    margin-bottom: 1 em;
+    padding-right: 20px;
+}
+
+.About-header {
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.NoMatch {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 50%;
+    width: 50%;
+}
+
+.NoMatch .Img {
+    max-height: 80%;
+    max-width: 60%;
+}
+
+.NoMatch .ErrorText {
+    font-size: 80px;
+}

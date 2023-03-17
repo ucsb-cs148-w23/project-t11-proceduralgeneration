@@ -7,4 +7,4 @@ Last updated: 26.01.2023
 - `cd backend`
 - either 
   1. `flask run --host=0.0.0.0 --port=8080`
-  2. `python app.py`
+  2. `python app.py --dev`

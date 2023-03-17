@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { ControlsContext } from '../App.js';
+import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -31,6 +32,7 @@ export default function UploadTile(props) {
 
   const [file, setFile] = useState();
   const [symmetry, setSymmetry] = useState(-1);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
 
   function addNewTile(filename, fileObject) {
     // - create new id
@@ -61,6 +63,7 @@ export default function UploadTile(props) {
       }
     };
     setTiles(tiles);
+    setUploadSuccess(true);
   }
 
   function handleFileChange(e) {
@@ -77,11 +80,16 @@ export default function UploadTile(props) {
     addNewTile(file.name, file);
   }
 
+  function onClose() {
+    props.setOpen(false);
+    setUploadSuccess(false);
+  }
+
   return (
     <div>
       <Modal
         open={props.open}
-        onClose={() => {props.setOpen(false)}}
+        onClose={onClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -143,6 +151,12 @@ export default function UploadTile(props) {
                 {file ? file.name : "No file selected"}
               </Typography>
             </Grid>
+            {
+              uploadSuccess &&
+              <Grid item>
+                <Alert severity="success">Uploaded Succesfully!</Alert>
+              </Grid>
+            }
           </Grid>
         </Box>
       </Modal>

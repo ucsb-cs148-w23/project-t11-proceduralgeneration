@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext, Suspense } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { Grid, Button, TextField } from '@mui/material';
 import ModelTile from './ModelTile.js';
 import Paper from '@mui/material/Paper';
@@ -7,6 +7,7 @@ import { OrbitControls } from '@react-three/drei';
 import { fileTileMap } from '../defaultTiles.js';
 import { ControlsContext } from '../App.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
+import { DOMAIN } from '../constants.js';
 
 
 export default function SavedModels(props) {
@@ -18,13 +19,7 @@ export default function SavedModels(props) {
         setModelName(event.target.value);
         //make a post request to change in backend too
 
-        const domain = "http://127.0.0.1"
-        // -> server testing
-        // const domain = "3.132.124.203"
-        // -> prod
-        // const domain = "https://deez.mturk.monster"
-        
-        const getUpdateNameUrl = new URL(`${domain}:8080/update_model_name`);
+        const getUpdateNameUrl = new URL(`${DOMAIN}:8080/update_model_name`);
       
         const postData = {
             "email": props.userEmail,
@@ -71,7 +66,7 @@ export default function SavedModels(props) {
             const url = new URL(window.location.href);
             url.searchParams.append("modelId", props.id);
             url.searchParams.append("userEmail", props.userEmail);
-            console.log(url);
+            // console.log(url);
             
             //should await this...
             navigator.clipboard.writeText(url.toString());

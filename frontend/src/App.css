@@ -1,6 +1,4 @@
 .App {
-  /* text-align: center; */
-  /* height: 100%; */
   display: flex;
   flex-direction: column;
 }
@@ -99,18 +97,6 @@
   color: #61dafb;
 }
 
-
-.header-container {
-  /* padding: 60px;
-  text-align: center;
-  font-size: 30px;
-  height: 25%; */
-}
-
-.model {
-  
-}
-
 .saved-model {
   z-index: 8388639;
 }
@@ -157,9 +143,7 @@
   line-height: 38px;
 }
 
-
 .content {
-  /* flexbox */
   display: flex;
   padding: 2%;
   flex-direction: row;
@@ -175,7 +159,3 @@
   padding: 2%;
   flex: 1;
 }
-/*
-.control-panel-item {
-  margin-bottom: 1em;
-} */

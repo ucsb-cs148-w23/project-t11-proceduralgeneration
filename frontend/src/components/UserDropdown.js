@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { ControlsContext } from '../App.js';
+import { ControlsContext } from '../Root.js';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from '@mui/material';
 import { DOMAIN } from "../constants.js";

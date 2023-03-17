@@ -11,7 +11,7 @@ import Divider from '@mui/material/Divider';
 import { TextField, Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Slide from '@mui/material/Slide';
-import { ControlsContext } from '../App.js';
+import { ControlsContext } from '../Root.js';
 import { DOMAIN } from "../constants.js";
 
 const Transition = React.forwardRef(function Transition(
@@ -34,10 +34,8 @@ export default function NameAndSaveModel(props) {
   function saveModel() {
     // save model to user by calling endpoinit
     // pass in email & json of vertices
-    // console.log("user is saving a model");
   
     const saveModelUrl = new URL(`${DOMAIN}:8080/save_model`);
-    console.log("model name ", modelName);
   
     const postData = {
         "email": userEmail,

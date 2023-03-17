@@ -3,7 +3,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import { ControlsContext } from '../App.js';
+import { ControlsContext } from '../Root.js';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Divider from '@mui/material/Divider';
 import EditIcon from '@mui/icons-material/Edit';
@@ -19,7 +19,6 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import WaterSettings from './WaterSettings.js'
 import { DOMAIN } from "../constants.js";
-import { defaultCollapsed } from '../defaultTiles.js';
 import { trackPromise } from 'react-promise-tracker';
 import { useContext, useEffect, useRef, useState, Fragment } from 'react';
 
@@ -75,7 +74,6 @@ export default function ControlPanel(props) {
         meshRef.current, 
         (gltf) => {
           const output = JSON.stringify(gltf, null, 2);
-          console.log('File gltf stringified', output);
           saveString(output, modelName + '.gltf');
         }, 
         (error) => {
@@ -114,8 +112,6 @@ export default function ControlPanel(props) {
         }
         setModelTiles(data["tiles"]);
         setClickedTile(null);
-        // console.log(data);
-        // console.log("model tiles:", modelTiles)
       }
     ));
   }

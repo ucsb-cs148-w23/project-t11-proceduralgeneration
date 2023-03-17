@@ -6,6 +6,80 @@
     font-family: 'Lato';
 }
 
+.toc {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 48px;
+    width: 20%;
+    min-width: 20%;
+    padding-left: 2%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    margin: 8px;
+    align-self: flex-start;
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+}
+
+.toc ul {
+    padding-bottom: 20%;
+}
+
+.toc .a1Black, .toc .a2Black {
+    color: black;
+    text-decoration: none;
+}
+
+.toc .a1White, .toc .a2White {
+    color: white;
+    text-decoration: none;
+}
+
+.c {
+    width: 78%;
+    min-width: 78%;
+    padding: 2%;
+}
+
+.c h1 {
+    text-align: center;
+}
+
+.c #header2-1 {
+    padding-top: 1%;
+}
+
+.c h2 {
+    padding-top: 10%;
+}
+
+.c h3 {
+    padding-top: 4%;
+}
+
+.c h2, .c h3 {
+    scroll-margin-top: 16px;
+}
+
+/* Safari-only */
+@supports (-webkit-hyphens:none) {
+    .c h2, .c h3 {
+        padding-top: 16px;
+        margin-top: -16px;
+    }
+}
+
+.NavBar .aBlack {
+    color: black;
+    text-decoration: none;
+}
+
+.NavBar .aWhite {
+    color: white;
+    text-decoration: none;
+}
+
 .NavBar ul li{
     display: inline;
     list-style-type: none;
@@ -22,6 +96,12 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
+}
+
+.About .Layout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .NoMatch {

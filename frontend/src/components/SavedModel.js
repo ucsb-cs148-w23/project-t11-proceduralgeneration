@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { fileTileMap } from '../defaultTiles.js';
-import { ControlsContext } from '../App.js';
+import { ControlsContext } from '../Root.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 import { DOMAIN } from '../constants.js';
 
@@ -59,27 +59,21 @@ export default function SavedModels(props) {
     }
 
     function exportLink() {
-        //TODO
-        // create url with id, user email
 
         if (props.userEmail && props.id) {
             const url = new URL(window.location.href);
             url.searchParams.append("modelId", props.id);
             url.searchParams.append("userEmail", props.userEmail);
-            // console.log(url);
             
-            //should await this...
             navigator.clipboard.writeText(url.toString());
             window.alert("Copied sharable link " + url.toString() + " to clipboard :D");
-
 
         } else {
             window.alert("Couldn't create sharable link :(");
         }
     }
 
-    // each saved model has a box for the model (small box), button to download, button to share a link
-    // later add ability to give model a name (reconfigure from list to dict in backend), delete model
+    
     useEffect(() => {
         if (numDownload > 0) {
           const exporter = new GLTFExporter();

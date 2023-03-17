@@ -1,10 +1,9 @@
 import { useContext } from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import Box from '@mui/material/Box';
-import { ControlsContext } from '../App.js';
+import { ControlsContext } from '../Root.js';
 import { useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -32,6 +31,7 @@ export default function Header(props) {
           align="center"
           noWrap
           sx={{ flex: 1 }}
+          className="title"
         >
           3D Environment Procedural Generator
       </Typography>

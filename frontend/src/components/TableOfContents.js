@@ -41,7 +41,7 @@ function Headings(props){
     const theme = useTheme();
     
     return (
-        <ul>
+        <ul class="tocUlOuter">
         {props.headings.map((heading) => (
             <li key={heading.id}>
             <a
@@ -57,7 +57,7 @@ function Headings(props){
                 {heading.title}
             </a>
             {heading.items.length > 0 && (
-                <ul>
+                <ul class="tocUlInner">
                 {heading.items.map((child) => (
                     <li key={child.id}>
                     <a 

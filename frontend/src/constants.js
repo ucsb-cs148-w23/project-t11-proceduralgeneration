@@ -12,4 +12,5 @@ const DIR2POS = {
   "py": [0, 0, 1],
   "ny": [0, 0, -1]
 };
-export { DOMAIN, DIR2POS };
+const HOMEURL = "https://helloworld-66bb0.web.app/";
+export { DOMAIN, DIR2POS, HOMEURL };

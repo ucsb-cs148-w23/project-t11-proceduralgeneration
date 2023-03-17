@@ -37,3 +37,4 @@ Werkzeug==2.2.2
 zipp==3.11.0
 parameterized==0.8.1
 pymongo==4.2.0
+jszip==3.10.1

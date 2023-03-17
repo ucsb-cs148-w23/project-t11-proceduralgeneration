@@ -29,6 +29,13 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
+const nextLoadText = {
+  "Loading": "Loading .",
+  "Loading .": "Loading . .",
+  "Loading . .": "Loading . . .",
+  "Loading . . .": "Loading"
+};
+
 export default function Loader(props) {
     
   const { promiseInProgress } = useContext(ControlsContext);
@@ -46,20 +53,7 @@ export default function Loader(props) {
       setWiki(wikis[getRandomInt(wikis.length)]);
     }, 1500);
     const interval = setInterval(() => {
-      setLoadText(loadText => {
-        if ( loadText==="Loading" ){
-          setLoadText("Loading .");
-        }
-        if( loadText==="Loading ." ){
-          setLoadText("Loading . .");
-        }
-        if( loadText==="Loading . ." ){
-            setLoadText("Loading . . .");
-        }
-        if( loadText==="Loading . . ." ){
-          setLoadText("Loading");
-        }
-      });
+      setLoadText(loadText => {setLoadText(nextLoadText[loadText])});
     }, 300);
     return () => {
         clearInterval(interval_text);
@@ -67,7 +61,8 @@ export default function Loader(props) {
     };
   }, []);
 
-  return ( promiseInProgress && (
+  return ( 
+    promiseInProgress && 
     <mesh>
       <PerspectiveCamera 
         makeDefault
@@ -90,5 +85,5 @@ export default function Loader(props) {
         </div>
       </Html>
     </mesh>
-  ));
+  );
 }

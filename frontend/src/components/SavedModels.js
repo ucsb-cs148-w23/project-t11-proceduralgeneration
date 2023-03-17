@@ -4,19 +4,20 @@ import SavedModel from './SavedModel.js';
 
 
 export default function SavedModels(props) {
-    return (
-        <div className="saved-models-dialog">
-            <Grid container spacing={4} fullWidth>
-                {Object.entries(props.savedModels).map(([id, model]) => (
-                    <Grid item>
-                        <SavedModel
-                            userEmail={props.userEmail}
-                            model={model}
-                            id={id}
-                        />
-                    </Grid>
-                ))}
-            </Grid>
-        </div>
-    )
+  return (
+    <Grid container spacing={4} direction="column" alignItems="center">
+      {Object.entries(props.savedModels).map(([id, model]) => (
+        <Grid item>
+          <SavedModel
+            savedModels={props.savedModels}
+            setSavedModels={props.setSavedModels}
+            userEmail={props.userEmail}
+            model={model}
+            id={id}
+            setAlertMsg={props.setAlertMsg}
+          />
+        </Grid>
+      ))}
+    </Grid>
+  )
 }

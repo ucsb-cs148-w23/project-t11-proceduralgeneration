@@ -112,7 +112,6 @@ export default function UploadTile(props) {
               value={symmetry}
               onChange={(event) => {
                 const value = event.target.value;
-                console.log("value", value);
                 setSymmetry(value);
               }}
             >

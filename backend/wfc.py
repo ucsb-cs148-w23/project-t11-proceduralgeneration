@@ -10,9 +10,12 @@ import random
 # constants
 
 DIRECTIONS = [
-    (1, 0, 0, "px"),  (-1, 0, 0, "nx"),
-    (0, 0, 1, "py"),  (0, 0, -1, "ny"),
-    (0, 1, 0, "pz"),  (0, -1, 0, "nz")
+    (1, 0, 0, "px"),
+    (-1, 0, 0, "nx"),
+    (0, 0, 1, "py"),
+    (0, 0, -1, "ny"),
+    (0, 1, 0, "pz"),
+    (0, -1, 0, "nz"),
 ]
 MESH_FILE_DIRECTORY = "../CityModels/"
 DEFAULT_TILE_PATH = "../prototypes/p2.json"
@@ -27,15 +30,16 @@ TILE_SIZE = 2
 # -----------------------------
 # solver class
 
+
 class EnvironmentGenerator:
     def __init__(
-        self, 
-        shape, 
+        self,
+        shape,
         tile_data,
-        height_option_map=None, 
+        height_option_map=None,
         # empty_tile="proto_28",
         empty_tile="m9_r0",
-        prep_meshes=False
+        prep_meshes=False,
     ):
         self.tile_data = tile_data
         if prep_meshes:
@@ -43,31 +47,36 @@ class EnvironmentGenerator:
         self.empty_tile = empty_tile
 
         # handle height option mapping
-        self.height_option_map = height_option_map or copy.deepcopy(DEFAULT_HEIGHT_OPTION_MAP)
+        self.height_option_map = height_option_map or copy.deepcopy(
+            DEFAULT_HEIGHT_OPTION_MAP
+        )
         self.DEFAULT_HEIGHT_OPTIONS = set(self.height_option_map.pop("default"))
-        self.height_option_map = {int(k): set(v) for k, v in self.height_option_map.items()}
+        self.height_option_map = {
+            int(k): set(v) for k, v in self.height_option_map.items()
+        }
 
         self.shape = shape
         self.grid = self._initialize_grid()
-        self.uncollapsed = set(itertools.product(
-            range(self.shape[0]),
-            range(self.shape[1]),
-            range(self.shape[2])
-        ))
+        self.uncollapsed = set(
+            itertools.product(
+                range(self.shape[0]), range(self.shape[1]), range(self.shape[2])
+            )
+        )
         self.debug = False
-    
 
     def generate(self):
         # keep collapsing until all cells are collapsed
         while len(self.uncollapsed):
             # choose collapse target
-            collapse_target_idxs = min(self.uncollapsed, key=lambda idxs: len(self._get_cell(idxs)))
+            collapse_target_idxs = min(
+                self.uncollapsed, key=lambda idxs: len(self._get_cell(idxs))
+            )
             self.uncollapsed.discard(collapse_target_idxs)
             collapse_target = self._get_cell(collapse_target_idxs)
             if len(collapse_target) == 0:
                 selected_option = "proto_28_r0"
             else:
-                # special handling of the empty tile: 
+                # special handling of the empty tile:
                 # - only select if it's the only remaining option
                 if len(collapse_target) > 1:
                     collapse_target.discard(self.empty_tile)
@@ -76,7 +85,7 @@ class EnvironmentGenerator:
                 selected_option = random.choices(
                     choices,
                     weights=[self.tile_data[opt]["weight"] for opt in choices],
-                    k=1
+                    k=1,
                 )[0]
             self._set_cell(collapse_target_idxs, {selected_option})
 
@@ -85,7 +94,7 @@ class EnvironmentGenerator:
                     f"Collapsing {collapse_target_idxs} "
                     f"to {selected_option, self.tile_data[selected_option]['mesh']}"
                 )
-            
+
             # update neighbors
             self._update_neighbors(collapse_target_idxs)
 
@@ -101,7 +110,9 @@ class EnvironmentGenerator:
                     opt = list(tile)[0]
                     if opt != self.empty_tile:
                         tile_mesh = self.tile_data[opt]["mesh"]
-                        mesh += copy.deepcopy(tile_mesh).translate((i * 2, j * 2, k * 2))
+                        mesh += copy.deepcopy(tile_mesh).translate(
+                            (i * 2, j * 2, k * 2)
+                        )
 
         return mesh
 
@@ -116,12 +127,18 @@ class EnvironmentGenerator:
                     opt = list(tile)[0]
                     file = self.tile_data[opt]["mesh"]
                     if file != "":
-                        tiles.append({
-                            "file": file,
-                            "position": [i * TILE_SIZE, j * TILE_SIZE, k * TILE_SIZE],
-                            "rotation": self.tile_data[opt]["rotation"]
-                        })
-                    
+                        tiles.append(
+                            {
+                                "file": file,
+                                "position": [
+                                    i * TILE_SIZE,
+                                    j * TILE_SIZE,
+                                    k * TILE_SIZE,
+                                ],
+                                "rotation": self.tile_data[opt]["rotation"],
+                            }
+                        )
+
         return tiles
 
     def _update_neighbors(self, idxs):
@@ -157,8 +174,8 @@ class EnvironmentGenerator:
             i, j, k, neighbor_options, direction = stack.pop()
 
             # if self.debug:
-                # n_opts = [self.tile_data[opt]["mesh"] for opt in neighbor_options]
-                # print(f"updating tile {i} {j} {k} from {direction} with new options: {neighbor_options}")
+            # n_opts = [self.tile_data[opt]["mesh"] for opt in neighbor_options]
+            # print(f"updating tile {i} {j} {k} from {direction} with new options: {neighbor_options}")
 
             target = self.grid[i][j][k]
             allowed_options = set()
@@ -173,7 +190,7 @@ class EnvironmentGenerator:
             # mark as collapsed if necessary
             if len(new_options) <= 1:
                 self.uncollapsed.discard((i, j, k))
-            
+
             # update neighbors if current tile has changed
             if len(new_options) != previous_size:
                 for dx, dy, dz, dir in DIRECTIONS:
@@ -185,7 +202,7 @@ class EnvironmentGenerator:
                         and len(self.grid[nx][ny][nz]) > 1
                     ):
                         stack.append((nx, ny, nz, new_options, dir))
-        
+
     def _prep_meshes(self):
         for data in self.tile_data.values():
             mesh_file_name = data.get("mesh", None)
@@ -197,7 +214,7 @@ class EnvironmentGenerator:
                 filepath = os.path.join(MESH_FILE_DIRECTORY, mesh_file_name)
                 mesh = o3d.io.read_triangle_mesh(filepath)
                 rotation_matrix = mesh.get_rotation_matrix_from_xyz(
-                        (0, np.pi * data["rotation"] / 2, 0)
+                    (0, np.pi * data["rotation"] / 2, 0)
                 )
                 mesh.rotate(rotation_matrix, center=(0, 0, 0))
                 data["mesh"] = mesh
@@ -208,9 +225,9 @@ class EnvironmentGenerator:
                 [
                     self.height_option_map.get(j, self.DEFAULT_HEIGHT_OPTIONS)
                     for _ in range(self.shape[2])
-                ] 
+                ]
                 for j in range(self.shape[1])
-            ] 
+            ]
             for _ in range(self.shape[0])
         ]
         return grid
@@ -233,12 +250,11 @@ class EnvironmentGenerator:
         return vertex_array
 
 
-
 if __name__ == "__main__":
     with open("beans.json") as f:
         beans = json.load(f)
     solver = EnvironmentGenerator(shape=(5, 5, 5), tile_data=beans, prep_meshes=True)
-    solver.debug = True 
+    solver.debug = True
     solver.generate()
 
     mesh = solver.assemble_mesh()

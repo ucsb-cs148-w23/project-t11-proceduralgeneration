@@ -23,7 +23,6 @@ export default function Header(props) {
       sx={{ borderBottom: 1, borderColor: 'divider' }}
     >
       <ViewInArIcon />
-
       <Typography
           component="h2"
           variant="h5"
@@ -35,8 +34,6 @@ export default function Header(props) {
         >
           3D Environment Procedural Generator
       </Typography>
-      {/* <div id="signInDiv"></div> */}
-      {/* if is logged in, show user dropdown else show login */}
       
       {(props.isLoggedIn) ? <UserDropdown userEmail={props.userEmail} /> : <LogIn />}
       <NavBar></NavBar>
@@ -56,7 +53,6 @@ export default function Header(props) {
           {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
       </Box>
-
     </Toolbar>
   );
 }

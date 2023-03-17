@@ -102,8 +102,6 @@ export default function TileSettings() {
   function addNewNeighborRelation() {
     const tid = file2id[tile];
     const nid = neighbor.id;
-    // console.log("neighbor: ", neighbor);
-    // console.log(`adding neighbor relation: ${tid} -> ${nid}`);
 
     // ----------------------
     // target to neighbor
@@ -125,7 +123,6 @@ export default function TileSettings() {
       for (let i = 0; i < directionOrder.length; i++) {
         if (directionOrder[i] === neighborDir) {
           neighborDir = i;
-          // console.log("neighborDir: ", neighborDir);
           break;
         }
       }
@@ -248,7 +245,6 @@ export default function TileSettings() {
                   options={getNeighbors()}
                   isOptionEqualToValue={(option, value) => option.label === value.label}
                   onChange={(event, newValue) => {
-                    console.log("new neighbor value: ", newValue);
                     setNeighbor(newValue);
                   }}
                   renderInput={(params) => <TextField {...params} label="Neighbor" />}
@@ -294,9 +290,6 @@ export default function TileSettings() {
                   id="combo-box-demo"
                   options={Object.values(tiles)}
                   onChange={(event, newValue) => {
-                    // console.log(newValue["mesh"]);
-                    // console.log("chose new neighbor target.val: ", event.target.value); // name
-                    // console.log("chose new neighbor newVal: ", newValue); // underlying value
                     const id = file2id[newValue["mesh"]];
                     const updated = {
                       "label": newValue["mesh"] || "none",

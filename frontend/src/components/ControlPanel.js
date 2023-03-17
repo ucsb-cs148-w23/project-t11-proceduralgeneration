@@ -74,7 +74,6 @@ export default function ControlPanel(props) {
         meshRef.current, 
         (gltf) => {
           const output = JSON.stringify(gltf, null, 2);
-          console.log('File gltf stringified', output);
           saveString(output, modelName + '.gltf');
         }, 
         (error) => {
@@ -113,8 +112,6 @@ export default function ControlPanel(props) {
         }
         setModelTiles(data["tiles"]);
         setClickedTile(null);
-        // console.log(data);
-        // console.log("model tiles:", modelTiles)
       }
     ));
   }

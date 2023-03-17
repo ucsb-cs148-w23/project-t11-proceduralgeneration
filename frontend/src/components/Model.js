@@ -5,12 +5,10 @@ import { ControlsContext } from '../App.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 
 export default function Model(props) {
-  console.log("re-render!\nlogging from Model: ", props.vertices);
   const pointsRef = useRef(props.vertices);
   var refContext = ControlsContext;
   // For testing purposes
   if(useContext(ControlsContext) === undefined){
-    console.log("null context");
     const color = "#FEFBEA";
     const numDownload = 0;
     refContext = createContext({color,numDownload});
@@ -28,9 +26,7 @@ export default function Model(props) {
     meshRef.current.geometry.attributes.position.count = props.vertexCount;
     meshRef.current.geometry.attributes.position.updateRange.count = props.vertexCount * 3
     meshRef.current.geometry.attributes.position.needsUpdate = true;
-    console.log(meshRef.current.geometry.drawRange);
     // apparently pointsRef gets updated too by this effect
-    // console.log("pointsRef: ", pointsRef);
   }, [props.vertices, props.vertexCount]);
 
   // create persistent variable, initialize once
@@ -63,7 +59,6 @@ export default function Model(props) {
         meshRef.current, 
         (gltf) => {
           const output = JSON.stringify(gltf, null, 2);
-          console.log('File gltf stringified', output);
           saveString(output, 'model.gltf');
         }, 
         (error) => {

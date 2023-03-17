@@ -66,9 +66,7 @@ export default function SavedModels(props) {
             const url = new URL(window.location.href);
             url.searchParams.append("modelId", props.id);
             url.searchParams.append("userEmail", props.userEmail);
-            // console.log(url);
             
-            //should await this...
             navigator.clipboard.writeText(url.toString());
             window.alert("Copied sharable link " + url.toString() + " to clipboard :D");
 

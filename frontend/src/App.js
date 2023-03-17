@@ -69,7 +69,6 @@ function App() {
 
   function getUrlParams() {
     const url = new URL(window.location.href);
-    // console.log(window.location.href);
     const email = url.searchParams.get("userEmail");
     const id = url.searchParams.get("modelId");
 
@@ -80,7 +79,6 @@ function App() {
           "email": email,
           "id": id,
       }
-      // console.log(postData);
       
       fetch(getUpdateNameUrl, {
           method: 'POST',
@@ -92,9 +90,7 @@ function App() {
         })
         .then(r => r.json())
         .then(data => {
-          // console.log("save data: ", data);
           setModelTiles(data?.model?.tiles);
-          // return data;
       });
 
   }

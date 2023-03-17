@@ -34,10 +34,8 @@ export default function NameAndSaveModel(props) {
   function saveModel() {
     // save model to user by calling endpoinit
     // pass in email & json of vertices
-    // console.log("user is saving a model");
   
     const saveModelUrl = new URL(`${DOMAIN}:8080/save_model`);
-    console.log("model name ", modelName);
   
     const postData = {
         "email": userEmail,

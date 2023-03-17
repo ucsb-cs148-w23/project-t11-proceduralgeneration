@@ -4,7 +4,6 @@ import SavedModel from './SavedModel.js';
 
 
 export default function SavedModels(props) {
-    // console.log("passed in: ", props.savedModels);
     return (
         <div className="saved-models-dialog">
             <Grid container spacing={4} fullWidth>

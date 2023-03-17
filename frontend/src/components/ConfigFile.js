@@ -69,7 +69,6 @@ export default function ConfigFile(props) {
 
       // read tile_models
       zip.folder("tile_models").forEach(function (relativePath, file) {
-        // console.log(relativePath, file);
         file.async("blob").then(function (data) {
           const url = URL.createObjectURL(data);
           name2file[relativePath] = url;

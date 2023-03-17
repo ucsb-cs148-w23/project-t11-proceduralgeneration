@@ -64,8 +64,7 @@ export default function SavedModels(props) {
 
   function exportLink() {
     if (props.userEmail && props.id) {
-      // const url = new URL(window.location.href);
-      const url = "https://helloworld-66bb0.web.app/";
+      const url = new URL(window.location.origin);
       url.searchParams.append("modelId", props.id);
       url.searchParams.append("userEmail", props.userEmail);
       

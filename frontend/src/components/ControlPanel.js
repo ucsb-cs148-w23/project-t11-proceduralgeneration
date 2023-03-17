@@ -19,7 +19,6 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import WaterSettings from './WaterSettings.js'
 import { DOMAIN } from "../constants.js";
-import { defaultCollapsed } from '../defaultTiles.js';
 import { trackPromise } from 'react-promise-tracker';
 import { useContext, useEffect, useRef, useState, Fragment } from 'react';
 

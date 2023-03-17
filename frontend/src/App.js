@@ -6,7 +6,6 @@ import Header from './components/Header.js'
 import Lato from "./fonts/Lato-Regular.ttf";
 import ModelTile from './components/ModelTile.js'
 import WaterPlane from './components/WaterPlane.js'
-// import onSignIn from './components/LogIn.js';
 import Loader from './components/Loader.js'
 import Paper from '@mui/material/Paper';
 import { Canvas } from '@react-three/fiber'

@@ -12,7 +12,6 @@ const Input = styled(MuiInput)`
 const DEFAULT_MIN = 0;
 const DEFAULT_MAX = 24;
 
-
 export default function InputSlider(props) {
   const handleSliderChange = (event, newValue) => {
     props.setValue(newValue);

@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { useState, useContext } from 'react';
+import { useState, useContext, Fragment } from 'react';
+import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DownloadIcon from '@mui/icons-material/Download';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogTitle from '@mui/material/DialogTitle';
 import Divider from '@mui/material/Divider';
 import { TextField, Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
@@ -14,15 +12,13 @@ import Slide from '@mui/material/Slide';
 import { ControlsContext } from '../App.js';
 import { DOMAIN } from "../constants.js";
 
-const Transition = React.forwardRef(function Transition(
-  props,
-  ref,
-) {
+const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function NameAndSaveModel(props) {
   const [open, setOpen] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const { 
     userEmail, 
     modelTiles, 
@@ -33,7 +29,7 @@ export default function NameAndSaveModel(props) {
 
   function saveModel() {
     // save model to user by calling endpoinit
-    // pass in email & json of vertices
+    // pass in email & model tiles
   
     const saveModelUrl = new URL(`${DOMAIN}:8080/save_model`);
   
@@ -53,7 +49,7 @@ export default function NameAndSaveModel(props) {
     })
       .then(r => r.json())
       .then(data => {
-        setOpen(true);
+        setShowAlert(true);
       });
   }
 
@@ -61,22 +57,27 @@ export default function NameAndSaveModel(props) {
     setNumDownload(numDownload + 1);
   }
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
     <div>
       <Divider />
       <Typography 
         variant="h6" 
-        sx={{
-          marginTop: 2,
-          marginBottom: 2
-        }}
+        sx={{ marginTop: 2, marginBottom: 2 }}
       >
         Save Model
       </Typography>
+      {
+        showAlert && 
+        <Fragment>
+          <Alert 
+            severity="info" 
+            sx={{ marginBottom: 2 }}
+            onClose={() => {setShowAlert(false)}}
+          >
+            Model Saved to Cloud!
+          </Alert>
+        </Fragment>
+      }
       <Grid container spacing={1}>
         <Grid item>
           <TextField 
@@ -110,18 +111,6 @@ export default function NameAndSaveModel(props) {
           </ButtonGroup>
         </Grid>
       </Grid>
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>{"Your model has been saved!"}</DialogTitle>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
-      </Dialog>
     </div>
   );
 }

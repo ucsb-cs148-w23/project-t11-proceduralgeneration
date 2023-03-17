@@ -22,16 +22,8 @@ import {
 } from 'react';
 import { fileTileMap, defaultCollapsed, defaultFile2id } from './defaultTiles.js';
 import { usePromiseTracker } from "react-promise-tracker";
-import { DOMAIN } from "./constants.js";
+import { DOMAIN, DIR2POS } from "./constants.js";
 
-const dir2pos = {
-  "px": [1, 0, 0],
-  "nx": [-1, 0, 0],
-  "pz": [0, 1, 0],
-  "nz": [0, -1, 0],
-  "py": [0, 0, 1],
-  "ny": [0, 0, -1]
-};
 const ControlsContext = createContext();
 
 function App() {
@@ -186,7 +178,7 @@ function App() {
                             (neighbor && (neighbor["id"] !== "m9")) &&
                             <ModelTile
                               modelPath={name2file[tiles[neighbor["id"]]["mesh"]]}
-                              position={dir2pos[neighbor["direction"]].map(x => x * 2)}
+                              position={DIR2POS[neighbor["direction"]].map(x => x * 2)}
                               rotation={[0, neighbor["rotation"] * Math.PI / 2, 0]}
                               onClick={() => null}
                             />

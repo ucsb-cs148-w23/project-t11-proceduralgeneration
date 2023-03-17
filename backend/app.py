@@ -24,23 +24,6 @@ DEFAULT_TILE_PATH = "../prototypes/target.json"
 with open(DEFAULT_TILE_PATH) as f:
     default_tile_data = json.load(f)
 
-
-@app.route("/generate_map")
-def generate_map():
-    x = request.args.get("x", default=8, type=int)
-    y = request.args.get("y", default=8, type=int)
-    z = request.args.get("z", default=8, type=int)
-
-    env_gen = EnvironmentGenerator(
-        (x, y, z), deepcopy(default_tile_data), prep_meshes=True
-    )
-    env_gen.generate()
-    mesh = env_gen.assemble_mesh()
-    vertex_array = env_gen.vertices_from_mesh(mesh)
-
-    return jsonify(vertices=vertex_array)
-
-
 @app.route("/generate", methods=["POST"])
 def generate():
     request_data = request.json
@@ -63,15 +46,6 @@ def generate():
     tiles = env_gen.format_tile_array()
 
     return jsonify(tiles=tiles)
-
-
-@app.route("/random_triangles")
-def random_triangles():
-    scale = request.args.get("scale", default=5, type=float)
-    count = request.args.get("count", default=1, type=int)
-    vertices = [random.uniform(-scale, scale) for _ in range(count * 9)]
-    return jsonify(vertices=vertices)
-
 
 @app.route("/login", methods=["POST"])
 def login_user():
@@ -129,6 +103,20 @@ def update_model_name():
         updated_user["saved_models"][model_id]["name"] = new_model_name
         records.replace_one(user_found, updated_user)
         return {"resp": "your model has been updated! :D"}
+    else:
+        return {"resp": "User not found!"}
+
+@app.route("/delete_saved_model", methods=["POST"])
+def delete_saved_model():
+    user_email = request.get_json().get("email")
+    model_id = request.get_json().get("id")
+    user_found = records.find_one({"email": user_email})
+
+    if user_found:
+        updated_user = deepcopy(user_found)
+        updated_user["saved_models"].pop(model_id, None)
+        records.replace_one(user_found, updated_user)
+        return {"resp": "your model has been deleted! :D"}
     else:
         return {"resp": "User not found!"}
 

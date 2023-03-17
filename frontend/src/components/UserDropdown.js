@@ -21,7 +21,13 @@ const style = {
   transform: 'translate(-50%, -50%)',
   bgcolor: 'background.paper',
   boxShadow: 24,
-  p: 4,
+  paddingTop: "1%",
+  paddingBottom: "1%",
+  paddingLeft: "5%",
+  paddingRight: "5%",
+  minWidth: "700px",
+  height: "80%",
+  overflow: "auto",
 };
 
 export default function UserDropdown(props) {
@@ -103,6 +109,7 @@ export default function UserDropdown(props) {
         <Modal
           open={open}
           onClose={handleClose}
+          sx={{overflow: "auto"}}
         >
           <Box sx={style} display="flex" flexDirection="column">
             <Typography variant="h4" component="h2">Saved Models</Typography>

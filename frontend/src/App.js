@@ -37,40 +37,35 @@ function App() {
     userEmail,
   } = useContext(ControlsContext);
 
-  function getUrlParams() {
-    const url = new URL(window.location.href);
-    const email = url.searchParams.get("userEmail");
-    const id = url.searchParams.get("modelId");
-
-    if (email && id) {
-      const getUpdateNameUrl = new URL(`${DOMAIN}:8080/get_model`);
-      
-      const postData = {
-          "email": email,
-          "id": id,
-      }
-      
-      fetch(getUpdateNameUrl, {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(postData)
-        })
-        .then(r => r.json())
-        .then(data => {
-          setModelTiles(data?.model?.tiles);
-      });
-
-  }
-
-  }
-  
   useEffect(() => {
+    function getUrlParams() {
+      const url = new URL(window.location.href);
+      const email = url.searchParams.get("userEmail");
+      const id = url.searchParams.get("modelId");
 
+      if (email && id) {
+        const getUpdateNameUrl = new URL(`${DOMAIN}:8080/get_model`);
+        
+        const postData = {
+            "email": email,
+            "id": id,
+        }
+        
+        fetch(getUpdateNameUrl, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+          })
+          .then(r => r.json())
+          .then(data => {
+            setModelTiles(data?.model?.tiles);
+        });
+      }
+    }
     getUrlParams();
-
   }, [])
 
   return (
@@ -78,7 +73,7 @@ function App() {
       <Header className="header" isLoggedIn={loggedIn} userEmail={userEmail} />
       <div className="content"> 
         <Paper className="canvas-container">
-            <Canvas>
+          <Canvas>
             <Loader/>  
             { !promiseInProgress && (
               <Suspense fallback={null}>
@@ -143,7 +138,7 @@ function App() {
                 }
               </Suspense>
             )}
-            </Canvas>
+          </Canvas>
         </Paper>
         {
           showTileSettings? 

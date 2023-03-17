@@ -95,7 +95,7 @@ export default function SavedModels(props) {
   }
 
   function clickDelete() {
-    const getDeleteUrl = new URL(`${DOMAIN}:8080/delete_model`);
+    const getDeleteUrl = new URL(`${DOMAIN}:8080/delete_saved_model`);
     const postData = {
       "email": props.userEmail,
       "id": props.id

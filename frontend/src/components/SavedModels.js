@@ -5,7 +5,7 @@ import SavedModel from './SavedModel.js';
 
 export default function SavedModels(props) {
   return (
-    <Grid container spacing={4} justifyContent="center">
+    <Grid container spacing={4} direction="column" alignItems="center">
       {Object.entries(props.savedModels).map(([id, model]) => (
         <Grid item>
           <SavedModel

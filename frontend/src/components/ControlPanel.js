@@ -97,23 +97,24 @@ export default function ControlPanel(props) {
     };
     
     trackPromise(
-    fetch(generateUrl, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(postData)
-      })
-      .then(r => r.json())
-      .then(data => {
-        for (let i = 0; i < data["tiles"].length; i++) {
-          data["tiles"][i]["idx"] = i;
+      fetch(generateUrl, {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(postData)
+        })
+        .then(r => r.json())
+        .then(data => {
+          for (let i = 0; i < data["tiles"].length; i++) {
+            data["tiles"][i]["idx"] = i;
+          }
+          setModelTiles(data["tiles"]);
+          setClickedTile(null);
         }
-        setModelTiles(data["tiles"]);
-        setClickedTile(null);
-      }
-    ));
+      )
+    );
   }
 
   function deleteClickedTile() {
@@ -122,7 +123,6 @@ export default function ControlPanel(props) {
       setClickedTile(null);
     }
   }
-
 
   return (
     <Grid 

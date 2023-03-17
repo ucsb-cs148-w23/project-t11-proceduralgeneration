@@ -9,11 +9,12 @@ export default function SavedModels(props) {
       {Object.entries(props.savedModels).map(([id, model]) => (
         <Grid item>
           <SavedModel
+            key={id}
+            id={id}
             savedModels={props.savedModels}
             setSavedModels={props.setSavedModels}
             userEmail={props.userEmail}
             model={model}
-            id={id}
             setAlertMsg={props.setAlertMsg}
           />
         </Grid>

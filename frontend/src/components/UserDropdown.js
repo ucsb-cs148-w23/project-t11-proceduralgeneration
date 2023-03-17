@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import { DOMAIN } from "../constants.js";
 import SavedModels from './SavedModels.js';
+import { union, filterMissingTiles } from '../utils.js';
 
 const style = {
   position: 'absolute',
@@ -62,14 +63,9 @@ export default function UserDropdown(props) {
       .then(data => {
         let cpy = {};
         Object.entries(data.models).forEach(([id, model]) => {
-          let ok = true;
-          for (let i = 0; i < model.tiles.length; i++) {
-            if (!(model.tiles[i].file in name2file)) {
-              ok = false;
-              missingTiles.add(model.tiles[i].file);
-            }
-          }
-          if (ok) {
+          let currentMissingTiles = filterMissingTiles(model, name2file);
+          missingTiles = union(missingTiles, currentMissingTiles);
+          if (currentMissingTiles.size === 0) {
             cpy[id] = model;
           }
         });

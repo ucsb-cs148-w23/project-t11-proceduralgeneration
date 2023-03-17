@@ -16,6 +16,7 @@ import {
   Suspense 
 } from 'react';
 import { DOMAIN, DIR2POS } from "./constants.js";
+import { filterMissingTiles } from './utils';
 
 
 function App() {
@@ -61,7 +62,11 @@ function App() {
           })
           .then(r => r.json())
           .then(data => {
-            setModelTiles(data?.model?.tiles);
+            let model = data?.model;
+            if (model) {
+              filterMissingTiles(model, name2file);
+              setModelTiles(model.tiles);
+            }
         });
       }
     }

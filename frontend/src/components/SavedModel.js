@@ -70,7 +70,7 @@ export default function SavedModels(props) {
       
       navigator.clipboard.writeText(url.toString());
 
-      props.setAlertMsg("Copied sharable link to clipboard:\n" + url.toString());
+      props.setAlertMsg("Copied shareable link to clipboard:\n" + url.toString());
       // window.alert("Copied sharable link " + url.toString() + " to clipboard :D");
     } else {
       props.setAlertMsg("Couldn't create sharable link");

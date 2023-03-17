@@ -6,10 +6,6 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import JSZip from 'jszip';
 
 const style = {
@@ -73,7 +69,6 @@ export default function ConfigFile(props) {
 
       // read tile_models
       zip.folder("tile_models").forEach(function (relativePath, file) {
-        // console.log(relativePath, file);
         file.async("blob").then(function (data) {
           const url = URL.createObjectURL(data);
           name2file[relativePath] = url;

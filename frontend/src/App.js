@@ -6,7 +6,6 @@ import Header from './components/Header.js'
 import Lato from "./fonts/Lato-Regular.ttf";
 import ModelTile from './components/ModelTile.js'
 import WaterPlane from './components/WaterPlane.js'
-// import onSignIn from './components/LogIn.js';
 import Loader from './components/Loader.js'
 import Paper from '@mui/material/Paper';
 import { Canvas } from '@react-three/fiber'
@@ -70,7 +69,6 @@ function App() {
 
   function getUrlParams() {
     const url = new URL(window.location.href);
-    // console.log(window.location.href);
     const email = url.searchParams.get("userEmail");
     const id = url.searchParams.get("modelId");
 
@@ -81,7 +79,6 @@ function App() {
           "email": email,
           "id": id,
       }
-      // console.log(postData);
       
       fetch(getUpdateNameUrl, {
           method: 'POST',
@@ -93,9 +90,7 @@ function App() {
         })
         .then(r => r.json())
         .then(data => {
-          // console.log("save data: ", data);
           setModelTiles(data?.model?.tiles);
-          // return data;
       });
 
   }

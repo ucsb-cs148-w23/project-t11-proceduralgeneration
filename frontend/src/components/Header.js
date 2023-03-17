@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import Box from '@mui/material/Box';
 import { ControlsContext } from '../App.js';

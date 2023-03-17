@@ -59,16 +59,12 @@ export default function SavedModels(props) {
     }
 
     function exportLink() {
-        //TODO
-        // create url with id, user email
 
         if (props.userEmail && props.id) {
             const url = new URL(window.location.href);
             url.searchParams.append("modelId", props.id);
             url.searchParams.append("userEmail", props.userEmail);
-            // console.log(url);
             
-            //should await this...
             navigator.clipboard.writeText(url.toString());
             window.alert("Copied sharable link " + url.toString() + " to clipboard :D");
 
@@ -78,8 +74,6 @@ export default function SavedModels(props) {
         }
     }
 
-    // each saved model has a box for the model (small box), button to download, button to share a link
-    // later add ability to give model a name (reconfigure from list to dict in backend), delete model
     useEffect(() => {
         if (numDownload > 0) {
           const exporter = new GLTFExporter();

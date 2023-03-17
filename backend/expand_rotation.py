@@ -1,12 +1,8 @@
 from collections import defaultdict
-# import numpy as np
 import json
 
-symmetry_rotation = {
-    0: [0, 1, 2, 3],
-    2: [0, 1],
-    4: [0]
-}
+symmetry_rotation = {0: [0, 1, 2, 3], 2: [0, 1], 4: [0]}
+
 
 def expand_rotations(tile_data):
     expanded = {}
@@ -18,15 +14,18 @@ def expand_rotations(tile_data):
                 "mesh": tile["mesh"],
                 # "rotation": rotation * np.pi / 2,
                 # let the frontend multiply by pi/2
-                "rotation": rotation, 
-                "valid_neighbors": _rotate_neighbors(tile["valid_neighbors"], rotation, tile_data),
+                "rotation": rotation,
+                "valid_neighbors": _rotate_neighbors(
+                    tile["valid_neighbors"], rotation, tile_data
+                ),
                 "weight": tile.get("weight", 1),
                 "ground": tile.get("ground", False),
-                "include": tile.get("include", True)
+                "include": tile.get("include", True),
             }
             # print(name, tile, r_name, expanded[r_name], sep='\n')
 
     return expanded
+
 
 def _rotate_neighbors(base_neighbors, rotation, tile_data):
     """
@@ -45,15 +44,13 @@ def _rotate_neighbors(base_neighbors, rotation, tile_data):
     # match rotation
     for d in ("pz", "nz"):
         for neighbor, r in base_neighbors[d]:
-            rotated_neighbors[d].append(
-                _rotate_tile(neighbor, r + rotation, tile_data)
-            )
+            rotated_neighbors[d].append(_rotate_tile(neighbor, r + rotation, tile_data))
 
     # rotate neighbors
     # ds = ["px", "py", "nx", "ny"]
     # ds = ["px", "py", "nx", "ny"][::-1]
     ds = ["ny", "nx", "py", "px"]
-    for i in range(4): 
+    for i in range(4):
         # previous and next direction
         pd = ds[i]
         nd = ds[(i + rotation) % 4]
@@ -63,7 +60,7 @@ def _rotate_neighbors(base_neighbors, rotation, tile_data):
             )
 
     return rotated_neighbors
-    
+
 
 def _rotate_tile(tile, rotation, tile_data):
     assert len(tile.split("_r")) == 1
@@ -75,12 +72,13 @@ def _rotate_tile(tile, rotation, tile_data):
     else:
         return f"{tile}_r0"
 
+
 if __name__ == "__main__":
     with open("../prototypes/collapsed.json") as f:
         data = json.load(f)
 
     expanded = expand_rotations(data)
-    with open("expanded_rev.json", 'w') as f:
+    with open("expanded_rev.json", "w") as f:
         json.dump(expanded, f, indent=4)
 
     # with open("../prototypes/v2.json") as f:

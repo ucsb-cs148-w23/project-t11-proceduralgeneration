@@ -3,7 +3,7 @@ import { Alert, Grid, Box, Button, ButtonGroup, TextField, IconButton, Tooltip, 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { fileTileMap } from '../defaultTiles.js';
-import { ControlsContext } from '../App.js';
+import { ControlsContext } from '../Root.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 import { DOMAIN } from '../constants.js';
 import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';

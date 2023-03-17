@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { ControlsContext } from '../App.js';
+import { ControlsContext } from '../Root.js';
 
 export default function ModelTile(props) {
   const { setClickedTile } = useContext(ControlsContext);

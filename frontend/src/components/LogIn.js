@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ControlsContext } from '../App.js';
+import { ControlsContext } from '../Root.js';
 import { GoogleLogin } from '@react-oauth/google';
 import { DOMAIN } from "../constants.js";
 import jwt_decode from 'jwt-decode';

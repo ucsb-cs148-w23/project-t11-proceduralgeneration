@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber'
-import { ControlsContext } from '../App.js';
+import { ControlsContext } from '../Root.js';
 import { Html, Text, PerspectiveCamera } from '@react-three/drei'
 import { useTheme } from '@mui/material/styles';
 import Lato from "../fonts/Lato-Regular.ttf";
@@ -71,7 +71,7 @@ export default function Loader(props) {
       <LoadingScreen />
       <Text 
         color={theme.palette.mode === "dark" ? "white" : "black"}
-        fontSize={0.1}
+        fontSize={0.2}
         position={[0,-2.75,0]}
         textAlign="center"
         lineHeight={2}

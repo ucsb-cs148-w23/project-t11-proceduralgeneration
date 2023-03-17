@@ -9,7 +9,7 @@ import Divider from '@mui/material/Divider';
 import { TextField, Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Slide from '@mui/material/Slide';
-import { ControlsContext } from '../App.js';
+import { ControlsContext } from '../Root.js';
 import { DOMAIN } from "../constants.js";
 
 const Transition = React.forwardRef(function Transition(props, ref) {

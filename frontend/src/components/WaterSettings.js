@@ -1,5 +1,5 @@
 import { Fragment, useContext } from 'react';
-import { ControlsContext } from '../App.js';
+import { ControlsContext } from '../Root.js';
 import { Grid, Switch, FormControlLabel } from '@mui/material';
 
 export default function WaterSettings(){

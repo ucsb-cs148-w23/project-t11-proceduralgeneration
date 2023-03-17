@@ -115,6 +115,7 @@ function App() {
                         modelTiles.map((tile, i) => {
                           return (
                             <ModelTile 
+                              key={i}
                               idx={i}
                               modelPath={name2file[tile["file"]]} 
                               position={tile["position"]}

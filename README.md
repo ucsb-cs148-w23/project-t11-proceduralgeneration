@@ -1,5 +1,5 @@
 # project-t11-proceduralgeneration
-Project Name (temp): Procedural City Generator
+Project Name: 3D Environment Generator ([deployment](https://helloworld-66bb0.web.app/))
 
 One line description: Create a creative tool to procedurally generate a city model using the wave function collapse algorithm.
 

@@ -5,7 +5,7 @@ import { OrbitControls } from '@react-three/drei';
 import { fileTileMap } from '../defaultTiles.js';
 import { ControlsContext } from '../Root.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
-import { DOMAIN } from '../constants.js';
+import { DOMAIN, HOMEURL } from '../constants.js';
 import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DownloadIcon from '@mui/icons-material/Download';
@@ -64,7 +64,8 @@ export default function SavedModels(props) {
 
   function exportLink() {
     if (props.userEmail && props.id) {
-      const url = new URL(window.location.href);
+    //   const url = new URL(window.location.href);
+      const url = new URL(HOMEURL);
       url.searchParams.append("modelId", props.id);
       url.searchParams.append("userEmail", props.userEmail);
       

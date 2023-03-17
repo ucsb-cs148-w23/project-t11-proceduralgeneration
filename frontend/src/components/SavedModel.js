@@ -15,7 +15,7 @@ import ModelTile from './ModelTile.js';
 
 
 export default function SavedModels(props) {
-  const { setModelTiles } = useContext(ControlsContext);
+  const { setModelTiles, setClickedTile } = useContext(ControlsContext);
   const meshRef = useRef();
   const [modelName, setModelName] = useState(props.model.name);
 
@@ -117,6 +117,7 @@ export default function SavedModels(props) {
 
 
   function onOpenModel() {
+    setClickedTile(null);
     setModelTiles(props.model.tiles);
   }
 

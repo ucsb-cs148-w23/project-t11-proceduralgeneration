@@ -98,7 +98,11 @@ function App() {
                         onClick={() => null}
                       />
                       {
-                        (neighbor && (neighbor["id"] !== "m9")) &&
+                        (
+                          neighbor 
+                          && (neighbor["id"] !== "m9")
+                          && (neighbor["direction"] !== null)
+                        ) &&
                         <ModelTile
                           modelPath={name2file[tiles[neighbor["id"]]["mesh"]]}
                           position={DIR2POS[neighbor["direction"]].map(x => x * 2)}

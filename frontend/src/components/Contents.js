@@ -9,14 +9,22 @@ import Image7 from '../resources/p5.png'
 import Image8 from '../resources/p6.png'
 import Image9 from '../resources/p7.png'
 import Image10 from '../resources/p8.png'
+import Image11 from '../resources/acct_dropdown.png'
+import Image12 from '../resources/saved_models.png'
+import Image13 from '../resources/config_file.png'
 
 function Contents(){
     return(
       <div className="c">
         <h1>Wiki</h1>
+        <p>
+          Note: this wiki page is subject to the code freeze. 
+          The content below is correct and up-to-date, but more recent documentation is available at
+          this <a href="https://docs.google.com/document/d/164QHBM2JcjjnHsfeIHww2jYJZYaF_qPwue93dyXSlxs/edit?usp=sharing">link</a>.
+        </p>
         <h2 id="header2-1">About This App</h2>
             <h3 id="header3-1">Product Purpose</h3>
-                <p>This product helps users to procedurally generate custom 3D environments through a graphical interface. As a web app, no software download or installation is required to hit the ground running. It requires no knowledge of algorithms behind the generation and it has a friendly user interface.</p>
+                <p>This product helps users to procedurally generate custom 3D environments through a graphical interface. As a web app, no software download, installation, nor knowledge algorithm knowledge is required to hit the ground running.</p>
             <h3 id="header3-2">Intended User Audience</h3>
                 <p>This tool is built for designers inexperienced with code-oriented tools to iterate on environments quickly. The tool allows designers to create larger models much faster than by hand, and through an easier and more accessible tool than game engines or other design software.</p>
         <h2 id="header2-2">User Manual</h2>
@@ -92,9 +100,36 @@ function Contents(){
                             <li>Click the Rotate Button to rotate the new neighbor tile</li>
                             <li>Click the SAVE button to add the new neighbor</li>
                         </ul>
+                <h4>Saving and Loading Tile Settings</h4>
+                  <p>
+                    Updating tile settings through the UI is precise and intuitive but slow. 
+                    Furthermore, you might want to use the same settings across separate sessions.
+                    To solve both these issues, we added functionality to save and load tile settings.
+                    Clicking the "CONFIG FILE" button opens the config tile menu.
+                  </p>
+                  <img src={Image13} className="Img" style={{width: "50vw"}}/>
+                  <p>
+                    From this menu, you have the option to download the current configuration or select and upload a configuration file from your local machine.
+                    This way, users can share their configurations with each other, edit them offline, or just save their work for another time.
+                  </p>
+
             <h3 id="header3-6">Account</h3>
-            <img src={Image10} className="Img"/>
-                <p>Click the sign-in button, to choose the Google account you want to choose to log in. Then you can upload your own models for creating city models, or you can save your generated city models to your accounts.</p>
+            <img src={Image10} className="Img" style={{width: "75vw"}}/>
+                <p>
+                  Click the sign-in button, to choose the Google account you want to choose to log in. Once logged in, select from the "Account Options" dropdown.
+                </p>
+                <div style={{display: "flex", justifyContent: "center"}}>
+                  <img src={Image11} className="Img" style={{width: "15vh"}}/>
+                </div>
+                <p>Select "Saved Models" to view models saved to the cloud. Then from this panel, use the buttons to:</p>
+                <ul>
+                  <li>Open the model in the editor</li>
+                  <li>Download the model</li>
+                  <li>Get a shareable link</li>
+                  <li>Rename the model</li>
+                  <li>Delete the model</li>
+                </ul>
+                <img src={Image12} className="Img" style={{width: "75vw"}}/>
         <h2 id="header2-3">Meet the Team</h2>
             <img src={Image2} className="Img"/>
             <p></p>

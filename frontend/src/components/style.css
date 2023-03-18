@@ -23,7 +23,7 @@
 }
 
 .toc ul {
-    padding-bottom: 20%;
+    padding-bottom: 3%;
 }
 
 .toc .a1Black, .toc .a2Black {
@@ -46,30 +46,6 @@
     text-align: center;
 }
 
-.c #header2-1 {
-    padding-top: 1%;
-}
-
-.c h2 {
-    padding-top: 10%;
-}
-
-.c h3 {
-    padding-top: 4%;
-}
-
-.c h2, .c h3 {
-    scroll-margin-top: 16px;
-}
-
-/* Safari-only */
-@supports (-webkit-hyphens:none) {
-    .c h2, .c h3 {
-        padding-top: 16px;
-        margin-top: -16px;
-    }
-}
-
 .NavBar .aBlack {
     color: black;
     text-decoration: none;
@@ -84,7 +60,6 @@
     display: inline;
     list-style-type: none;
     margin-top: 1em;
-    margin-bottom: 1 em;
     padding-right: 20px;
 }
 

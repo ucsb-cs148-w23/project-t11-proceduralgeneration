@@ -16,19 +16,22 @@ export default function WaterSettings(){
                 }}
               />
             } 
-            label="Toggle Water" 
+            label="Water" 
           />
-          <FormControlLabel 
-            control={
-              <Switch 
-                checked={showSunset}
-                onClick={() => {
-                  setShowSunset(!showSunset);
-                }}
-              />
-            } 
-            label="Toggle Sunset" 
-          />
+          { 
+            showWater && 
+            <FormControlLabel 
+              control={
+                <Switch 
+                  checked={showSunset}
+                  onClick={() => {
+                    setShowSunset(!showSunset);
+                  }}
+                />
+              } 
+              label="Sunset" 
+            />
+          }
       </Grid>
     </Fragment>
   )

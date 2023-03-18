@@ -32,7 +32,7 @@ export default function WaterPlane(props){
 
     const distortionMap = useLoader(TextureLoader, distortionImg);
     let lod = Math.min(1,2*Math.floor((planeSize/32)/5));
-    if (Math.abs(props.xSize - props.zSize) <= 3 && planeSize/32 >= 20){
+    if (Math.abs(props.xSize - props.zSize) <= 3 || planeSize/32 >= 20){
         lod *= 2;
     }
     useFrame((state) => {

@@ -34,6 +34,7 @@ function Root() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState();
   const [showWater, setShowWater] = useState(false);
+  const [showSunset, setShowSunset] = useState(false);
   const [modelName, setModelName] = useState("Untitled");
 
   const meshRef = useRef();
@@ -93,6 +94,7 @@ function Root() {
         loginBoxRef,
         promiseInProgress,
         showWater, setShowWater,
+        showSunset, setShowSunset,
         loggedIn, setLoggedIn,
         userEmail, setUserEmail,
         modelName, setModelName

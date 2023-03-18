@@ -3,7 +3,7 @@ import { ControlsContext } from '../Root.js';
 import { Grid, Switch, FormControlLabel } from '@mui/material';
 
 export default function WaterSettings(){
-  const { showWater, setShowWater } = useContext(ControlsContext);
+  const { showWater, setShowWater, showSunset, setShowSunset } = useContext(ControlsContext);
   return (
     <Fragment>
       <Grid item>
@@ -17,6 +17,17 @@ export default function WaterSettings(){
               />
             } 
             label="Toggle Water" 
+          />
+          <FormControlLabel 
+            control={
+              <Switch 
+                checked={showSunset}
+                onClick={() => {
+                  setShowSunset(!showSunset);
+                }}
+              />
+            } 
+            label="Toggle Sunset" 
           />
       </Grid>
     </Fragment>

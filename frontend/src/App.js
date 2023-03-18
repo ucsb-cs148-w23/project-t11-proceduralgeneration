@@ -34,6 +34,7 @@ function App() {
     meshRef,
     promiseInProgress,
     showWater,
+    showSunset,
     loggedIn,
     userEmail,
   } = useContext(ControlsContext);

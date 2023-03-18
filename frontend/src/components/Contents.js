@@ -1,14 +1,14 @@
 import './style.css';
-import Image1 from '../resources/FrontPage.png'
+import Image1 from '../resources/Home.png'
 import Image2 from '../resources/team.png'
 import Image3 from '../resources/p1.png'
 import Image4 from '../resources/p2.png'
 import Image5 from '../resources/p3.png'
 import Image6 from '../resources/p4.png'
-import Image7 from '../resources/p5.png'
-import Image8 from '../resources/p6.png'
-import Image9 from '../resources/p7.png'
-import Image10 from '../resources/p8.png'
+import Image7 from '../resources/Tile.png'
+import Image8 from '../resources/Neighbor.png'
+import Image9 from '../resources/AddNeighbor.png'
+import Image10 from '../resources/Account.png'
 import Image11 from '../resources/acct_dropdown.png'
 import Image12 from '../resources/saved_models.png'
 import Image13 from '../resources/config_file.png'
@@ -29,7 +29,7 @@ function Contents(){
                 <p>This tool is built for designers inexperienced with code-oriented tools to iterate on environments quickly. The tool allows designers to create larger models much faster than by hand, and through an easier and more accessible tool than game engines or other design software.</p>
         <h2 id="header2-2">User Manual</h2>
             <h3 id="header3-3">Basic Operation</h3>
-                <img src={Image1} className="Img"/>
+                <img src={Image1} className="newImg"/>
                 <h4>Control Panel (Right)</h4>
                     <ul>
                         <li>Use the sliders to adjust the size of the generated environment</li>
@@ -38,7 +38,9 @@ function Contents(){
                     </ul>
                 <h4>Canvas (Left)</h4>
                     <ul>
-                        <li>Drag the mouse on the canvas to control the camera and view the model from different angles</li>
+                        <li>Drag the mouse with one finger on the canvas to rotate the camera and view the model from different angles</li>
+                        <li>Drag the mouse with two fingers on the canvas to move the model around</li>
+                        <li>Pinch in and out with two fingers on the canvas to control the camera and zoom in and zoom out</li>
                     </ul>
                 <h4>Header Bar (Top)</h4>
                     <img src={Image3} className="Img"/>
@@ -78,7 +80,7 @@ function Contents(){
                     </ol>
                 <h4>Editing Tile Generation Properties</h4>
                     <p>Select a tile from the dropdown to get started.</p>
-                    <img src={Image7} className="Img"/>
+                    <img src={Image7} className="newImg"/>
                     <ul>
                         <li>Use the switches to control whether to use a block in the generation (and at what heights)</li>
                         <li>Use the Random Selection Weight slider to bias the algorithm in favour of certain tiles when randomly selecting from a remaining option list (use higher weight for higher generation frequency).</li>
@@ -86,13 +88,13 @@ function Contents(){
                 <h4>Editing Neighbor Constraints</h4>
                     <p>The Wave Function Collapse Algorithm is a constraint solver. We informed the algorithm that on the +x-axis face, block A can have neighbors of block B with rotation r. To allow users to fully control generation, we provide an interface for editing these constraints.</p>
                     <h5>Viewing and Removing Existing Neighbor</h5>
-                        <img src={Image8} className="Img"/>
+                        <img src={Image8} className="newImg"/>
                         <ul>
                             <li>Select a tile from the dropdown under “Add or Remove Allowed Neighbors” to view the neighbor relation</li>
                             <li>Click the “DELETE NEIGHBOR” button to remove the relation</li>
                         </ul>
                     <h5>Adding a New Neighbor </h5>
-                        <img src={Image9} className="Img"/>
+                        <img src={Image9} className="newImg"/>
                         <ul>
                             <li>Click the “+ ADD ALLOWED NEIGHBOR” button to begin</li>
                             <li>Select a direction for the new neighbor in the direction dropdown</li>
@@ -114,7 +116,7 @@ function Contents(){
                   </p>
 
             <h3 id="header3-6">Account</h3>
-            <img src={Image10} className="Img" style={{width: "75vw"}}/>
+            <img src={Image10} className="newImg"/>
                 <p>
                   Click the sign-in button, to choose the Google account you want to choose to log in. Once logged in, select from the "Account Options" dropdown.
                 </p>

@@ -23,7 +23,7 @@
 }
 
 .toc ul {
-    padding-bottom: 3%;
+    padding-bottom: 5%;
 }
 
 .toc .a1Black, .toc .a2Black {
@@ -42,8 +42,25 @@
     padding: 2%;
 }
 
+.c .newImg {
+    width: 65vw;
+}
+
 .c h1 {
     text-align: center;
+}
+
+/* Below is to create a margin for toc redirected */
+.c h2, .c h3 {
+    scroll-margin-top: 16px;
+}
+
+/* Safari-only */
+@supports (-webkit-hyphens:none) {
+    .c h2, .c h3 {
+        padding-top: 16px;
+        margin-top: -16px;
+    }
 }
 
 .NavBar .aBlack {

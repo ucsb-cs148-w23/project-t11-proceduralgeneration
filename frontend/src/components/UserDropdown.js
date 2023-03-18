@@ -131,7 +131,8 @@ export default function UserDropdown(props) {
           sx={{overflow: "auto"}}
         >
           <Box sx={style} display="flex" flexDirection="column">
-            <Typography variant="h4" component="h2">Saved Models</Typography>
+            <Typography variant="h5" component="h2">Saved Models</Typography>
+            <Box sx={{marginBottom: 4}}></Box>
             {alertMsg !== '' && <Alert severity="info" onClose={onCloseMsg}>{alertMsg}</Alert> }
             <Box sx={{marginBottom: 4}}></Box>
             <SavedModels 

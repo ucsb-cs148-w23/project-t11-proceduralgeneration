@@ -54,6 +54,12 @@ export default function TileSettings() {
   const [tileInclusion, setTileInclusion] = useState(true);
   const [groundStatus, setGroundStatus] = useState(false);
 
+  function clearNeighborState() {
+    setNeighbor(null);
+    setNewNeighborDirection(null);
+    setNewNeighborRotation(0);
+  }
+
   function getNeighbors() {
     const tid = file2id[tile];
     const fmtd = [];
@@ -103,6 +109,10 @@ export default function TileSettings() {
     const tid = file2id[tile];
     const nid = neighbor.id;
 
+    if (newNeighborDirection === null) {
+      return;
+    }
+
     // ----------------------
     // target to neighbor
     const neighbors = tiles[tid]["valid_neighbors"];
@@ -149,7 +159,7 @@ export default function TileSettings() {
             onClick={() => {
               setShowTileSettings(false);
               setTile(null);
-              setNeighbor(null);
+              clearNeighborState();
               setAddNeighborMode(false);
             }}
           >
@@ -184,7 +194,7 @@ export default function TileSettings() {
           options={Object.values(tiles)}
           onChange={(event, newValue) => {
             setTile(newValue["mesh"]);
-            setNeighbor(null);
+            clearNeighborState();
             setW(newValue["weight"] || 1);
             if (newValue["include"] === undefined) {
               setTileInclusion(true);
@@ -252,7 +262,7 @@ export default function TileSettings() {
                 <Button 
                   startIcon={<AddIcon />} 
                   onClick={() => {
-                    setNeighbor(null);
+                    clearNeighborState();
                     setAddNeighborMode(true);
                   }} >
                   Add Allowed Neighbor
@@ -313,7 +323,7 @@ export default function TileSettings() {
           <ButtonGroup variant="outlined" aria-label="outlined primary button group">
             <Button
               onClick={() => {
-                setNeighbor(null);
+                clearNeighborState();
                 setAddNeighborMode(false);
               }}
               startIcon={<ArrowBackIcon />}

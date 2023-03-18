@@ -1,0 +1,19 @@
+Contributions
+- frontend
+  - tile customization
+    - view tile
+    - upload new tile
+    - adjust weight/inclusion
+    - view/add/delete neighbor (+ frontend logic to adjust constraint data)
+  - upload/download tile configuration
+  - tile selection + single tile edits
+    - rotate/delete/replace individual tiles in the generation
+  - revised UI for Saved Models
+  - bugfixes
+ - backend
+   - setup flask backend
+   - deployed backend (register domain, obtain SSL certificates)
+   - optimized the WFC algorithm to run up to dim=20 on micro EC2 instance
+   - rotation expansion (takes constraint data and expands symmetrical possibilities)
+   - updated backend to accept tile constraint data from the frontend
+   - added delete saved model endpoint

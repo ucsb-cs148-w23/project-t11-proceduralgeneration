@@ -13,6 +13,7 @@ import {
 } from 'react';
 import { fileTileMap, defaultCollapsed, defaultFile2id } from './defaultTiles.js';
 import { usePromiseTracker } from "react-promise-tracker";
+import './App.css';
 
 const ControlsContext = createContext();
 

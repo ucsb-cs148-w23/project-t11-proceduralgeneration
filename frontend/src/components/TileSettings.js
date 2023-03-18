@@ -145,6 +145,44 @@ export default function TileSettings() {
     setTiles(tiles);
   }
 
+  function deleteNeighborRelation() {
+    const tid = file2id[tile];
+    const nid = neighbor.id;
+    const nr = neighbor.rotation;
+
+    // ----------------------
+    // target to neighbor
+    const neighbors = tiles[tid]["valid_neighbors"];
+    neighbors[neighbor.direction] = neighbors[neighbor.direction].filter((n) => {
+      return n[0] !== nid || n[1] !== nr;
+    });
+    
+    // ----------------------
+    // neighbor to target
+    const neighbors2 = tiles[nid]["valid_neighbors"];
+    let neighborDir = oppositeDirection[neighbor.direction];
+    // get initial rotation number corresponding to neighbor -> target direction
+    const remainingRotations = (4 - newNeighborRotation) % 4;
+    if (neighborDir === "pz" || neighborDir === "nz") {
+      neighbors2[neighborDir].push([tid, remainingRotations]);
+    } else {
+      for (let i = 0; i < directionOrder.length; i++) {
+        if (directionOrder[i] === neighborDir) {
+          neighborDir = i;
+          break;
+        }
+      }
+      // finish rotating neighbor so it has 0 rotation, update 
+      // - the neighbor -> target direction 
+      // - the rotation of the target
+      neighborDir = directionOrder[(neighborDir + remainingRotations) % 4];
+      neighbors2[neighborDir] = neighbors2[neighborDir].filter((n) => {
+        return n[0] !== tid || n[1] !== remainingRotations;
+      });
+    }
+    setTiles(tiles);
+  }
+
   return (
     <Grid 
       container
@@ -201,7 +239,6 @@ export default function TileSettings() {
             } else {
               setTileInclusion(newValue["include"]);
             }
-            // setTileInclusion(newValue["include"]);
             setGroundStatus(newValue["ground"] === false);
           }}
           renderInput={(params) => <TextField {...params} label="Tile" />}
@@ -355,6 +392,7 @@ export default function TileSettings() {
               </Fragment>
               : <Button
                 startIcon={<DeleteIcon />}
+                onClick={deleteNeighborRelation}
               >
                 Delete Neighbor
               </Button>

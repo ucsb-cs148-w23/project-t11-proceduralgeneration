@@ -166,12 +166,6 @@ export default function TileSettings() {
             Back
           </Button>
           <Button 
-            startIcon={<AddIcon />}
-            onClick={() => setOpenAddTile(true)}
-          >
-            New Tile
-          </Button>
-          <Button 
             startIcon={<FileCopyIcon />}
             onClick={() => setOpenConfigFile(true)}
           >
@@ -206,6 +200,12 @@ export default function TileSettings() {
           }}
           renderInput={(params) => <TextField {...params} label="Tile" />}
         />
+        <Button 
+          startIcon={<AddIcon />}
+          onClick={() => setOpenAddTile(true)}
+        >
+          New Tile
+        </Button>
       </Grid>
       {
         tile &&

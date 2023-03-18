@@ -100,7 +100,7 @@ export default function UploadTile(props) {
           <p>Please ensure:</p>
           <ul>
             <li>the file name is unique (from previous uploads)</li>
-            <li>the model fits in a cube of equal size to previous tiles (default tiles have side length = 2)</li>
+            <li>the model conforms to the 2x2x2 grid unit</li>
           </ul>
           
 

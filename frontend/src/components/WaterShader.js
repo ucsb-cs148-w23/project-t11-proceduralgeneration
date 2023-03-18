@@ -9,6 +9,7 @@ const WaterShader = shaderMaterial(
         // WaterColor (these dont work lol)
         u_shallowColor : {value : new Vector3(1,0,0)},
         u_deepColor : {value : new Vector3(0,1,0)},
+        u_sunset : {value : 0},
         
         // Depth Params
         u_depthTexture : {value : null},
@@ -26,53 +27,65 @@ const WaterShader = shaderMaterial(
         u_waveSteepness : {value : 0.08},
         u_waveLength : {value : 12.0},
         u_waveSpeed : {value : 1.2},
+        u_waveLod : {value : 1},
     },
 
     // Vertex
     glsl`
         varying vec2 vUv;
-        varying vec3 viewZ;
         varying vec4 vPos;
+        varying vec3 vNormal;
 
 
         uniform float u_Time;
         uniform float u_waveSteepness;
         uniform float u_waveLength;
         uniform float u_waveSpeed;
+        uniform float u_waveLod;
 
-        vec3 GerstnerWave(vec3 pos, float steepness, float wavelength, float speed, float direction){
+        vec3 GerstnerWave(vec3 pos, float steepness, float wavelength,float direction, inout vec3 tangent, inout vec3 binormal){
             direction = direction * 2.0 - 1.0;
-            vec2 d = normalize(vec2(cos(3.14159 * direction), sin(3.14159 * direction)));
-            float k = 2.0 * 3.14159 / wavelength;
-            float f = k * (dot(d, pos.xz) - speed * u_Time);
+            vec2 d = normalize(vec2(cos(3.14 * direction), sin(3.14 * direction)));
+            float k = 2.0 * 3.14 / wavelength;
+            float c = sqrt(9.8/k) / u_waveSpeed;
+            float f = k * (dot(d, pos.xz) - c * u_Time);
             float a = steepness / k;
+
+            tangent += vec3(-d.x * d.x * (steepness * sin(f)), d.x * (steepness * cos(f)), -d.x * d.y * (steepness * sin(f)));
+            
+            binormal += vec3(-d.x * d.y * (steepness * sin(f)), d.y * (steepness * cos(f)), -d.y * d.y * (steepness * sin(f)));
 
             return vec3( d.x * (a * cos(f)), a * sin(f), d.y * (a * cos(f)));
         }
 
-        vec3 CalcGerstnerWaves(vec3 pos, float steepness, float wavelength, float speed, vec4 directions1, vec4 directions2){
-            vec3 offset = vec3(0,0,0);
-            offset += GerstnerWave(pos, steepness, wavelength, speed, directions1.x);
-            offset += GerstnerWave(pos, steepness, wavelength, speed, directions1.y);
-            offset += GerstnerWave(pos, steepness, wavelength, speed, directions1.z);
-            //offset += GerstnerWave(pos, steepness, wavelength, speed, directions1.w);
-            offset -= GerstnerWave(pos, steepness, wavelength, speed, directions2.x);
-            offset += GerstnerWave(pos, steepness, wavelength, speed, directions2.y);
-            offset += GerstnerWave(pos, steepness, wavelength, speed, directions2.z);
-            //offset += GerstnerWave(pos, steepness, wavelength, speed, directions2.w);
+        vec3 CalcGerstnerWaves(vec3 pos, float steepness, float wavelength, vec4 directions1, vec4 directions2, inout vec3 normal){
+            vec3 offset = vec3(0.0,0.0,0.0);
+            vec3 tangent = vec3(1.0,0.0,0.0);
+            vec3 binormal = vec3(0.0,0.0,1.0);
+            offset += GerstnerWave(pos, steepness, wavelength, directions1.x, tangent, binormal);
+            offset += GerstnerWave(pos, steepness+(0.03/u_waveLod), 1.5*wavelength, directions1.y, tangent, binormal);
+            offset += GerstnerWave(pos, steepness-(0.01/u_waveLod), wavelength, directions1.z, tangent, binormal);
+            offset += GerstnerWave(pos, steepness, 0.5*wavelength, directions1.w, tangent, binormal);
+            offset -= GerstnerWave(pos, steepness, wavelength, directions2.x, tangent, binormal);
+            offset += GerstnerWave(pos, steepness-(0.01/u_waveLod), 0.9*wavelength, directions2.y, tangent, binormal);
+            offset -= GerstnerWave(pos, steepness, 1.1*wavelength, directions2.z, tangent, binormal);
+            offset += GerstnerWave(pos, steepness, 0.7*wavelength, directions2.w, tangent, binormal);
+
+            normal = normalize(cross(binormal, tangent));
             return offset;
         }
 
         void main(){
             vec4 directions1 = vec4(0, 0.5, 0.2, 1);
-            vec4 directions2 = vec4(-0.25, 0.4, -0.7, 0.55);
-            vec4 gertstner = vec4(CalcGerstnerWaves(position, u_waveSteepness, u_waveLength, u_waveSpeed, directions1, directions2), 0.0);
+            vec4 directions2 = vec4(-0.25, 0.4, -0.7, -1);
+            vec3 norm = vec3(0);
+            vec4 gertstner = vec4(CalcGerstnerWaves(position, u_waveSteepness, u_waveLength, directions1, directions2, norm), 0.0);
             vec4 modelPos = modelMatrix * vec4(position, 1.0);
             modelPos += gertstner;
             //vPos = projectionMatrix * modelViewMatrix * (gertstner+vec4(position, 1.0));
             vPos = projectionMatrix * viewMatrix * modelPos;
             gl_Position = vPos;
-            viewZ = -(modelViewMatrix * vec4(position.xyz, 1.0)).xyz;
+            vNormal = norm;
             vUv = uv;
         }
     `,
@@ -82,11 +95,12 @@ const WaterShader = shaderMaterial(
         #include <packing>
 
         varying vec2 vUv;
-        varying vec3 viewZ;
         varying vec4 vPos;
+        varying vec3 vNormal;
         
         uniform vec3 u_shallowColor;
         uniform vec3 u_deepColor;
+        uniform float u_sunset;
 
         uniform sampler2D u_depthTexture;
         uniform float u_cameraNear;
@@ -148,10 +162,24 @@ const WaterShader = shaderMaterial(
             cNoiseVal = cNoiseVal > 0.72 ? 1.0 : 0.0;
             
 
-            gl_FragColor.rgb = mix(colorB, colorA, mixed) + cNoiseVal - noiseVal;
+            vec3 waterColor = mix(colorB, colorA, mixed) + cNoiseVal - noiseVal;
             gl_FragColor.a = 1.0;
             //gl_FragColor.rgb = 1.0 - vec3(depth);
-
+            vec3 lightColor = vec3(1.0, 0.335, 0.32);
+            //lightColor = vec3(0.7);
+          
+            // ambient
+            float ambientStrength = 1.1;
+            vec3 ambient = ambientStrength * lightColor;
+          
+            // Diffuse 
+            vec3 norm = vNormal;
+            vec3 lightDir = normalize(vec3(20.0,20.0,20.0) - vPos.xyz);
+            float diff = max(dot(norm, lightDir), 0.0);
+            vec3 diffuse = diff * lightColor;
+          
+            vec3 result = (u_sunset * (ambient + diffuse) * ambientStrength * waterColor) + (waterColor * float(int(u_sunset) ^ 1));
+            gl_FragColor.rgb = vec3(result);
             //gl_FragColor = vec4(u_depthDistance,0,0,1);
         }
     `

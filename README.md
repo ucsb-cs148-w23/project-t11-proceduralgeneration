@@ -1,5 +1,5 @@
 # project-t11-proceduralgeneration
-Project Name: 3D Environment Generator ([deployment](https://helloworld-66bb0.web.app/))
+Project Name: 3D Environment Generator 
 
 One line description: Create a creative tool to procedurally generate a city model using the wave function collapse algorithm.
 
@@ -13,6 +13,8 @@ One line description: Create a creative tool to procedurally generate a city mod
 | Shuning Liu  | shuningliu     |
 | Christine Tu | christinetu15  |
 
+## Deployment
+[https://helloworld-66bb0.web.app/](https://helloworld-66bb0.web.app/)
 
 ## Tech stack 
 - front-end: React.js
